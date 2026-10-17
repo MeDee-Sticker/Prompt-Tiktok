@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ad Economics Console — ระบบยิงแอด Facebook ที่คำนวณแล้วว่าคุ้มที่สุด · 599 Prompt ก๊อปวาง</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@600;800&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0E1013;color:#EDEFF5;font-family:'Sarabun',sans-serif;padding:28px 18px 70px;line-height:1.5}
+  .wrap{max-width:1180px;margin:0 auto}
+  h1{font-family:'Kanit';font-weight:800;font-size:32px;line-height:1.2}
+  h2{font-family:'Kanit';font-weight:800;font-size:21px;margin-bottom:4px}
+  h3{font-family:'Kanit';font-weight:600;font-size:16px;margin-bottom:8px}
+  a{color:#FF8A5B}
+  .lead{color:#9AA3B8;font-size:16px;margin-top:8px}
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .chip{border:1px solid #333A48;background:#171A21;border-radius:999px;padding:7px 15px;font-size:13.5px;color:#C6CDDC}
+  .chip b{font-family:'Kanit';font-weight:600}
+  .chip.bad{border-color:#5A2A22;background:#231512;color:#FFB19A}
+  .chip.ok{border-color:#25452F;background:#122016;color:#9BE3B4}
+  section{background:#171A21;border:1px solid #262B36;border-radius:18px;padding:22px 24px;margin-top:22px}
+  section>p.hint{color:#9AA3B8;font-size:14.5px;margin-bottom:16px;margin-top:6px}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px}
+  .fld{display:flex;flex-direction:column;gap:6px}
+  .fld label{font-size:13px;color:#9AA3B8;font-weight:600}
+  .fld input[type=number]{background:#0E1013;border:1px solid #333A48;color:#EDEFF5;border-radius:11px;padding:11px 13px;font-family:'Sarabun';font-size:16px;font-weight:600;width:100%}
+  .fld input[type=number]:focus{outline:none;border-color:#FF5A1F}
+  .fld .unit{font-size:12px;color:#6E7688}
+  .presets{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  button{font-family:'Kanit';font-weight:600;font-size:14px;border-radius:999px;padding:9px 17px;cursor:pointer;border:1px solid #333A48;background:#1E222B;color:#EDEFF5}
+  button:hover{border-color:#FF5A1F;color:#FFD8C7}
+  button.primary{background:#FF3D00;border-color:#FF3D00;color:#fff}
+  button.primary:hover{color:#fff;filter:brightness(1.08)}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:12px}
+  .kpi{background:#0E1013;border:1px solid #262B36;border-radius:14px;padding:14px 15px}
+  .kpi span{display:block;font-size:12.5px;color:#8B93A6;font-weight:600}
+  .kpi b{display:block;font-family:'Kanit';font-weight:800;font-size:25px;margin-top:4px;letter-spacing:-.3px}
+  .kpi i{display:block;font-style:normal;font-size:12px;color:#6E7688;margin-top:3px}
+  .kpi.good b{color:#4ADE80}.kpi.bad b{color:#FF6B4A}.kpi.mid b{color:#FBBF24}
+  .verdict{margin-top:16px;border-radius:14px;padding:16px 18px;font-size:15.5px;border:1px solid #333A48;background:#12151B}
+  .verdict.win{border-color:#25452F;background:#122016}
+  .verdict.lose{border-color:#5A2A22;background:#1F1310}
+  .verdict b{font-family:'Kanit';font-weight:800}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+  th,td{padding:9px 10px;text-align:right;border-bottom:1px solid #262B36;white-space:nowrap}
+  th:first-child,td:first-child{text-align:left}
+  thead th{color:#9AA3B8;font-size:12.5px;font-family:'Kanit';font-weight:600;border-bottom:1px solid #333A48}
+  tbody tr:last-child td{border-bottom:0}
+  .heat td{text-align:center;font-family:'Kanit';font-weight:600;font-size:13px;padding:8px 6px}
+  .heat td.rowh{text-align:left;color:#9AA3B8;font-family:'Sarabun';font-weight:600}
+  .heat td.ok{background:#12281A;color:#7FE0A2}
+  .heat td.warn{background:#2A2410;color:#F5CE6B}
+  .heat td.bad{background:#2A1512;color:#FF8C73}
+  .heat td.zone{box-shadow:inset 0 0 0 2px #FF5A1F}
+  .bar{height:9px;border-radius:999px;background:#0E1013;overflow:hidden;margin-top:6px}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,#FF3D00,#FFA35B)}
+  .barrow{background:#0E1013;border:1px solid #262B36;border-radius:13px;padding:12px 14px;margin-top:10px}
+  .barrow .t{display:flex;justify-content:space-between;font-size:13.5px;gap:10px}
+  .barrow .t b{font-family:'Kanit';font-weight:600}
+  .split{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:14px}
+  ol.rules{margin-left:20px;font-size:15px}
+  ol.rules li{margin:8px 0}
+  code{background:#0E1013;border:1px solid #262B36;border-radius:6px;padding:2px 6px;font-size:13.5px;color:#FFC9AF}
+  .src{font-size:13px;color:#8B93A6}
+  .src li{margin:6px 0 6px 18px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:760px){.two{grid-template-columns:1fr}h1{font-size:25px}}
+  .tag{display:inline-block;font-family:'Kanit';font-weight:600;font-size:12px;padding:3px 10px;border-radius:999px;background:#2A2410;color:#F5CE6B;border:1px solid #4A3F14}
+  .tag.bad{background:#231512;color:#FFB19A;border-color:#5A2A22}
+  .tag.ok{background:#122016;color:#9BE3B4;border-color:#25452F}
+  .win-row td{background:#122016}
+  .foot{margin-top:26px;font-size:13px;color:#6E7688}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ระบบยิงแอด Facebook ที่ “คำนวณแล้วว่าคุ้มที่สุด”</h1>
+  <p class="lead">ใส่ตัวเลขจริงของคุณ → หน้านี้คำนวณ <b>จุดคุ้มทุน · งบที่ควรใช้จริง · แบ่งงบข้ามแคมเปญ · แผน 30 วัน</b> ให้อัตโนมัติ
+  ทุกสูตรอยู่ในไฟล์นี้ ตรวจสอบได้ · ค่าเริ่มต้นตั้งจากราคาข้อมูลตลาดจริงของ Meta ไทย</p>
+
+  <div class="chips">
+    <span class="chip">สินค้า: <b>599 Prompt ก๊อปวาง · ฿99</b></span>
+    <span class="chip bad">ยังไม่มี Meta Pixel → วัดผลอัตโนมัติไม่ได้</span>
+    <span class="chip bad">อีเมลลิงก์ดาวน์โหลดตกสแปม → แผน “แจกฟรีก่อน” เสียหายหนัก</span>
+    <span class="chip">Facebook ยังไม่เชื่อม → ผมกดยิงให้ไม่ได้</span>
+  </div>
+
+  <!-- ══════════ 1. ตัวเลขของคุณ ══════════ -->
+  <section>
+    <h2>1) ตัวเลขจริงของร้านคุณ</h2>
+    <p class="hint">ค่าเริ่มต้น = ค่ากลางจากข้อมูลตลาด Meta ไทย (ดูที่มาในข้อ 8) — ถ้ามีตัวเลขจริงจากการยิงแล้ว ให้ทับเลย</p>
+    <div class="presets">
+      <button data-preset="good">กลุ่มตัวเลข “ดี”</button>
+      <button data-preset="mid">“กลาง” (ค่าเริ่มต้น)</button>
+      <button data-preset="bad">“แย่”</button>
+      <button data-preset="reset">คืนค่าเริ่มต้น</button>
+    </div>
+    <div class="grid2">
+      <div class="fld"><label>ราคาที่ขาย (บาท)</label><input type="number" class="in" id="price" value="99" step="1"><span class="unit">ตอนนี้ร้านขาย ฿99</span></div>
+      <div class="fld"><label>งบต่อวัน (บาท)</label><input type="number" class="in" id="budget" value="100" step="50"><span class="unit">งบที่ยิงได้จริงต่อวัน</span></div>
+      <div class="fld"><label>CPM (บาท / 1,000 การแสดง)</label><input type="number" class="in" id="cpm" value="180" step="10"><span class="unit">ตลาดไทย ฿50–300 · อีคอมเมิร์ซ ฿120–250</span></div>
+      <div class="fld"><label>CTR (%)</label><input type="number" class="in" id="ctr" value="1.7" step="0.1"><span class="unit">ค่าอ้างอิง 1.7–2.4%</span></div>
+      <div class="fld"><label>CVR หลังคลิก (%)</label><input type="number" class="in" id="cvr" value="2" step="0.1"><span class="unit">คนคลิกกี่ % ที่จ่ายเงินจริง</span></div>
+      <div class="fld"><label>ขอคืนเงิน (%)</label><input type="number" class="in" id="refundPct" value="3" step="1"><span class="unit">ประมาณการ</span></div>
+      <div class="fld"><label>ค่าธรรมเนียมรับเงิน (%)</label><input type="number" class="in" id="feePct" value="0" step="0.5"><span class="unit">พร้อมเพย์สแกน = 0</span></div>
+      <div class="fld"><label>ต้นทุนสินค้า/ออเดอร์ (บาท)</label><input type="number" class="in" id="cogs" value="0" step="10"><span class="unit">ไฟล์ดิจิทัล = 0</span></div>
+      <div class="fld"><label>ราคาแพ็ก/บันเดิล (บาท)</label><input type="number" class="in" id="bundle" value="399" step="50"><span class="unit">คันโยกเพิ่มกำไร/ออเดอร์</span></div>
+      <div class="fld"><label>CPA ของกลุ่มอุ่น (× ของ cold)</label><input type="number" class="in" id="retargetMult" value="0.35" step="0.05"><span class="unit">0.35 = ถูกลง 65%</span></div>
+      <div class="fld"><label>คนกรอกอีเมลจากคนคลิก (%)</label><input type="number" class="in" id="optInPct" value="20" step="1"><span class="unit">ใช้กับแผน “แจกฟรีก่อน”</span></div>
+      <div class="fld"><label>อีเมล → ซื้อจริง (%)</label><input type="number" class="in" id="leadToSalePct" value="6" step="1"><span class="unit">ต้องวัดเอง ยังไม่มีข้อมูล</span></div>
+      <div class="fld"><label>β (CPA เสื่อมเมื่องบสูงขึ้น)</label><input type="number" class="in" id="beta" value="0.25" step="0.05"><span class="unit">0.25 = งบ×2 → CPA แพงขึ้น 19%</span></div>
+      <div class="fld"><label>จำนวนวันของแผน</label><input type="number" class="in" id="days" value="30" step="1"><span class="unit">ใช้ในตารางแผน 30 วัน</span></div>
+    </div>
+  </section>
+
+  <!-- ══════════ 2. ผลลัพธ์ ══════════ -->
+  <section>
+    <h2>2) ผลลัพธ์ที่คำนวณได้</h2>
+    <p class="hint">CPA = CPC ÷ CVR · กำไร/ออเดอร์ = ราคา − ขอคืน − ค่าธรรมเนียม − ต้นทุน (ไฟล์ดิจิทัล = ราคาเต็ม)</p>
+    <div class="kpis" id="kpis"></div>
+    <div class="verdict" id="verdict"></div>
+  </section>
+
+  <!-- ══════════ 3. คันโยก AOV ══════════ -->
+  <section>
+    <h2>3) คันโยกที่แรงที่สุด: กำไรต่อออเดอร์</h2>
+    <p class="hint">จุดคุ้มทุนของค่าแอด = กำไรต่อออเดอร์ตรง ๆ ⇒ <b>ขึ้นราคา/ทำบันเดิล คือวิธีเดียวที่ทำให้ CPA ที่ตลาดคิดนั้น “จ่ายไหว”</b>
+    ตารางนี้คำนวณ CPC สูงสุดที่ยังไม่ขาดทุน ณ CVR ปัจจุบันของคุณ</p>
+    <table id="lever"></table>
+  </section>
+
+  <!-- ══════════ 4. จัดสรรงบ ══════════ -->
+  <section>
+    <h2>4) ควรยิงแคมเปญไหน งบเท่าไหร่ (คำนวณให้แล้ว)</h2>
+    <p class="hint">โมเดล: CPA คงที่ดีที่สุดไว้ที่ “งบที่แนะนำ” R (R = งบขั้นต่ำที่ทำให้ ad set หลุด Learning Phase = CPA × 50 ÷ 7)
+    เมื่อยิงเกิน R แล้ว CPA จะเสื่อมลงแบบ S<sup>β</sup> ⇒ ระบบหา “กำไรส่วนเพิ่มต่อบาท” ของทุกแคมเปญแล้วจัดสรรงบให้กำไรรวมสูงสุด (water-filling)</p>
+    <div id="alloc"></div>
+  </section>
+
+  <!-- ══════════ 5. Learning Phase ══════════ -->
+  <section>
+    <h2>5) เกต Learning Phase — ตัวคุมความจริงของงบเล็ก</h2>
+    <p class="hint">Meta ต้องการ ~50 optimization events ต่อ ad set ต่อ 7 วัน งบที่น้อยกว่านั้น = ติด <i>Learning Limited</i> ระบบจะไม่ปรับให้คุณ</p>
+    <div id="learning"></div>
+  </section>
+
+  <!-- ══════════ 6. 4 แผน 30 วัน ══════════ -->
+  <section>
+    <h2>6) เทียบ 4 แผนตลอด 30 วัน (ระบบเลือกแผนกำไรสูงสุดให้)</h2>
+    <p class="hint">แต่ละวันระบบจัดสรรงบใหม่ · ตรวจผลทุก 7 วัน แล้วปรับงบตามกติกา (+20% ถ้า CPA ดีกว่า 80% ของจุดคุ้มทุน / ลด 30% ถ้าเกินทุน / ปิดถ้าเกิน 120%)</p>
+    <div id="plays"></div>
+  </section>
+
+  <!-- ══════════ 7. ตารางตัดสินใจ ══════════ -->
+  <section>
+    <h2>7) ตารางตัดสินใจ: CPC × CVR → กำไร(+) / ขาดทุน(−) ต่อ 1 ออเดอร์</h2>
+    <p class="hint">ช่องที่ตีกรอบส้ม = ช่วงที่ตลาดไทยเป็นไปได้จริง (CPC ฿2–15 · CVR 1.5–2.9%) — สังเกตว่ากี่ช่องที่เป็นบวก</p>
+    <div id="grid"></div>
+  </section>
+
+  <!-- ══════════ 8. กติกา + คัดลอก ══════════ -->
+  <section>
+    <h2>8) กติกาหยุด/ขยาย ที่คำนวณจากตัวเลขคุณ</h2>
+    <ol class="rules" id="rules"></ol>
+    <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
+      <button class="primary" id="copy">คัดลอกแผนทั้งหมด (Markdown)</button>
+      <button id="copyCsv">คัดลอกหัวตารางบันทึกผลรายวัน (CSV)</button>
+      <a href="index.html" style="align-self:center">← ดูครีเอทีฟ 3 แบบ + คลิป</a>
+      <a href="FACEBOOK-ADS.md" style="align-self:center">เปิดชุดยิงแอด (ข้อความ/กลุ่มเป้าหมาย/UTM) →</a>
+    </div>
+    <p class="hint" id="copied" style="margin-top:10px"></p>
+  </section>
+
+  <!-- ══════════ 9. ที่มา ══════════ -->
+  <section>
+    <h2>9) ที่มาของตัวเลข + สิ่งที่หน้านี้ “ไม่รู้”</h2>
+    <div class="two">
+      <div>
+        <h3>แหล่งอ้างอิง</h3>
+        <ul class="src">
+          <li>CPM ไทย ฿50–300 · อีคอมเมิร์ซ ฿120–250 · CPC ฿2–15 · ต้นทุนต่อการซื้อ ฿100–500 — Sphere Agency, 14 มี.ค. 2026 · <a href="https://sphereagency.com/articles/facebook-ads-pricing-thailand">sphereagency.com</a></li>
+          <li>CVR อีคอมเมิร์ซไทย ~2.4–2.9% (คาดการณ์ 2026) — Branch8, 24 มี.ค. 2026 · <a href="https://branch8.com/posts/e-commerce-conversion-benchmarks-southeast-asia-2026">branch8.com</a></li>
+          <li>CTR 2.39% · CVR 1.53% (อีคอมเมิร์ซ, ส.ค. 2025–ก.ค. 2026) — Triple Whale, 17 ส.ค. 2026 · <a href="https://www.triplewhale.com/blog/facebook-ads-benchmarks">triplewhale.com</a></li>
+          <li>CTR 1.71% (แคมเปญ Traffic) — WordStream, อัปเดต 14 ก.ย. 2026 · <a href="https://www.wordstream.com/blog/facebook-ads-benchmarks-2025">wordstream.com</a></li>
+          <li>Learning Phase = ~50 events/7 วัน · Learning Limited — Meta · <a href="https://www.facebook.com/business/help/112167992830700">help/112167992830700</a></li>
+          <li>Cost per Result Goal → งบ/วัน ≥ 5× เป้า — Meta · <a href="https://www.facebook.com/business/help/176339196621566">help/176339196621566</a></li>
+          <li>งบระดับแคมเปญ vs ad set — Meta · <a href="https://www.facebook.com/business/help/458847204894307">help/458847204894307</a> · Dynamic parameters/UTM · <a href="https://www.facebook.com/business/help/1016122818401732">help/1016122818401732</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>สิ่งที่หน้านี้ “ไม่รู้” (อย่าเชื่อเกิน)</h3>
+        <ul class="src">
+          <li>ไม่มีเบนช์มาร์ก Meta ไทยที่เปิดวิธีวัดให้ตรวจ — ตัวเลข CPM/CPC มาจากบทความเอเจนซี ไม่ใช่ชุดข้อมูลที่ตรวจสอบได้</li>
+          <li>ช่วงที่อ้างในแหล่งข้อมูล <b>ขัดกันเอง</b>: CPM ฿120–250 กับ CTR 1.7% ⇒ CPC ≈ ฿10.6 ซึ่งสูงกว่าเพดานที่บทความเดียวกันบอกไว้ (฿2–15) มาก ⇒ ให้เชื่อ <b>CPC ที่คุณวัดได้เอง</b> มากที่สุด</li>
+          <li>β (ความเสื่อมของ CPA) เป็นสมมติฐาน ไม่มีตัวเลขทางการ — แก้ที่ช่อง β เพื่อดูว่าคำตอบเปลี่ยนแค่ไหน</li>
+          <li>“อีเมล → ซื้อจริง %” ยังไม่มีข้อมูลจริง ต้องยิงแล้ววัดเอง และตอนนี้อีเมลตกสแปมอยู่</li>
+          <li>ยังไม่มี Pixel ⇒ ไม่มีการวัดผลอัตโนมัติ ⇒ ออเดอร์ต้องนับมือ ⇒ แผนในหน้านี้เป็น <b>ประมาณการก่อนยิง</b> ไม่ใช่ผลที่เกิดขึ้นแล้ว</li>
+        </ul>
+      </div>
+    </div>
+    <p class="foot">ระบบนี้คำนวณให้ — แต่คนกดยิงคือคุณ (หรือผม ถ้าคุณเชื่อม Facebook ให้แล้ว)</p>
+  </section>
+</div>
+
+<script>
+// ═══════════════════════ ENGINE_START ═══════════════════════
+/**
+ * เอ็นจินคำนวณเศรษฐศาสตร์โฆษณา — คณิตศาสตร์ล้วน ไม่แตะ DOM
+ * ใช้ได้ทั้งในเบราว์เซอร์ (globalThis.createAdEngine) และใน Node (สำหรับเทสต์)
+ */
+function createAdEngine() {
+  const num = (v, d) => { const n = Number(v); return Number.isFinite(n) ? n : (d === undefined ? 0 : d); };
+  const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+
+  /** 1) เศรษฐกิจต่อ 1 ออเดอร์ — ตัวเลขที่ตัดสินทุกอย่าง */
+  function unit(o) {
+    const price = num(o.price, 99);
+    const refundRate = num(o.refundPct) / 100;
+    const feeRate = num(o.feePct) / 100;
+    const cogs = num(o.cogs);
+    const netPerOrder = price * (1 - refundRate) * (1 - feeRate) - cogs;
+    return {
+      price, refundRate, feeRate, cogs, netPerOrder,
+      beCpa: netPerOrder,                                   // CPA สูงสุดที่ยังไม่ขาดทุน
+      beRoas: netPerOrder > 0 ? price / netPerOrder : Infinity, // ROAS(ยอดขายรวม) ขั้นต่ำ
+    };
+  }
+
+  /** 2) กรวยขายจากงบวันเดียว */
+  function funnel(o) {
+    const budget = num(o.budget), cpm = num(o.cpm);
+    const ctr = num(o.ctr) / 100, cvr = num(o.cvr) / 100;
+    const impressions = cpm > 0 ? (budget / cpm) * 1000 : 0;
+    const clicks = impressions * ctr;
+    const orders = clicks * cvr;
+    return {
+      budget, cpm, ctr, cvr, impressions, clicks, orders,
+      cpc: clicks > 0 ? budget / clicks : Infinity,
+      cpa: orders > 0 ? budget / orders : Infinity,
+      cpmReal: impressions > 0 ? (budget / impressions) * 1000 : Infinity,
+    };
+  }
+
+  /** 3) จุดคุ้มทุนในทุกหน่วยที่ตัดสินใจได้ (ctr/cvr ส่งเป็นเปอร์เซ็นต์ เช่น 1.7 = 1.7%) */
+  function breakEven(o) {
+    const N = num(o.netPerOrder), cpm = num(o.cpm), price = num(o.price, 99);
+    const ctr = num(o.ctr) / 100, cvr = num(o.cvr) / 100;
+    const cpc = (cpm > 0 && ctr > 0) ? cpm / (1000 * ctr) : Infinity;
+    return {
+      cpc,
+      cpa: cvr > 0 ? cpc / cvr : Infinity,
+      beCpa: N,
+      beCvr: (isFinite(cpc) && cpc > 0 && N > 0) ? cpc / N : Infinity,  // CVR ขั้นต่ำ (สัดส่วน) ณ CPC นี้
+      beCpc: N * cvr,                                                   // CPC สูงสุดที่รับได้ ณ CVR นี้
+      beCpm: isFinite(cpc) ? N * cvr * 1000 * ctr : Infinity,            // CPM สูงสุดที่รับได้
+      beRoas: N > 0 ? price / N : Infinity,
+    };
+  }
+
+  /** ROI = CVR × กำไร/ออเดอร์ ÷ CPC − 1 → CVR ขั้นต่ำเพื่อให้ได้ ROI ตามเป้า */
+  function requiredCvr(o) {
+    const N = num(o.netPerOrder), cpc = num(o.cpc), roi = num(o.roi);
+    if (!(N > 0) || !(cpc > 0)) return Infinity;
+    return cpc * (1 + roi) / N;
+  }
+
+  /** 4) เกต Learning Phase ของ Meta: ~50 optimization events / 7 วัน / ad set */
+  function learningGate(o) {
+    const orders = num(o.orders), cpa = num(o.cpa), need = num(o.eventsNeeded, 50);
+    const eventsPerWeek = orders * 7;
+    return {
+      eventsPerWeek,
+      need,
+      passes: eventsPerWeek >= need,
+      missingEvents: Math.max(0, need - eventsPerWeek),
+      minDailyBudget: (cpa > 0 && isFinite(cpa)) ? (need / 7) * cpa : Infinity,
+      budgetForCostPerResultRule: num(o.targetCpa) * 5,   // กติกา 5× ของ Meta (bid = Cost per Result Goal)
+      daysToFillEvents: eventsPerWeek > 0 ? need / (eventsPerWeek / 7) : Infinity,
+    };
+  }
+
+  /** 5) CPA เมื่องบสูงขึ้น — คงที่ดีที่สุดถึงงบ R แล้วค่อยเสื่อมแบบ S^β (β=สมมติฐานที่ผู้ใช้ปรับได้) */
+  function cpaAt(ch, spend) {
+    const s = Math.max(0, num(spend));
+    return ch.cpa0 * Math.pow(Math.max(1, s / Math.max(1, ch.R)), ch.beta);
+  }
+  function ordersAt(ch, spend) { const c = cpaAt(ch, spend); return c > 0 ? spend / c : 0; }
+  function profitAt(ch, spend, N) { return ordersAt(ch, spend) * N - spend; }
+
+  /**
+   * เตรียมตัวเลขเชิงเส้นส่วนเพิ่มของช่องหนึ่ง ๆ
+   * กำไรส่วนเพิ่มต่อ 1 บาท: งบ ≤ R = คงที่ (m) · งบ > R = k·S⁻ᵝ − 1 (ลดลงเรื่อย ๆ)
+   * cap = งบสูงสุดที่ควรใช้ (กำไรส่วนเพิ่ม = 0) · 0 = ไม่ควรยิงเลย
+   */
+  function prep(c, N) {
+    const beta = clamp(num(c.beta, 0.25), 0.01, 0.9);
+    const cpa0 = Math.max(1e-9, num(c.cpa0));
+    const R = Math.max(1, num(c.R, 1000));
+    const k = N * (1 - beta) * Math.pow(R, beta) / cpa0;
+    const m = N / cpa0 - 1;
+    const lam0 = k * Math.pow(R, -beta) - 1;
+    const cap = m <= 0 ? 0 : (lam0 > 0 ? Math.max(R, Math.pow(k, 1 / beta)) : R);
+    return { name: c.name, cpa0, R, beta, k, m, lam0, cap };
+  }
+
+  /** กำไรส่วนเพิ่มต่อ 1 บาท ณ งบหนึ่ง (ย่านงบ > R เท่านั้น — ย่าน ≤ R ใช้ค่าคงที่ m) */
+  function marginalAt(ch, spend, N) {
+    const p = prep(ch, N);
+    return p.k / Math.pow(Math.max(num(spend), p.R), p.beta) - 1;
+  }
+
+  /** งบสูงสุดที่ “ควรใช้” ของช่องหนึ่ง ๆ (กำไรส่วนเพิ่ม = 0) */
+  function capSpend(ch, N) { return prep(ch, N).cap; }
+
+  /** งบส่วนที่เกิน R ที่ควรใช้ ณ ระดับกำไรส่วนเพิ่มขั้นต่ำ lam (ใช้แก้แบบ water-filling) */
+  function extraAt(p, lam) {
+    if (!(p.lam0 > lam)) return 0;
+    return Math.max(0, Math.pow(p.k / (1 + Math.max(0, lam)), 1 / p.beta) - p.R);
+  }
+
+  /** 6) จัดสรรงบทั้งพอร์ตให้กำไรรวมสูงสุด — เติมย่าน CPA คงที่ (ตามกำไรส่วนเพิ่มมาก→น้อย) แล้วขยายย่านที่ CPA เสื่อม */
+  function allocate(o) {
+    const N = num(o.netPerOrder), budget = Math.max(0, num(o.budget));
+    const chs = (N > 0 ? (o.channels || []) : []).map((c) => prep(c, N)).filter((c) => c.m > 0);
+    const capacity = chs.reduce((s, c) => s + c.cap, 0);
+    const use = Math.min(budget, capacity);
+    const parts = chs.map((c) => ({ c, spend: 0 }));
+    let left = use;
+    let lam = 0;
+
+    /* เฟส 1 — งบในย่าน CPA คงที่: เติมช่องที่กำไรส่วนเพิ่มสูงสุดก่อน (กำไรส่วนเพิ่มเท่ากันทั้งย่าน จึงแบ่งครึ่งไหนก็เท่ากัน) */
+    for (const p of parts.slice().sort((a, b) => b.c.m - a.c.m)) {
+      if (left <= 0) break;
+      const take = Math.min(p.c.R, left);
+      p.spend += take;
+      left -= take;
+    }
+
+    /* เฟส 2 — งบที่เหลือเมื่อทุกช่องได้ครบ R: กระจายเข้าย่าน CPA เสื่อมให้กำไรส่วนเพิ่มเท่ากันทุกช่อง */
+    if (left > 1e-9) {
+      const ext = (l) => parts.reduce((s, p) => s + extraAt(p.c, l), 0);
+      const lamMax = Math.max(1e-9, ...parts.map((p) => p.c.lam0));
+      if (ext(0) <= left) {
+        lam = 0;                                        // ขยายได้ถึงเพดานทุกช่อง
+      } else {
+        let lo = 0, hi = lamMax;
+        for (let i = 0; i < 200; i++) {
+          const mid = (lo + hi) / 2;
+          if (ext(mid) > left) lo = mid; else hi = mid;
+        }
+        lam = (lo + hi) / 2;
+      }
+      const need = parts.map((p) => extraAt(p.c, lam));
+      const sum = need.reduce((a, b) => a + b, 0);
+      const scale = sum > left ? left / sum : 1;
+      parts.forEach((p, i) => { p.spend += need[i] * scale; });
+      left = Math.max(0, left - Math.min(sum, left));
+    }
+
+    const split = parts.map((p) => {
+      const spend = p.spend;
+      const cpa = cpaAt(p.c, spend);
+      const orders = spend > 0 ? spend / cpa : 0;
+      return { name: p.c.name, spend, cpa, cap: p.c.cap, orders, profit: orders * N - spend };
+    });
+    const spend = split.reduce((s, x) => s + x.spend, 0);
+    const orders = split.reduce((s, x) => s + x.orders, 0);
+    const profit = split.reduce((s, x) => s + x.profit, 0);
+    return {
+      budget, capacity, use, leftover: budget - spend, spend, orders, profit, split, lam,
+      cpa: orders > 0 ? spend / orders : Infinity,
+      viable: orders > 0 && spend > 0,
+      dropped: (o.channels || []).length - chs.length,
+    };
+  }
+
+  /**
+   * 7) ฉากทัศน์ N วัน: จัดสรรงบใหม่ทุกวัน + ทบทวนทุก reviewDays แล้วปรับ/ปิด
+   * แคมเปญกลุ่มอุ่นใส่ unlockClicks ได้ (เช่น 300 คลิก) — จะเปิดเฉพาะหลังสะสมคนดูจากแคมเปญที่ seeds=true พอแล้ว
+   * เพราะการรีมาร์เก็ตติ้งที่ยังไม่มีคนดู = ยิงไม่ติด
+   */
+  function project(o) {
+    const days = Math.max(1, Math.round(num(o.days, 30)));
+    const N = num(o.netPerOrder);
+    const chans = o.channels || [];
+    const r = Object.assign({ reviewDays: 7, upPct: 20, downPct: 30, scaleBelow: 0.8, killAbove: 1.2 }, o.rule || {});
+    let budget = Math.max(0, num(o.budget)), audience = 0;
+    const rows = [];
+    let cum = 0, killed = false;
+    for (let d = 1; d <= days; d++) {
+      const usable = chans.filter((c) => audience >= num(c.unlockClicks, 0));
+      const a = allocate({ budget, netPerOrder: N, channels: usable });
+      cum += a.profit;
+      rows.push({ day: d, budget, spend: a.spend, orders: a.orders, cpa: a.cpa, profit: a.profit, cum,
+                  active: a.split.filter((x) => x.spend > 0).map((x) => x.name) });
+      if (!a.viable) { killed = true; break; }                  // ไม่มีแคมเปญไหนควรยิง → หยุด
+      for (const x of a.split) {                                 // แคมเปญที่สร้างกลุ่มอุ่นเพิ่มจำนวนคนดูให้แคมเปญอุ่น
+        const c = usable.find((u) => u.name === x.name);
+        if (c && c.seeds && num(c.cpc) > 0) audience += x.spend / num(c.cpc);
+      }
+      if (d % r.reviewDays === 0) {
+        const win = rows.slice(-r.reviewDays);
+        const spend = win.reduce((s, x) => s + x.spend, 0);
+        const ords = win.reduce((s, x) => s + x.orders, 0);
+        const avgCpa = ords > 0 ? spend / ords : Infinity;
+        if (!(avgCpa < N * r.killAbove)) { killed = true; break; }
+        else if (avgCpa < N * r.scaleBelow) budget *= 1 + r.upPct / 100;
+        else if (avgCpa > N) budget *= 1 - r.downPct / 100;
+      }
+    }
+    const gated = chans.filter((c) => num(c.unlockClicks, 0) > 0).map((c) => c.name);
+    const first = rows.find((x) => x.active.some((n) => gated.includes(n)));
+    return {
+      rows, cum, killed, endBudget: budget, days: rows.length,
+      audience, openDay: first ? first.day : 0, gated,
+      spend: rows.reduce((s, x) => s + x.spend, 0),
+      orders: rows.reduce((s, x) => s + x.orders, 0),
+    };
+  }
+
+  /** 8) เทียบหลายแผน (แต่ละแผนมีกำไร/ออเดอร์ของตัวเอง) แล้วจัดอันดับตามกำไรจริง */
+  function rankPlays(o) {
+    const days = Math.max(1, Math.round(num(o.days, 30)));
+    return (o.plays || []).map((p) => {
+      const pr = project({ days, budget: o.budget, netPerOrder: p.netPerOrder, channels: p.channels, rule: o.rule });
+      const a = allocate({ budget: num(o.budget), netPerOrder: p.netPerOrder, channels: p.channels });
+      return Object.assign({}, p, {
+        project: pr, daily: a,
+        verdict: !a.viable ? 'ไม่ควรยิง' : (pr.cum > 0 ? 'กำไร' : 'ขาดทุน'),
+      });
+    }).sort((x, y) => y.project.cum - x.project.cum);
+  }
+
+  /** 9) ตาราง CPC × CVR → กำไรต่อออเดอร์ */
+  function grid(o) {
+    const N = num(o.netPerOrder);
+    const cpcs = o.cpcs || [1, 2, 3, 5, 8, 10, 15];
+    const cvrs = o.cvrs || [0.5, 1, 1.5, 2, 2.5, 3, 4, 5];
+    const cells = [];
+    for (const cvrP of cvrs) for (const cpc of cpcs) {
+      const cpa = cpc / (cvrP / 100);
+      cells.push({ cpc, cvr: cvrP, cpa, profit: N - cpa, ok: N - cpa > 0 });
+    }
+    return { cpcs, cvrs, cells };
+  }
+
+  /** 10) งบขั้นต่ำที่ทำให้ ad set หลุด Learning Phase ณ CPA หนึ่ง ๆ (ใช้เป็น R ของโมเดล) */
+  function recommendedSpend(cpa, eventsNeeded) {
+    return (num(eventsNeeded, 50) / 7) * num(cpa);
+  }
+
+  return { unit, funnel, breakEven, requiredCvr, learningGate, cpaAt, ordersAt, profitAt, marginalAt,
+           capSpend, prep, allocate, project, rankPlays, grid, recommendedSpend };
+}
+if (typeof globalThis !== 'undefined') globalThis.createAdEngine = createAdEngine;
+// ═══════════════════════ ENGINE_END ═══════════════════════
+
+/* ═══════════ ส่วนติดต่อผู้ใช้ ═══════════ */
+(function () {
+  const E = createAdEngine();
+  const $ = (id) => document.getElementById(id);
+  const val = (id) => Number($(id).value);
+  const nf = (v, d) => { const x = Number(v); return Number.isFinite(x) ? x.toLocaleString('th-TH', { minimumFractionDigits: d || 0, maximumFractionDigits: d || 0 }) : '–'; };
+  const baht = (v, d) => Number.isFinite(Number(v)) ? '฿' + nf(v, d || 0) : '–';
+  const pa = (v, d) => Number.isFinite(Number(v)) ? nf(v * 100, d === undefined ? 2 : d) + '%' : '–';
+
+  const PRESETS = {
+    good: { cpm: 120, ctr: 2.4, cvr: 2.9 },
+    mid: { cpm: 180, ctr: 1.7, cvr: 2 },
+    bad: { cpm: 250, ctr: 1, cvr: 1.5 },
+    reset: { price: 99, budget: 100, cpm: 180, ctr: 1.7, cvr: 2, refundPct: 3, feePct: 0, cogs: 0, bundle: 399, retargetMult: 0.35, optInPct: 20, leadToSalePct: 6, beta: 0.25, days: 30 },
+  };
+
+  function read() {
+    const cfg = { price: val('price'), budget: val('budget'), cpm: val('cpm'), ctr: val('ctr'), cvr: val('cvr'),
+      refundPct: val('refundPct'), feePct: val('feePct'), cogs: val('cogs'), bundle: val('bundle'),
+      retargetMult: val('retargetMult'), optInPct: val('optInPct'), leadToSalePct: val('leadToSalePct'),
+      beta: val('beta'), days: val('days') };
+    const u = E.unit(cfg);
+    const f = E.funnel(cfg);
+    const be = E.breakEven(Object.assign({ netPerOrder: u.netPerOrder }, cfg));
+    const lg = E.learningGate({ orders: f.orders, cpa: f.cpa });
+    /* แคมเปญ 3 ตัว — R = งบขั้นต่ำที่หลุด Learning Phase ของแต่ละตัว */
+    const coldCpa = f.cpa;
+    const rtCpa = coldCpa * cfg.retargetMult;
+    const leadCpa = f.cpc / Math.max(0.0001, cfg.optInPct / 100);
+    const mk = (name, cpa0, extra) => Object.assign({ name, cpa0: isFinite(cpa0) ? cpa0 : 1e9, R: E.recommendedSpend(isFinite(cpa0) ? cpa0 : 1e9), beta: clampN(cfg.beta, 0.01, 0.9) }, extra || {});
+    const cold = mk('C1 ขายตรงคนใหม่ (cold)', coldCpa, { cpc: isFinite(f.cpc) ? f.cpc : 10, seeds: true });
+    const rt = mk('C3 รีมาร์เก็ตติ้ง (คนที่กด/ดูคลิป)', rtCpa, { unlockClicks: 300 });
+    const lead = mk('C2 เก็บอีเมล (ขายทีหลัง)', leadCpa);
+    const leadNet = u.price * (cfg.leadToSalePct / 100) * (1 - u.refundRate) * (1 - u.feeRate) - u.cogs;
+    const bundleU = E.unit({ price: cfg.bundle, refundPct: cfg.refundPct, feePct: cfg.feePct, cogs: cfg.cogs });
+    return { cfg, u, f, be, lg, cold, rt, lead, leadNet, bundleU };
+  }
+  function clampN(v, lo, hi) { return Math.min(hi, Math.max(lo, Number.isFinite(+v) ? +v : lo)); }
+
+  function render() {
+    const S = read();
+    renderKpis(S); renderVerdict(S); renderLever(S); renderAlloc(S); renderLearning(S);
+    renderPlays(S); renderGrid(S); renderRules(S);
+  }
+
+  /* ── 2) KPI ── */
+  function renderKpis(S) {
+    const { u, f, be, cfg } = S;
+    const profitPerDay = f.orders * u.netPerOrder - f.budget;
+    const cvrOk = !isFinite(be.beCvr) ? 'bad' : (be.beCvr * 100 <= 2.9 ? 'good' : (be.beCvr * 100 <= 8 ? 'mid' : 'bad'));
+    const rows = [
+      ['การแสดง/วัน', nf(f.impressions), nf(f.clicks, 1) + ' คลิกที่คาด', ''],
+      ['CPC ที่คาด', baht(be.cpc, 2), 'CPM ÷ (1,000 × CTR)', ''],
+      ['CPA ที่คาด', baht(be.cpa), 'ตลาดไทย ฿100–500', isFinite(be.cpa) && be.cpa < u.netPerOrder ? 'good' : 'bad'],
+      ['กำไร/ออเดอร์', baht(u.netPerOrder), 'จุดคุ้มทุนของ CPA', 'mid'],
+      ['ออเดอร์/วัน', nf(f.orders, 2), 'ที่งบ ' + baht(f.budget) + '/วัน', ''],
+      ['CPA สูงสุดที่รับได้', baht(be.beCpa), 'เกินนี้ = ขาดทุนทุกออเดอร์', 'mid'],
+      ['CVR ขั้นต่ำที่ต้องได้', pa(be.beCvr, 1), 'ที่ CPC ' + baht(be.cpc, 2), cvrOk],
+      ['CPC สูงสุดที่รับได้', baht(be.beCpc, 2), 'ที่ CVR ' + nf(cfg.cvr, 1) + '%', ''],
+      ['CPM สูงสุดที่รับได้', baht(be.beCpm, 0), 'ที่ CTR ' + nf(cfg.ctr, 1) + '%', ''],
+      ['กำไร/วัน', baht(profitPerDay), profitPerDay >= 0 ? 'บวก' : 'ติดลบ', profitPerDay >= 0 ? 'good' : 'bad'],
+      ['กำไร ' + nf(cfg.days) + ' วัน', baht(profitPerDay * cfg.days), 'ถ้าตัวเลขคงที่ทั้งช่วง', profitPerDay >= 0 ? 'good' : 'bad'],
+    ];
+    $('kpis').innerHTML = rows.map((r) => '<div class="kpi ' + r[3] + '"><span>' + r[0] + '</span><b>' + r[1] + '</b><i>' + r[2] + '</i></div>').join('');
+  }
+
+  /* ── 2b) คำตัดสิน ── */
+  function renderVerdict(S) {
+    const { u, f, be, bundleU } = S;
+    const gap = u.netPerOrder - be.cpa;
+    const needPrice = (be.cpa) / ((1 - u.refundRate) * (1 - u.feeRate)) + u.cogs;
+    let html;
+    if (gap >= 0) {
+      html = '<b>ผ่าน:</b> ที่ CPC ' + baht(be.cpc, 2) + ' และ CVR ' + nf(S.cfg.cvr, 1) + '% คุณได้กำไร ' + baht(gap) + ' ต่อออเดอร์ → ยิงได้';
+      $('verdict').className = 'verdict win';
+    } else {
+      html = '<b>ยังไม่ผ่าน:</b> ที่ CPC ' + baht(be.cpc, 2) + ' และ CVR ' + nf(S.cfg.cvr, 1) + '% ตลาดคิด CPA ' + baht(be.cpa) +
+        ' แต่กำไรต่อออเดอร์มีแค่ ' + baht(u.netPerOrder) + ' → <b>ขาด ' + baht(-gap) + ' ทุกออเดอร์</b>';
+      html += '<br>ต้องแก้อย่างใดอย่างหนึ่ง: <b>(1)</b> ให้กำไรต่อออเดอร์ ≥ ' + baht(be.cpa) + ' → ขายอย่างน้อย ' + baht(needPrice) +
+        ' (บันเดิล ' + baht(S.cfg.bundle) + ' ที่ตั้งไว้ = ' + baht(bundleU.netPerOrder) + ' → ' + (bundleU.netPerOrder >= be.cpa ? '<span class="tag ok">พอ</span>' : '<span class="tag bad">ยังไม่พอ</span>') + ')';
+      html += ' <b>(2)</b> ลด CPA ให้ต่ำกว่า ' + baht(u.netPerOrder) + ' (ทำได้จริงเฉพาะกลุ่มอุ่น/C3 ซึ่ง CPA ≈ ' + baht(S.rt.cpa0) + ')';
+      html += ' <b>(3)</b> ดัน CVR ขึ้นเป็น ' + pa(u.netPerOrder > 0 && isFinite(be.cpc) ? be.cpc / u.netPerOrder : Infinity, 1) + ' ขึ้นไป (เดิม ' + nf(S.cfg.cvr, 1) + '%)';
+      $('verdict').className = 'verdict lose';
+    }
+    const warn = (!isFinite(be.cpc) || be.cpc < 2 || be.cpc > 15)
+      ? '<br><span class="tag">เช็ก:</span> CPC ที่ได้จากการคูณ CPM × CTR = ' + baht(be.cpc, 2) + ' ซึ่ง' + (be.cpc > 15 ? 'สูงกว่า' : 'ต่ำกว่า') + 'ช่วง ฿2–15 ของข้อมูลตลาด ⇒ ตัวเลขชุดนี้ขัดกันเอง ให้ยึด CPC ที่วัดได้จริงจาก Ads Manager'
+      : '';
+    $('verdict').innerHTML = html + warn;
+  }
+
+  /* ── 3) คันโยก AOV ── */
+  function renderLever(S) {
+    const { u, f, cfg } = S;
+    const prices = [99, 149, 99, 299, 499];
+    const rows = prices.map((p) => {
+      const x = E.unit({ price: p, refundPct: cfg.refundPct, feePct: cfg.feePct, cogs: cfg.cogs });
+      const maxCpc = x.netPerOrder * (cfg.cvr / 100);
+      const needCvr = isFinite(f.cpc) && x.netPerOrder > 0 ? f.cpc / x.netPerOrder : Infinity;
+      const gap = x.netPerOrder - f.cpa;
+      const cls = gap >= 0 ? 'ok' : (gap > -20 ? 'warn' : 'bad');
+      return '<tr><td>' + baht(p) + (p === cfg.price ? ' <span class="tag">ราคาปัจจุบัน</span>' : '') + (p === cfg.bundle ? ' <span class="tag ok">บันเดิล</span>' : '') +
+        '</td><td>' + baht(x.netPerOrder) + '</td><td class="heat ' + cls + '">' + (gap >= 0 ? '+' : '') + baht(gap) + '</td><td>' + baht(maxCpc, 2) +
+        '</td><td>' + (isFinite(needCvr) ? pa(needCvr, 1) : '–') + '</td></tr>';
+    }).join('');
+    $('lever').innerHTML = '<thead><tr><th>ราคา/บันเดิล</th><th>กำไรต่อออเดอร์</th><th>กำไร(ขาดทุน)ที่ CPA ' + baht(f.cpa) + '</th><th>CPC สูงสุดที่รับได้</th><th>CVR ขั้นต่ำที่ต้องได้</th></tr></thead><tbody>' + rows + '</tbody>';
+  }
+
+  /* ── 4) จัดสรรงบ ── */
+  function renderAlloc(S) {
+    const { u, cold, rt, lead, leadNet, cfg } = S;
+    const played = E.allocate({ budget: cfg.budget, netPerOrder: u.netPerOrder, channels: [cold, rt] });
+    const equal = [cold, rt].map((c) => {
+      const s = cfg.budget / 2;
+      return E.profitAt(c, s, u.netPerOrder);
+    }).reduce((a, b) => a + b, 0);
+
+    let html = '';
+    html += '<h3>พอร์ต “ขายตรง ฿' + nf(cfg.price) + '” — C1 + C3</h3>';
+    html += '<div class="kpis">';
+    html += kpiBox('งบที่ระบบแนะนำให้ใช้', baht(played.use), played.capacity < cfg.budget ? 'พอร์ตดูดได้สูงสุด ' + baht(played.capacity) + '/วัน' : 'ใช้เต็มงบที่ตั้ง', played.viable ? 'good' : 'bad');
+    html += kpiBox('ไม่ควรยิง', baht(Math.max(0, played.leftover)), 'เงินส่วนเกินที่ยิงเพิ่ม = ขาดทุน', played.leftover > 0.5 ? 'mid' : '');
+    html += kpiBox('CPA เฉลี่ย', baht(played.cpa), 'จุดคุ้มทุน ' + baht(u.netPerOrder), played.cpa < u.netPerOrder ? 'good' : 'bad');
+    html += kpiBox('กำไร/วัน', baht(played.profit), 'จัดสรรอัตโนมัติ', played.profit > 0 ? 'good' : 'bad');
+    html += '</div>';
+
+    if (!played.viable) {
+      html += '<div class="verdict lose" style="margin-top:14px"><b>ระบบตอบว่า: อย่ายิงเลยที่ตัวเลขนี้</b>' +
+        '<br>ทั้ง C1 และ C3 มี CPA สูงกว่ากำไรต่อออเดอร์ (' + baht(u.netPerOrder) + ') ⇒ ทุกบาทที่ยิงคือขาดทุน ' +
+        'ให้แก้ที่ข้อ 3 (ราคา/บันเดิล) หรือลด CPA ให้ต่ำกว่า ' + baht(u.netPerOrder) + ' ก่อน</div>';
+    }
+
+    if (played.split.length) {
+      const maxSpend = Math.max(...played.split.map((x) => x.spend), 1);
+      html += '<div class="split">' + played.split.map((x) => {
+        const share = played.spend > 0 ? (x.spend / played.spend) * 100 : 0;
+        return '<div class="barrow"><div class="t"><b>' + x.name + '</b><span>' + baht(x.spend) + ' · ' + nf(share, 0) + '%</span></div>' +
+          '<div class="bar"><i style="width:' + (x.spend / maxSpend) * 100 + '%"></i></div>' +
+          '<div class="t" style="margin-top:6px;color:#8B93A6;font-size:12.5px"><span>CPA ' + baht(x.cpa) + ' · ' + nf(x.orders, 2) + ' ออเดอร์/วัน</span><span>กำไร ' + baht(x.profit) + '</span></div></div>';
+      }).join('') + '</div>';
+      html += '<p class="hint" style="margin-top:12px">กำไรที่ระบบจัดสรร = <b>' + baht(played.profit) + '/วัน</b> · ถ้าแบ่งครึ่งเท่ากันจะได้ ' + baht(equal) +
+        '/วัน → <b>การจัดสรรให้ผลต่าง ' + baht(played.profit - equal) + '/วัน</b> (' + (equal !== 0 ? nf(((played.profit - equal) / Math.abs(equal)) * 100, 0) + '%' : '–') + ')</p>';
+      const daysToSeed = isFinite(cfg.budget / cold.cpc) && cfg.budget > 0 ? 300 / (cfg.budget / cold.cpc) : Infinity;
+      html += '<p class="hint">งบขั้นต่ำที่ทำให้แต่ละตัวหลุด Learning Phase: C1 ' + baht(cold.R) + ' · C3 ' + baht(rt.R) + ' → ถ้างบน้อยกว่านี้ ระบบ Meta จะไม่เรียนรู้และ CPA จะแกว่ง</p>';
+      html += '<p class="hint">⚠️ <b>ข้อจำกัดที่โมเดลไม่รู้:</b> การจัดสรรด้านบนล้วนใช้ C3 ได้ แต่ C3 คือกลุ่มอุ่นที่<b>ยังไม่มีอยู่ในวันนี้</b> — ต้องให้ C1 วิ่งก่อน ~' + nf(daysToSeed, 0) +
+        ' วัน ที่งบนี้ (สะสมคลิกให้ครบ 300 คน) แล้วค่อยย้ายงบไป C3 · ดูลำดับในตารางแผนข้อ 6</p>';
+      html += '<p class="hint">ℹ️ ตัวจัดสรรเลือก C3 ก่อนเสมอเมื่อกำไรต่อบาทสูงกว่า — เป็นคำตอบที่ถูกทางคณิตศาสตร์ แต่ต้องรอให้มีคนดูสะสมก่อนถึงจะทำได้จริง</p>';
+    }
+
+    /* แผนเก็บอีเมล (คนละกำไรต่อหน่วย) */
+    html += '<h3 style="margin-top:22px">พอร์ต “แจกฟรีก่อน แล้วปิดการขาย” — C2</h3>';
+    const leadA = E.allocate({ budget: cfg.budget, netPerOrder: leadNet, channels: [lead] });
+    const needSale = u.netPerOrder > 0 ? lead.cpa0 / u.netPerOrder : Infinity;   // อัตรา “อีเมล → ซื้อ” ขั้นต่ำที่ทำให้แผนนี้เสมอทุน
+    html += '<p class="hint">รายได้ต่อลีด = ราคา × (อีเมล→ซื้อ ' + nf(cfg.leadToSalePct, 1) + '%) = <b>' + baht(leadNet) + '</b> · ต้นทุนต่อลีด = CPC ÷ (กรอกอีเมล ' + nf(cfg.optInPct, 0) + '%) = <b>' + baht(lead.cpa0) + '</b>' +
+      ' · งบขั้นต่ำหลุด Learning = ' + baht(lead.R) + ' · ต้องปิดการขายได้ ' + pa(needSale, 1) + ' ของลีด</p>';
+    html += '<div class="verdict ' + (leadA.viable ? 'win' : 'lose') + '">' + (leadA.viable
+      ? 'แผนนี้<b>ผ่าน</b>: ควรใช้ ' + baht(leadA.use) + '/วัน → ' + nf(leadA.orders, 2) + ' ลีด/วัน · กำไร ' + baht(leadA.profit) + '/วัน (ยังต้องแก้เรื่องอีเมลตกสแปมก่อน)'
+      : 'แผนนี้<b>ยังไม่ผ่าน</b>: ต้นทุนต่อลีด ' + baht(lead.cpa0) + (lead.cpa0 > leadNet ? ' สูงกว่า' : ' ต่ำกว่า') + 'รายได้ต่อลีด ' + baht(leadNet) + ' → ต้องดัน “อีเมล→ซื้อ” ให้ถึง ' + pa(needSale, 1) + ' หรือลดต้นทุนต่อลีด' ) + '</div>';
+    html += '<p class="hint">⚠️ อีเมลของแถมตอนนี้ตกสแปม Gmail ทุกฉบับ ⇒ ตัวเลข “อีเมล→ซื้อ” จริงจะต่ำกว่าที่กรอกมาก จนกว่าจะแก้ DKIM/DMARC + เนื้อหาอีเมล</p>';
+
+    $('alloc').innerHTML = html;
+  }
+  function kpiBox(label, big, sub, cls) {
+    return '<div class="kpi ' + (cls || '') + '"><span>' + label + '</span><b>' + big + '</b><i>' + sub + '</i></div>';
+  }
+
+  /* ── 5) Learning ── */
+  function renderLearning(S) {
+    const { f, lg, cfg } = S;
+    const needMore = lg.passes ? 0 : lg.minDailyBudget - cfg.budget;
+    let html = '<div class="kpis">';
+    html += kpiBox('ออเดอร์/สัปดาห์ที่คาด', nf(lg.eventsPerWeek, 1) + ' / 50', lg.passes ? 'หลุด Learning Phase' : 'ติด Learning Limited', lg.passes ? 'good' : 'bad');
+    html += kpiBox('งบขั้นต่ำต่อ ad set', baht(lg.minDailyBudget), 'CPA ' + baht(f.cpa) + ' × 50 ÷ 7', 'mid');
+    html += kpiBox('งบคุณตอนนี้', baht(cfg.budget), lg.passes ? 'เพียงพอ' : 'ขาดอีก ' + baht(Math.max(0, needMore)) + '/วัน', lg.passes ? 'good' : 'bad');
+    html += kpiBox('CPA ที่งบนี้ยอมรับได้', baht(lg.minDailyBudget > 0 ? cfg.budget / (50 / 7) : Infinity), 'เพื่อให้ได้ 50 events/สัปดาห์', 'mid');
+    html += '</div>';
+    html += '<div class="verdict ' + (lg.passes ? 'win' : 'lose') + '" style="margin-top:14px">' + (lg.passes
+      ? '<b>ผ่านเกต:</b> งบ ' + baht(cfg.budget) + '/วัน ให้ ~' + nf(lg.eventsPerWeek, 1) + ' อีเวนต์/สัปดาห์ → Meta เรียนรู้ได้'
+      : '<b>ไม่ผ่านเกต:</b> งบ ' + baht(cfg.budget) + '/วัน ให้แค่ ~' + nf(lg.eventsPerWeek, 1) + ' อีเวนต์/สัปดาห์ (ต้องการ 50) → <b>ต้องใช้ ' + baht(lg.minDailyBudget) + '/วัน</b> ' +
+        'ถึงจะหลุด Learning Phase · ถ้าไม่พร้อมจ่ายงบนั้น <b>อย่าแยกหลาย ad set</b> ให้รวมเป็น ad set เดียว (Meta แนะนำให้รวมกลุ่มเป้าหมาย) และยอมรับว่างบนี้ใช้ “วัดราคาคลิก” ไม่ใช่ “วัดยอดขาย”') +
+      '</div>';
+    $('learning').innerHTML = html;
+  }
+
+  /* ── 6) 4 แผน ── */
+  function renderPlays(S) {
+    const { cfg, u, cold, rt, lead, leadNet, bundleU } = S;
+    const plays = [
+      { name: 'P1 · ยิงตรงคนใหม่ (C1 เดียว)', netPerOrder: u.netPerOrder, channels: [cold], note: 'งบรวมที่ ad set เดียว — ปลอดภัยต่อ Learning Phase ที่สุด' },
+      { name: 'P2 · ยิงตรง + รีมาร์เก็ตติ้ง (C1+C3)', netPerOrder: u.netPerOrder, channels: [cold, rt], note: 'C3 ต้องมีคนกดสะสม ~300 คนก่อนเปิด (≈ ' + nf(300 / Math.max(0.0001, S.f.clicks), 1) + ' วันที่งบนี้)' },
+      { name: 'P3 · แพ็ก/บันเดิล ฿' + nf(cfg.bundle) + ' แล้วยิงตรง', netPerOrder: bundleU.netPerOrder, channels: [cold], note: 'เพิ่มกำไรต่อออเดอร์เป็น ' + baht(bundleU.netPerOrder) + ' ⇒ ยกเพดาน CPA' },
+      { name: 'P4 · แจกอีเมลก่อน แล้วปิดการขาย (C2)', netPerOrder: leadNet, channels: [lead], note: 'ต้องแก้เรื่องอีเมลตกสแปมก่อน ไม่งั้นตัวเลขนี้ใช้ไม่ได้' },
+    ];
+    const ranked = E.rankPlays({ budget: cfg.budget, days: cfg.days, plays });
+    const w0 = ranked[0];
+    let html = '<div class="kpis">' + kpiBox('แผนที่ระบบเลือก', w0 ? w0.name.split('·')[0].trim() : '–',
+      !w0 ? '' : (w0.project.cum > 0
+        ? 'กำไร ' + baht(w0.project.cum) + ' ใน ' + nf(w0.project.days) + ' วัน'
+        : 'ไม่มีแผนไหนกำไรที่ตัวเลขนี้ — ต้องขยับราคา/กำไรต่อออเดอร์ก่อน'), w0 && w0.project.cum > 0 ? 'good' : 'bad') + '</div>';
+    html += '<table><thead><tr><th>แผน</th><th>กำไร/ออเดอร์</th><th>งบที่ควรใช้/วัน</th><th> CPA เฉลี่ย</th><th>ออเดอร์รวม</th><th>กำไร ' + nf(cfg.days) + ' วัน</th><th>คำตัดสิน</th></tr></thead><tbody>';
+    html += ranked.map((p, i) => '<tr class="' + (i === 0 && p.project.cum > 0 ? 'win-row' : '') + '"><td>' + p.name + '<br><span style="color:#8B93A6;font-size:12.5px">' + p.note + '</span></td><td>' + baht(p.netPerOrder) +
+      '</td><td>' + (p.daily.viable ? baht(p.daily.use) : '<span class="tag bad">งบนี้อย่ายิง</span>') + '</td><td>' + (p.daily.viable ? baht(p.daily.cpa) : '–') +
+      '</td><td>' + nf(p.project.orders, 1) + '</td><td><b>' + baht(p.project.cum) + '</b>' +
+      (p.project.killed ? '<br><span class="tag bad">ระบบสั่งปิดวันที่ ' + nf(p.project.days) + '</span>' : '') +
+      (p.project.openDay ? '<br><span class="tag">เปิดแคมเปญอุ่นวันแรก: วันที่ ' + nf(p.project.openDay) + '</span>' : '') +
+      '</td><td>' + (p.project.cum > 0 ? '<span class="tag ok">กำไร</span>' : '<span class="tag bad">' + p.verdict + '</span>') + '</td></tr>').join('');
+    html += '</tbody></table>';
+    const win = w0;
+    html += '<p class="hint" style="margin-top:14px"><b>คำตอบสั้น:</b> ' + (win.project.cum > 0
+      ? 'ใช้ “' + win.name + '” — ' + baht(win.daily.use) + '/วัน คาดกำไร ' + baht(win.project.cum) + ' ใน ' + nf(win.project.days) + ' วัน' +
+        (win.project.openDay ? ' (ยิง C1 ก่อน ' + nf(win.project.openDay - 1) + ' วันเพื่อสร้างกลุ่มอุ่น แล้วเปิด C3 วันที่ ' + nf(win.project.openDay) + ')' : '')
+      : 'ที่ตัวเลขนี้ <b>ไม่มีแผนไหนกำไร</b> ⇒ ต้องขยับราคา/กำไรต่อออเดอร์ก่อนยิง (ดูข้อ 3) — ยิงตอนนี้เท่ากับจ่ายเงินซื้อบทเรียน ซึ่งทำได้ แต่ต้องรู้ตัวว่าเป็นค่าเรียน ไม่ใช่การลงทุน') + '</p>';
+    $('plays').innerHTML = html;
+  }
+
+  /* ── 7) ตาราง CPC × CVR ── */
+  function renderGrid(S) {
+    const g = E.grid({ netPerOrder: S.u.netPerOrder });
+    const inZone = (cpc, cvr) => cpc >= 2 && cpc <= 15 && cvr >= 1.5 && cvr <= 2.9;
+    let html = '<table class="heat"><thead><tr><th>CVR ↓ / CPC →</th>' + g.cpcs.map((c) => '<th>' + baht(c) + '</th>').join('') + '</tr></thead><tbody>';
+    html += g.cvrs.map((cvr) => '<tr><td class="rowh">' + nf(cvr, 1) + '%</td>' + g.cpcs.map((cpc) => {
+      const cell = g.cells.find((x) => x.cpc === cpc && x.cvr === cvr);
+      const p = cell.profit;
+      const cls = p >= S.u.netPerOrder * 0.25 ? 'ok' : (p >= 0 ? 'warn' : 'bad');
+      return '<td class="' + cls + (inZone(cpc, cvr) ? ' zone' : '') + '">' + (p >= 0 ? '+' : '−') + nf(Math.abs(p), 0) + '</td>';
+    }).join('') + '</tr>').join('');
+    html += '</tbody></table>';
+    const feasible = g.cells.filter((c) => inZone(c.cpc, c.cvr) && c.ok).length;
+    const zoneAll = g.cells.filter((c) => inZone(c.cpc, c.cvr)).length;
+    html += '<p class="hint">ใน ‘ช่วงจริงของตลาดไทย’ ' + zoneAll + ' ช่อง มีเพียง <b>' + feasible + '</b> ช่องที่กำไร ⇒ ' +
+      (feasible === 0 ? 'แปลว่าถ้า CPA ไม่ต่ำเป็นพิเศษ <b>ห้ามยิงขาย ฿99 ตรง ๆ</b>' : 'แปลว่าโอกาสอยู่แค่หัวมุมที่ CPC ต่ำสุด และ CVR สูงสุด') + '</p>';
+    $('grid').innerHTML = html;
+  }
+
+  /* ── 8) กติกา ── */
+  function renderRules(S) {
+    const { u, f, be, lg, cold, rt, cfg } = S;
+    const clicksForOneOrder = cfg.cvr > 0 ? 100 / cfg.cvr : Infinity;
+    const rules = [
+      '<b>จุดคุ้มทุน:</b> CPA ต้องต่ำกว่า <code>' + baht(u.netPerOrder) + '</code> ทุกวัน ถ้าเกิน 7 วันติดกัน → <b>ปิด ad set</b> แล้วแก้หน้าจ่ายเงิน/ราคา ไม่ใช่เพิ่มงบ',
+      '<b>เพดานราคาคลิก:</b> CPC ห้ามเกิน <code>' + baht(be.beCpc, 2) + '</code> · CPM ห้ามเกิน <code>' + baht(be.beCpm, 0) + '</code> — เกินกว่านี้ขาดทุนทุกออเดอร์',
+      '<b>ขยายงบ:</b> ถ้าครบ 7 วันแล้ว CPA ดีกว่า ' + baht(u.netPerOrder * 0.8) + ' → เพิ่มงบ <b>+20%</b> แล้วรอ 3 วันก่อนเพิ่มรอบถัดไป (Meta ไม่มีกฎ 20% ทางการ แต่การกระโดดงบแรง ๆ ทำให้ระบบแจกจ่ายใหม่และ CPA แกว่ง)',
+      '<b>ลดงบ:</b> ถ้า CPA ระหว่าง ' + baht(u.netPerOrder) + '–' + baht(u.netPerOrder * 1.2) + ' → ลดงบ 30% (ไม่ใช่ปิดทันที ข้อมูลยังไม่พอ)',
+      '<b>เปลี่ยนครีเอทีฟ:</b> ถ้า CTR ต่ำกว่า <code>' + nf(Math.max(0.5, cfg.ctr * 0.6), 1) + '%</code> หลัง 1,000 การแสดง → เปลี่ยนภาพ/หัวข้อ อย่าแก้กลุ่มเป้าหมาย',
+      '<b>หยุดแล้วแก้แชนเนล:</b> ถ้าได้ <code>' + nf(clicksForOneOrder, 0) + '</code> คลิกแล้วยังไม่มีออเดอร์เลย (นั่นคือ ' + nf(1 / Math.max(0.0001, cfg.cvr / 100), 0) + ' คลิกต่อ 1 ออเดอร์ที่คาด) → ปัญหาอยู่ที่ขั้นตอนจ่ายเงิน/ความน่าเชื่อถือ ไม่ใช่ที่แอด',
+      '<b>รวม ad set:</b> งบ ' + baht(cfg.budget) + '/วัน ให้ ~' + nf(lg.eventsPerWeek, 1) + ' อีเวนต์/สัปดาห์ → ต้องมี ' + baht(lg.minDailyBudget) + '/วัน ต่อ ad set ถึงหลุด Learning ⇒ <b>ห้ามแยก 3 ad set</b> ให้รวมเป็น 1 แล้วใช้ 3 แอดใน ad set เดียว',
+      '<b>งบที่ควรใช้จริง:</b> พอร์ต C1+C3 ดูดงบได้สูงสุด ~' + baht(E.allocate({ budget: 1e9, netPerOrder: u.netPerOrder, channels: [cold, rt] }).use) + '/วัน ก่อนที่ CPA จะไต่เกินทุน ⇒ งบที่เกินกว่านั้น <b>อย่ายิง</b> เอาไปทำบันเดิล/ของแถมดีกว่า',
+      '<b>รีมาร์เก็ตติ้งก่อน cold:</b> C3 มี CPA ≈ ' + baht(rt.cpa0) + ' เทียบ C1 ' + baht(cold.cpa0) + ' ⇒ ถ้างบจำกัด ให้เก็บกลุ่มอุ่นไว้ยิง C3 ก่อน แล้วค่อยขยาย cold',
+      '<b>รอข้อมูล:</b> อย่าตัดสินใจจาก 3 วัน — Meta แนะนำให้ประเมินด้วยหน้าต่าง 7 วัน และถ้าใช้ Cost per Result Goal ให้ตั้งงบ ≥ 5× เป้า',
+    ];
+    $('rules').innerHTML = rules.map((r) => '<li>' + r + '</li>').join('');
+  }
+
+  /* ── ปุ่มคัดลอก ── */
+  function planText() {
+    const S = read();
+    const { cfg, u, f, be, lg, cold, rt, lead, leadNet, bundleU } = S;
+    const ranked = E.rankPlays({ budget: cfg.budget, days: cfg.days, plays: [
+      { name: 'P1 · ยิงตรงคนใหม่ (C1)', netPerOrder: u.netPerOrder, channels: [cold] },
+      { name: 'P2 · C1+C3 รีมาร์เก็ตติ้ง', netPerOrder: u.netPerOrder, channels: [cold, rt] },
+      { name: 'P3 · บันเดิล ฿' + cfg.bundle + ' + cold', netPerOrder: bundleU.netPerOrder, channels: [cold] },
+      { name: 'P4 · แจกอีเมลก่อน (C2)', netPerOrder: leadNet, channels: [lead] },
+    ] });
+    const alloc = E.allocate({ budget: cfg.budget, netPerOrder: u.netPerOrder, channels: [cold, rt] });
+    const L = [];
+    L.push('# แผนยิงแอด Facebook — คำนวณจาก Ad Economics Console');
+    L.push('');
+    L.push('## ตัวเลขตั้งต้น');
+    L.push('- ราคา ' + baht(cfg.price) + ' · บันเดิล ' + baht(cfg.bundle) + ' · กำไร/ออเดอร์ ' + baht(u.netPerOrder) + ' · ROAS ขั้นต่ำ ' + nf(be.beRoas, 2));
+    L.push('- CPM ' + baht(cfg.cpm) + ' · CTR ' + nf(cfg.ctr, 2) + '% → CPC ' + baht(be.cpc, 2) + ' · CVR ' + nf(cfg.cvr, 1) + '% → CPA ' + baht(be.cpa));
+    L.push('- จุดคุ้มทุน: CPA ≤ ' + baht(u.netPerOrder) + ' · CPC ≤ ' + baht(be.beCpc, 2) + ' · CPM ≤ ' + baht(be.beCpm, 0) + ' · CVR ≥ ' + pa(be.beCvr, 2));
+    L.push('');
+    L.push('## งบที่ควรใช้');
+    L.push('- งบที่ตั้ง ' + baht(cfg.budget) + '/วัน → ระบบใช้จริง ' + baht(alloc.use) + '/วัน (ส่วนเกิน ' + baht(alloc.leftover) + ' ไม่ควรยิง)');
+    alloc.split.forEach((x) => L.push('  - ' + x.name + ': ' + baht(x.spend) + '/วัน · CPA ' + baht(x.cpa) + ' · ' + nf(x.orders, 2) + ' ออเดอร์/วัน · กำไร ' + baht(x.profit)));
+    L.push('- กำไรรวมที่คาด ' + baht(alloc.profit) + '/วัน');
+    L.push('- งบขั้นต่ำหลุด Learning Phase: C1 ' + baht(cold.R) + ' · C3 ' + baht(rt.R) + ' (ต้องการ 50 events/สัปดาห์)');
+    L.push('');
+    L.push('## แผนที่ควรใช้ (เรียงตามกำไร ' + cfg.days + ' วัน)');
+    ranked.forEach((p) => L.push('- ' + p.name + ' → กำไร ' + baht(p.project.cum) + ' · ออเดอร์ ' + nf(p.project.orders, 1) + ' · งบที่ใช้ ' + baht(p.daily.use) + '/วัน' + (p.project.killed ? ' (ระบบสั่งปิดวันที่ ' + p.project.days + ')' : '')));
+    L.push('');
+    L.push('## กติกาหยุด/ขยาย');
+    L.push('- CPA > ' + baht(u.netPerOrder) + ' ติดกัน 7 วัน → ปิด');
+    L.push('- CPA < ' + baht(u.netPerOrder * 0.8) + ' → เพิ่มงบ 20% ทุก 3 วัน');
+    L.push('- CTR < ' + nf(Math.max(0.5, cfg.ctr * 0.6), 1) + '% หลัง 1,000 การแสดง → เปลี่ยนครีเอทีฟ');
+    L.push('- ' + nf(100 / Math.max(0.0001, cfg.cvr), 0) + ' คลิกแล้วยังไม่มีออเดอร์ → หยุด แล้วแก้หน้าจ่ายเงิน');
+    L.push('');
+    L.push('## ข้อจำกัดที่ยังไม่แก้ (ต้องรู้ก่อนใช้เงิน)');
+    L.push('- ยังไม่มี Meta Pixel → ไม่มีการวัดผลอัตโนมัติ ออเดอร์นับมือ');
+    L.push('- ไม่มี UTM เก็บลงฐานข้อมูล → เทียบแอดกับยอดขายต้องทำมือ');
+    L.push('- อีเมลลิงก์ดาวน์โหลดตกสแปม → แผน P4 ใช้ไม่ได้จนกว่าจะแก้');
+    return L.join('\n');
+  }
+
+  function flash(msg) { $('copied').textContent = msg; setTimeout(() => { $('copied').textContent = ''; }, 2500); }
+  async function copy(text, msg) {
+    try { await navigator.clipboard.writeText(text); flash(msg); }
+    catch (e) {
+      const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); ta.remove(); flash(msg);
+    }
+  }
+
+  document.querySelectorAll('.in').forEach((el) => el.addEventListener('input', render));
+  document.querySelectorAll('[data-preset]').forEach((b) => b.addEventListener('click', () => {
+    const p = PRESETS[b.dataset.preset];
+    Object.keys(p).forEach((k) => { if ($(k)) $(k).value = p[k]; });
+    render();
+  }));
+  $('copy').addEventListener('click', () => copy(planText(), 'คัดลอกแผนแล้ว — วางใน Ads Manager ได้เลย'));
+  $('copyCsv').addEventListener('click', () => copy('วันที่,แคมเปญ,งบที่ใช้,การแสดง,คลิก,CTR,CPC,ออเดอร์(pending/reported/paid),CPA,กำไร\n', 'คัดลอกหัวตาราง CSV แล้ว'));
+
+  render();
+})();
+</script>
+</body>
+</html>

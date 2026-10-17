@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ขอบคุณ! — 599 Prompt ก๊อปวาง</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;800;900&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="brand" href="/">← 599 Prompt ก๊อปวาง</a></div>
+  <div class="card">
+    <h1>ขอบคุณที่สนับสนุนครับ 🎉</h1>
+    <p class="muted" id="sub">กำลังตรวจสอบสถานะการชำระเงิน…</p>
+    <div class="msg" id="status">รอการยืนยันการชำระเงิน…</div>
+    <div id="dlBox" style="display:none"><a class="btn ok" id="dlLink" href="#">⬇ ดาวน์โหลด PDF ทันที</a></div>
+    <p class="muted" id="hint" style="margin-top:14px;display:none">โอนเงินแล้วแต่ยังไม่ได้แจ้ง? <a id="backLink" href="/">กลับไปที่หน้าเพจ</a> แล้วกด “ฉันโอนแล้ว” พร้อมแนบสลิป</p>
+    <p class="muted" id="mailNote" style="margin-top:14px"></p>
+    <p class="muted" style="margin-top:14px">ลิงก์โหลดอายุ 24 ชม. (โหลดได้ไม่จำกัดรอบ) · หากลิงก์หมดอายุ <a href="/retrieve">ขอลิงก์ใหม่ได้ที่นี่</a></p>
+    <p class="muted" id="updNote" style="margin-top:14px">ซื้อครั้งเดียว — ได้ทุกเวอร์ชันใหม่ฟรีตลอดชีพ (ลิงก์เดิมโหลดไฟล์รุ่นล่าสุดเสมอ)</p>
+    <p class="muted" style="margin-top:14px">📅 ได้ของแล้ว — เปิด <a href="/30day">“Kopwang Prompt สร้างรายได้ใน 30 วัน”</a> เพื่อดูว่าพรอมป์ต์รหัสไหนใช้ตอนไหน (แผน 4 สัปดาห์ · วันต่อวัน)</p>
+  </div>
+  <footer><a href="/terms">เงื่อนไข</a> · <a href="/refund">คืนเงิน</a> · <a href="/privacy">ความเป็นส่วนตัว</a></footer>
+</div>
+<script>
+const orderId = new URLSearchParams(location.search).get('order');
+const statusEl = document.getElementById('status');
+const TEXT = {
+  pending: 'ยังไม่พบการชำระเงิน — สแกน QR จ่ายก่อน แล้วกด “ฉันโอนแล้ว”',
+  reported: 'แจ้งโอนแล้ว — ร้านกำลังตรวจสอบ (ปกติไม่เกิน 1 ชั่วโมง) ปุ่มดาวน์โหลดจะเปิดให้อัตโนมัติ',
+  paid: 'ชำระเงินสำเร็จ ✅',
+  failed: 'ออเดอร์นี้ถูกปิด — สลิปไม่ผ่านการตรวจ ติดต่อร้านที่อีเมลท้ายหน้า'
+};
+let autoDlAt = 0;
+function autoDownload(url) {
+  if (!url || autoDlAt) return;
+  autoDlAt = Date.now();
+  const a = document.createElement('a');
+  a.href = url; a.rel = 'noopener';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+if (!orderId) { statusEl.textContent = 'ไม่พบเลขที่คำสั่งซื้อในลิงก์'; }
+else {
+  document.getElementById('backLink').href = '/?order=' + encodeURIComponent(orderId);
+  let tries = 0;
+  const tick = async () => {
+    tries++;
+    try {
+      const s = await (await fetch('/api/order/' + encodeURIComponent(orderId))).json();
+      if (s.status === 'paid') {
+        statusEl.textContent = TEXT.paid;
+        document.getElementById('sub').textContent = 'ไฟล์พร้อมดาวน์โหลดแล้ว';
+        const p = await (await fetch('/paid?order=' + encodeURIComponent(orderId))).json();
+        if (p.download_url) { document.getElementById('dlLink').href = p.download_url; document.getElementById('dlBox').style.display = 'block'; autoDownload(p.download_url); }
+        if (p.email) document.getElementById('mailNote').textContent = 'ส่งลิงก์ไปที่ ' + p.email + ' แล้ว';
+        if (p.pack && p.pack.version) {
+          document.getElementById('updNote').textContent =
+            `ไฟล์เวอร์ชัน ${p.pack.version} · ${p.pack.prompts} ชุด — ${p.update_promise || 'ซื้อครั้งเดียว ได้ทุกเวอร์ชันใหม่ฟรี'}`;
+        }
+        return;
+      }
+      if (s.status === 'pending' || s.status === 'reported') {
+        statusEl.textContent = TEXT[s.status];
+        document.getElementById('hint').style.display = s.status === 'pending' ? 'block' : 'none';
+        if (tries < 100) setTimeout(tick, 3000);
+      } else statusEl.textContent = TEXT[s.status] || ('สถานะ: ' + s.status);
+    } catch (e) { if (tries < 100) setTimeout(tick, 3000); }
+  };
+  tick();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+name = "promptpack-shop"
+main = "worker.js"
+compatibility_date = "2025-07-18"   # เวอร์ชันที่ workerd/Workers รองรับ (โค้ดใช้แค่ fetch/crypto มาตรฐาน)
+
+# เสิร์ฟหน้าเว็บ static (index/thank-you/retrieve/legal/admin) จาก ./public
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# ── ผูกโดเมนร้าน (kopwang.com) ───────────────────────────────────────────
+# ใช้เมื่อ deploy เข้าบัญชี Cloudflare ของคุณเอง: ลบเครื่องหมาย # ออก 3 บรรทัดล่าง แล้ว `wrangler deploy`
+# Cloudflare จะสร้าง DNS record + ใบรับรอง TLS ให้เอง — ไม่ต้องกด Custom domain ในแดชบอร์ด
+# (ต้องมีโดเมนอยู่ในบัญชีเดียวกันก่อน: dash.cloudflare.com → kopwang.com)
+# [[routes]]
+# pattern = "kopwang.com"
+# custom_domain = true
+
+# สร้างด้วย: wrangler d1 create promptpack-orders  →  ก๊อป database_id มาใส่
+[[d1_databases]]
+binding = "DB"
+database_name = "promptpack-orders"
+database_id = "00000000-0000-0000-0000-000000000000"   # ← แทนด้วย id จริงจาก `wrangler d1 create`
+
+# สร้างด้วย: wrangler r2 bucket create promptpack-files
+[[r2_buckets]]
+binding = "FILES"
+bucket_name = "promptpack-files"
+
+[vars]
+PAYMENT_PROVIDER = "promptpay"          # promptpay = รับเงินเข้าพร้อมเพย์ร้านตรง ๆ · omise = ใช้ Payment Gateway
+# ช่องทางรับเงิน (คั่นด้วย , · ช่องแรก = ค่าเริ่มต้น): "เบอร์พร้อมเพย์" หรือ "เลขบัญชี@รหัสธนาคาร" หรือ "เลขบัตรประชาชน"
+PROMPTPAY_OPTIONS = "0880754039, 9192868041@011"   # ← ช่องแรก = เบอร์พร้อมเพย์ที่ยืนยันแล้วว่าโอนได้จริง · ช่อง 2 = บัญชี ttb (011) เป็นทางเลือกสำรอง
+PROMPTPAY_LABELS = "ช่องทางหลัก|ช่องทางสำรอง"     # ← ป้ายบนปุ่มเลือกช่องทาง (คั่นด้วย | · เว้นว่าง = ใช้ชื่อบัญชี · ห้ามใส่ชนิด/เลข)
+PROMPTPAY_ID = "9192868041"            # ← ใช้เมื่อไม่ตั้ง PROMPTPAY_OPTIONS: เลขบัญชี/เบอร์พร้อมเพย์/เลขบัตรประชาชน (ต้องคู่กับ PROMPTPAY_BANK)
+PROMPTPAY_BANK = "011"                 # ← ต้องมีเมื่อ PROMPTPAY_ID เป็น “เลขบัญชีธนาคาร” เท่านั้น (002=กรุงเทพ · 004=กสิกร · 006=กรุงไทย · 011=ttb · 014=ไทยพาณิชย์ · 025=กรุงศรี · 066=ออมสิน)
+PROMPTPAY_NAME = "น.ส. พรพิไล ดวงใจ"      # ← สิ่งเดียวที่โชว์บนหน้าโอน (โชว์แค่ชื่อบัญชี — ไม่บอกชนิดพร้อมเพย์/ไม่โชว์เลข)
+PRODUCT_NAME = "599 Prompt ก๊อปวาง — TikTok Affiliate"
+PRICE_SATANG = "9900"          # 99 บาท = 9,900 สตางค์ (ราคาเปิดตัว)
+CURRENCY = "THB"
+PDF_OBJECT_KEY = "prompt-pack.pdf"     # ไฟล์ปัจจุบันที่ลูกค้าทุกคนโหลด (ลิงก์เก่า/ใหม่ชี้ที่ไฟล์นี้เสมอ)
+DOWNLOAD_TTL_HOURS = "24"              # อายุลิงก์ในอีเมลใบเสร็จ (ขอลิงก์ใหม่ได้ที่ /retrieve)
+# ── แพ็กอัปเดตตัวเอง: ออกรุ่นใหม่แล้วให้ลูกค้าคนเดิมได้ไฟล์ใหม่ + แจ้งเตือน ──
+# เวอร์ชัน/จำนวน prompt ตั้งที่ pack-version.mjs (ห้ามแก้ที่อื่น) · ออกรุ่นผ่านหลังบ้าน /admin ไม่ต้อง deploy
+UPDATE_LINK_TTL_HOURS = "720"         # อายุลิงก์ในอีเมล “มีเวอร์ชันใหม่” (30 วัน · โหลดซ้ำได้ไม่จำกัด)
+PACK_NOTIFY_BATCH = "20"              # ส่งอีเมลแจ้งรุ่นใหม่กี่คนต่อครั้ง (1–50 · หลังบ้านเรียกซ้ำจนจบเอง)
+REQUIRE_EMAIL = "1"              # เก็บอีเมลทุกออเดอร์ (ใช้ส่งลิงก์โหลด + ใบเสร็จอัตโนมัติ) — "0" = ไม่บังคับ
+AUTO_APPROVE = "1"               # ตรวจสลิปผ่านครบเงื่อนไข → อนุมัติ + ส่งลิงก์ให้ลูกค้าเองทันที (ต้องมี EASYSLIP_API_KEY)
+AUTO_VERIFY_MAX_ATTEMPTS = "5"   # ลองตรวจอัตโนมัติต่อออเดอร์สูงสุด (กันกินโควตาตรวจสลิป)
+SLIP_MATCH_AMOUNT = "1"          # ส่งยอดที่ต้องตรงให้ผู้ให้บริการตรวจสลิป (เบอร์/บัญชีไม่ตรงหรือยอดต่าง = ไม่ผ่าน)
+SLIP_MATCH_ACCOUNT = "1"         # ยืนยันว่าเป็นบัญชีที่ลงทะเบียนไว้กับคีย์ร้าน (ตั้ง "0" ถ้ายังไม่ลงทะเบียนบัญชี)
+MAIL_FROM = "599 Prompt ก๊อปวาง <no-reply@yourdomain.com>"   # ต้องเป็นโดเมนที่ verify กับ Resend แล้ว (SPF/DKIM/DMARC)
+# REPLY_TO = "support@yourdomain.com"   # ให้ผู้รับตอบกลับได้จริง (ลดการโดนมองเป็นสแปม) — ไม่ตั้งก็ใช้ NOTIFY_EMAIL
+NOTIFY_EMAIL = ""              # ใส่อีเมลร้าน เพื่อรับแจ้งเตือน "มีออเดอร์รอตรวจ"
+# APP_ORIGIN = "https://promptpack.yourdomain.workers.dev"   # ใส่ URL จริงตอน deploy
+
+# ความลับ (ตั้งด้วย wrangler secret put … ห้าม commit):
+#   DOWNLOAD_SIGNING_KEY    สุ่มเอง: openssl rand -hex 32 | base64
+#   ADMIN_TOKEN             สุ่มเอง: สำหรับหลังบ้าน /admin (ใช้กดอนุมัติ/ปฏิเสธออเดอร์)
+#   RESEND_API_KEY          คีย์จาก https://resend.com/api-keys (ส่งอีเมลลิงก์โหลด)
+#   EASYSLIP_API_KEY        เปิดโหมดอัตโนมัติ (ตรวจสลิป/ยอดเงิน + อนุมัติเอง + ส่งลิงก์ทางเมล)
+#                           สมัคร/ทดลองฟรี 7 วัน (50 ครั้ง) → https://easyslip.com · ตั้งค่าที่ Sites → Secrets
+#                           ⚠️ ต้องเพิ่มบัญชีรับเงินของร้านในหน้าเว็บผู้ให้บริการด้วย เพื่อให้ matchAccount ยืนยันได้
+#   (ไม่มีคีย์เพิ่มสำหรับการอัปเดต — ใช้ RESEND_API_KEY + DOWNLOAD_SIGNING_KEY + ADMIN_TOKEN ที่มีอยู่)
+#   OMISE_SECRET_KEY        (ทางเลือก) ใช้เฉพาะเมื่อ PAYMENT_PROVIDER = "omise"
+#   OMISE_WEBHOOK_SECRET    (ทางเลือก) ใช้เฉพาะเมื่อ PAYMENT_PROVIDER = "omise"

@@ -1,0 +1,30 @@
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#FBF6EE; font-family:'Sarabun',sans-serif; color:#1B1B1F; padding:34px 20px 70px; }
+.wrap { max-width:640px; margin:0 auto; }
+.card { background:#fff; border:1px solid #F1E9DB; border-radius:18px; padding:28px 26px; }
+h1 { font-family:'Kanit'; font-weight:900; font-size:28px; line-height:1.25; }
+h2 { font-family:'Kanit'; font-weight:800; font-size:18px; margin:22px 0 8px; }
+p, li { font-size:15px; line-height:1.75; color:#3A3A44; }
+ul { padding-left:20px; margin:8px 0; }
+a { color:#C74A15; }
+.muted { color:#7A7A85; font-size:14px; }
+.top { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px; }
+.brand { font-family:'Kanit'; font-weight:800; font-size:16px; color:#C74A15; text-decoration:none; }
+button, .btn { display:inline-block; width:100%; margin-top:16px; background:#FF3D00; border:none; color:#fff; font-family:'Kanit'; font-weight:800; font-size:18px; padding:15px; border-radius:999px; cursor:pointer; text-align:center; text-decoration:none; }
+button:disabled { opacity:.5; cursor:wait; }
+input { width:100%; margin-top:10px; padding:14px 16px; border:1px solid #E7DDCC; border-radius:14px; font-family:'Sarabun'; font-size:16px; background:#fff; }
+input:focus { outline:2px solid #FF5A1F33; border-color:#FF5A1F; }
+.msg { margin-top:14px; font-size:14px; font-weight:600; color:#C74A15; min-height:20px; }
+.ok { display:block; background:#00B37E; color:#fff; text-decoration:none; font-family:'Kanit'; font-weight:800; font-size:18px; padding:15px; border-radius:999px; text-align:center; margin-top:16px; }
+.stats { display:flex; gap:10px; flex-wrap:wrap; margin:6px 0 18px; }
+.stat { flex:1 1 130px; background:#FBF6EE; border:1px solid #F1E9DB; border-radius:14px; padding:12px 14px; }
+.stat b { display:block; font-family:'Kanit'; font-weight:800; font-size:20px; }
+.stat span { font-size:12px; color:#7A7A85; }
+table { width:100%; border-collapse:collapse; margin-top:14px; font-size:13px; }
+th, td { text-align:left; padding:9px 8px; border-bottom:1px solid #F1E9DB; white-space:nowrap; }
+th { font-family:'Kanit'; font-weight:700; font-size:12px; color:#6A6A75; }
+.badge { font-size:11px; font-weight:700; padding:2px 9px; border-radius:999px; }
+.badge.paid { background:#DCF6EC; color:#0A7A57; }
+.badge.pending { background:#FFF2D6; color:#8A6400; }
+footer { margin-top:26px; text-align:center; font-size:13px; color:#9A9AA6; line-height:1.9; }
+footer a { color:#C74A15; text-decoration:none; }

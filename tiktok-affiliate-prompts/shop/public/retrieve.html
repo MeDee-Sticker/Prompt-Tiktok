@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ขอลิงก์ดาวน์โหลดใหม่ — 599 Prompt ก๊อปวาง</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;800;900&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="brand" href="/">← 599 Prompt ก๊อปวาง</a></div>
+  <div class="card">
+    <h1>ขอลิงก์ดาวน์โหลดใหม่</h1>
+    <p class="muted">กรอกอีเมลที่ใช้ตอนซื้อ ระบบจะส่งลิงก์โหลดใหม่ให้ (จำกัด 5 ครั้ง/ชั่วโมง)</p>
+    <input id="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com">
+    <button id="sendBtn">ส่งลิงก์ให้ฉัน</button>
+    <div class="msg" id="msg"></div>
+  </div>
+  <footer><a href="/terms">เงื่อนไข</a> · <a href="/refund">คืนเงิน</a> · <a href="/privacy">ความเป็นส่วนตัว</a></footer>
+</div>
+<script>
+document.getElementById('sendBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('sendBtn'), msg = document.getElementById('msg');
+  const email = document.getElementById('email').value.trim();
+  if (!email) { msg.textContent = 'กรุณากรอกอีเมล'; return; }
+  btn.disabled = true; btn.textContent = 'กำลังส่ง…'; msg.textContent = '';
+  try {
+    const r = await fetch('/api/retrieve', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ email }) });
+    const d = await r.json();
+    msg.textContent = r.ok ? d.message : (d.error || 'เกิดข้อผิดพลาด');
+  } catch (e) { msg.textContent = 'เกิดข้อผิดพลาด: ' + e.message; }
+  btn.disabled = false; btn.textContent = 'ส่งลิงก์ให้ฉัน';
+});
+</script>
+</body>
+</html>

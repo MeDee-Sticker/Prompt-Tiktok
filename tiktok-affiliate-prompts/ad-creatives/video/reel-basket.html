@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Reel 8 วิ · ปักตะกร้าหารายได้ — 599 Prompt ก๊อปวาง</title>
+<!-- ฟอนต์: ในกล่องเรนเดอร์ใช้ฟอนต์ไทยในเครื่อง (fontconfig → .scratch/fonts) ถ้าเปิดในเบราว์เซอร์ปกติจะโหลดจาก Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;800;900&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { background:#000; }
+  .k { font-family:'Kanit', sans-serif; }
+
+  /* ===== เวที 1080×1920 (แนวตั้ง 9:16 สำหรับ TikTok) ===== */
+  #stage {
+    position:relative; width:1080px; height:1920px; overflow:hidden;
+    background:#0E1013; color:#fff; font-family:'Sarabun', sans-serif;
+  }
+  /* พื้นหลัง: แสงส้ม + เส้นกริดจาง */
+  #glow {
+    position:absolute; inset:-20%; pointer-events:none;
+    background:
+      radial-gradient(680px 680px at 82% 16%, rgba(255,90,31,.55), transparent 70%),
+      radial-gradient(820px 820px at 12% 88%, rgba(255,61,0,.22), transparent 72%),
+      radial-gradient(600px 600px at 50% 50%, rgba(20,24,32,.9), transparent 75%);
+  }
+  #grid {
+    position:absolute; inset:0; pointer-events:none; opacity:.5;
+    background-image:linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+                     linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size:90px 90px;
+    mask-image:radial-gradient(75% 60% at 50% 42%, #000 40%, transparent 100%);
+    -webkit-mask-image:radial-gradient(75% 60% at 50% 42%, #000 40%, transparent 100%);
+  }
+  .scene { position:absolute; inset:0; transform-origin:50% 50%; }
+
+  .pill {
+    display:inline-block; font-family:'Kanit'; font-weight:600; font-size:26px; letter-spacing:.4px;
+    background:rgba(255,90,31,.14); border:2px solid rgba(255,90,31,.75); color:#FF9A63;
+    padding:12px 26px; border-radius:999px;
+  }
+  .muted { color:#8E97AB; }
+  .o { color:#FF7A45; }
+
+  /* ---------- Scene 1: ฮุก ---------- */
+  #s1 .head { position:absolute; left:90px; top:430px; right:130px; }
+  #s1 h1 { font-family:'Kanit'; font-weight:900; line-height:1.14; letter-spacing:-1.5px; }
+  #s1 h1 .l { display:block; }
+  #l1 { font-size:102px; color:#fff; }
+  #l2 { font-size:102px; color:#fff; }
+  #l3 { font-size:94px; color:#FF5A1F; margin-top:8px; text-shadow:0 10px 34px rgba(255,61,0,.35); }
+  #s1 .strip {
+    position:absolute; left:90px; right:130px; top:1010px;
+    border-left:8px solid #FF3D00; padding:6px 0 6px 26px;
+    font-size:38px; font-weight:600; line-height:1.4; color:#C8CFDE;
+  }
+  #s1 .strip b { color:#fff; font-weight:700; }
+  #basket { position:absolute; right:60px; top:250px; font-size:170px; filter:drop-shadow(0 18px 30px rgba(0,0,0,.5)); }
+  #basket2 { position:absolute; right:150px; top:1330px; font-size:120px; opacity:.9; }
+
+  /* ---------- Scene 2: ทางลัด ---------- */
+  #s2 .kicker { position:absolute; left:90px; top:400px; }
+  #s2 .prod {
+    position:absolute; left:90px; right:130px; top:510px;
+    font-family:'Kanit'; font-weight:900; font-size:104px; line-height:1.1; letter-spacing:-1.5px;
+  }
+  #s2 .steps { position:absolute; left:90px; right:130px; top:760px; }
+  #s2 .step {
+    display:flex; align-items:center; gap:26px; margin-bottom:22px;
+    background:rgba(255,255,255,.045); border:2px solid rgba(255,255,255,.10);
+    border-radius:24px; padding:22px 28px;
+  }
+  #s2 .step b {
+    flex:none; width:64px; height:64px; border-radius:18px; display:flex; align-items:center; justify-content:center;
+    font-family:'Kanit'; font-weight:800; font-size:34px; color:#0E1013;
+    background:linear-gradient(145deg,#FF8A3D,#FF3D00);
+  }
+  #s2 .step span { font-size:40px; font-weight:600; color:#EDEFF5; line-height:1.25; }
+  #s2 .note {
+    position:absolute; left:90px; right:130px; top:1230px;
+    font-size:32px; font-weight:600; color:#FFB59A;
+  }
+
+  /* ---------- Scene 3: ข้อเสนอ + CTA ---------- */
+  #s3 .use { position:absolute; left:90px; right:130px; top:420px; }
+  #s3 .use b { display:block; font-size:46px; font-weight:700; color:#EDEFF5; }
+  #s3 .use i { display:block; font-style:normal; font-size:36px; font-weight:600; color:#9AA3B8; margin-top:16px; }
+  #s3 .price { position:absolute; left:90px; top:612px; }
+  #s3 .was { display:block; font-family:'Kanit'; font-weight:700; font-size:44px; color:#78808F; }
+  #s3 .was s { text-decoration-thickness:4px; }
+  #s3 .now { display:block; font-family:'Kanit'; font-weight:900; font-size:216px; line-height:1; letter-spacing:-6px; }
+  #s3 .now .cur { font-size:84px; vertical-align:super; letter-spacing:0; }
+  #s3 .now .baht { font-size:74px; color:#FFB59A; letter-spacing:0; margin-left:6px; }
+  #s3 .save {
+    position:absolute; left:90px; top:930px;
+    font-family:'Kanit'; font-weight:700; font-size:34px; color:#0E1013;
+    background:#FFD166; border-radius:999px; padding:10px 26px; transform:rotate(-3deg);
+  }
+  #s3 .cta {
+    position:absolute; left:90px; right:130px; top:1035px; text-align:center;
+    font-family:'Kanit'; font-weight:800; font-size:52px; color:#fff;
+    background:linear-gradient(145deg,#FF7A2F,#FF3D00); border-radius:999px; padding:28px 20px;
+    box-shadow:0 18px 40px rgba(255,61,0,.35);
+  }
+  #s3 .cta small { display:block; font-family:'Sarabun'; font-weight:600; font-size:30px; opacity:.92; margin-top:8px; }
+  #s3 .fine {
+    position:absolute; left:90px; right:130px; top:1265px;
+    font-size:30px; line-height:1.45; color:#8E97AB;
+  }
+  #s3 .brand {
+    position:absolute; left:90px; top:1440px; font-family:'Kanit'; font-weight:600; font-size:32px; color:#5D6577;
+  }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="glow"></div>
+  <div id="grid"></div>
+
+  <!-- ===== 1) ฮุก 0.0–2.5 วิ ===== -->
+  <section class="scene" id="s1">
+    <div class="head">
+      <span class="pill" id="pill">TIKTOK SHOP AFFILIATE · ปักตะกร้าหารายได้</span>
+      <h1>
+        <span class="l" id="l1">อยากปักตะกร้า</span>
+        <span class="l" id="l2">หารายได้ใน TikTok</span>
+        <span class="l" id="l3">แต่ไม่รู้จะพูดอะไร?</span>
+      </h1>
+    </div>
+    <div id="basket">🧺</div>
+    <div class="strip" id="strip"><b>ตะกร้าเปล่า = ยังไม่มีรายได้</b><br>คนซื้อตัดสินใจจาก “คลิป” ไม่ใช่จากสินค้าในตะกร้า</div>
+    <div id="basket2">💸</div>
+  </section>
+
+  <!-- ===== 2) ทางลัด 2.5–5.6 วิ ===== -->
+  <section class="scene" id="s2">
+    <span class="pill kicker" id="kick">ทางลัดที่ใช้ได้ทันที</span>
+    <div class="prod" id="prod">599 Prompt<br><span class="o">ก๊อปวาง</span></div>
+    <div class="steps">
+      <div class="step" id="st0"><b>1</b><span>เลือกสินค้าที่จะปักตะกร้า</span></div>
+      <div class="step" id="st1"><b>2</b><span>ก๊อป prompt ไปวางใน AI</span></div>
+      <div class="step" id="st2"><b>3</b><span>ได้สคริปต์พร้อมถ่ายทันที</span></div>
+    </div>
+    <div class="note" id="note">Hook · Shot list · CTA · แคปชัน — ครบในชุดเดียว</div>
+  </section>
+
+  <!-- ===== 3) ข้อเสนอ + CTA 5.6–8.0 วิ ===== -->
+  <section class="scene" id="s3">
+    <div class="use"><b id="use">ชุดเดียวจบ · ใช้ซ้ำได้ทุกสินค้า</b><i id="use2">ไม่ต้องเป็นนักเขียน · ไม่ต้องเก่งอังกฤษ</i></div>
+    <div class="price">
+      <span class="was" id="was">ราคาปกติ <s>999฿</s></span>
+      <span class="now" id="now">99<span class="cur">฿</span></span>
+    </div>
+    <span class="save" id="save">ลดเฉพาะโพสต์นี้</span>
+    <div class="cta" id="cta">กดที่ตะกร้า 👉 รับชุดนี้<small>ดาวน์โหลดทันทีหลังชำระเงิน</small></div>
+    <div class="fine" id="fine">ไม่ได้การันตีรายได้ · ผลลัพธ์ขึ้นกับสินค้าและคอนเทนต์ของคุณ</div>
+    <div class="brand" id="brand">Kopwang Prompt · 599 Prompt ก๊อปวาง</div>
+  </section>
+</div>
+
+<script>
+/* ============================================================
+   renderAt(t) — วาดสถานะทุกอย่าง ณ เวลา t (วินาที) แบบกำหนดได้
+   ใช้ทั้งตอนเรนเดอร์เฟรมวิดีโอ และตอนดูตัวอย่างในเบราว์เซอร์
+   ============================================================ */
+const FPS = 30, DUR = 8.0;
+const $ = (s) => document.querySelector(s);
+const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+const sp = (t, a, b) => clamp01((t - a) / (b - a));
+const fade = (t, a, b, c, d) => {
+  if (t <= a) return 0;
+  if (t < b) return easeOut(sp(t, a, b));
+  if (t < c) return 1;
+  return 1 - easeOut(sp(t, c, d));
+};
+function place(el, o, x, y, s) {
+  if (o !== undefined) el.style.opacity = o;
+  el.style.transform = `translate3d(${x || 0}px,${y || 0}px,0) scale(${s === undefined ? 1 : s})`;
+}
+
+window.renderAt = function (t) {
+  /* ---------- Scene 1 (0.00–2.50) ---------- */
+  const out1 = sp(t, 2.20, 2.50);
+  const s1 = $('#s1');
+  s1.style.opacity = 1 - out1;
+  s1.style.transform = `scale(${1 + 0.06 * out1})`;
+  $('#glow').style.opacity = 0.35 + 0.65 * easeOut(sp(t, 0, 1.0));
+  $('#grid').style.opacity = 0.30 + 0.30 * easeOut(sp(t, 0, 1.2));
+
+  let p = easeOut(sp(t, 0.10, 0.55));
+  place($('#pill'), p, -70 * (1 - p), 0, 1);
+  p = easeOut(sp(t, 0.30, 0.80));
+  place($('#l1'), p, 0, 90 * (1 - p), 1);
+  p = easeOut(sp(t, 0.55, 1.05));
+  place($('#l2'), p, 0, 90 * (1 - p), 1);
+  p = easeOut(sp(t, 0.85, 1.35));
+  place($('#l3'), p, 0, 80 * (1 - p), 1 + 0.16 * (1 - p));
+  p = easeOut(sp(t, 1.15, 1.55));
+  place($('#strip'), p, -50 * (1 - p), 0, 1);
+
+  const fl = Math.sin(t * 2.4) * 16;
+  place($('#basket'), 1, 0, fl, 1 + 0.03 * Math.sin(t * 3.1));
+  place($('#basket2'), 0.9, 0, -fl * 0.8, 1);
+
+  /* ---------- Scene 2 (2.50–5.60) ---------- */
+  const o2 = fade(t, 2.50, 2.88, 5.26, 5.60);
+  const exit2 = sp(t, 5.26, 5.60);
+  const s2 = $('#s2');
+  s2.style.opacity = o2;
+  s2.style.transform = `scale(${1 - 0.05 * exit2}) translate3d(0,${20 * exit2}px,0)`;
+
+  p = easeOut(sp(t, 2.55, 2.95));
+  place($('#kick'), p, 0, 40 * (1 - p), 1);
+  p = easeOut(sp(t, 2.65, 3.10));
+  place($('#prod'), p, 0, 70 * (1 - p), 1 + 0.05 * (1 - p));
+  [['#st0', 3.05], ['#st1', 3.42], ['#st2', 3.79]].forEach(([sel, at]) => {
+    const q = easeOut(sp(t, at, at + 0.36));
+    place($(sel), q, 90 * (1 - q), 0, 1);
+  });
+  p = easeOut(sp(t, 4.25, 4.65));
+  place($('#note'), p, 0, 30 * (1 - p), 1);
+
+  /* ---------- Scene 3 (5.60–8.00) ---------- */
+  const s3 = $('#s3');
+  s3.style.opacity = sp(t, 5.62, 5.96);
+  p = easeOut(sp(t, 5.70, 6.05));
+  place($('#use'), p, 0, 50 * (1 - p), 1);
+  place($('#use2'), easeOut(sp(t, 5.98, 6.32)), 0, 40 * (1 - easeOut(sp(t, 5.98, 6.32))), 1);
+  p = easeOut(sp(t, 5.78, 6.18));
+  place($('#was'), p, 0, 40 * (1 - p), 1);
+  // ป้ายราคา: เด้งเข้ามาแล้วค้าง
+  const pop = sp(t, 5.85, 6.25);
+  const shake = t < 6.35 ? 1 + 0.10 * Math.sin(sp(t, 6.15, 6.35) * Math.PI) : 1;
+  place($('#now'), pop, 0, 120 * (1 - easeOut(pop)), (0.86 + 0.14 * easeOut(pop)) * shake);
+  p = easeOut(sp(t, 6.30, 6.60));
+  place($('#save'), p, 60 * (1 - p), 0, 1);
+  p = easeOut(sp(t, 6.40, 6.75));
+  const pulse = t > 6.9 ? 1 + 0.025 * Math.sin((t - 6.9) * 6.0) : 1;
+  place($('#cta'), p, 0, 60 * (1 - p), pulse);
+  p = easeOut(sp(t, 6.85, 7.20));
+  place($('#fine'), p, 0, 20 * (1 - p), 1);
+  place($('#brand'), easeOut(sp(t, 7.00, 7.40)), 0, 0, 1);
+
+  // ซีนที่ยังไม่เริ่ม = โปร่งใสสนิท กันไม่ให้เห็นล่วงหน้า
+  if (t < 2.45) s2.style.opacity = 0;
+  if (t < 5.55) s3.style.opacity = 0;
+};
+
+/* เปิดในเบราว์เซอร์เฉย ๆ จะเล่นวนไปเรื่อย ๆ ให้ดูตัวอย่าง */
+if (!window.__NO_AUTOPLAY__) {
+  let start = null;
+  const loop = (ts) => {
+    if (start === null) start = ts;
+    const t = ((ts - start) / 1000) % DUR;
+    window.renderAt(t);
+    requestAnimationFrame(loop);
+  };
+  window.renderAt(0);
+  requestAnimationFrame(loop);
+}
+</script>
+</body>
+</html>

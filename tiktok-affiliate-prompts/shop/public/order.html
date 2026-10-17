@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>กดสั่ง — 599 Prompt ก๊อปวาง ฿99 | จ่ายพร้อมเพย์ ดาวน์โหลดทันที</title>
+<meta name="description" content="หน้ากดสั่งชุด 599 Prompt ก๊อปวาง — กรอกอีเมล กดสั่ง แล้วสแกนพร้อมเพย์ ฿99 ระบบตรวจสลิปอัตโนมัติและส่งลิงก์ดาวน์โหลดทันที">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;800;900&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#FBF6EE; font-family:'Sarabun',sans-serif; color:#1B1B1F; min-height:100vh; padding:28px 16px 48px; overflow-x:hidden; }
+  .wrap { max-width:560px; margin:0 auto; }
+  .topbar { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .brand { font-family:'Kanit'; font-weight:800; font-size:16px; }
+  .back { font-family:'Kanit'; font-weight:600; font-size:13px; color:#C74A15; text-decoration:none; white-space:nowrap; }
+  .pill { display:inline-block; background:#FFE9DC; border:2px solid #FF5A1F; color:#C74A15; font-family:'Kanit'; font-weight:600; font-size:13px; padding:4px 16px; border-radius:999px; margin-top:18px; }
+  h1 { font-family:'Kanit'; font-weight:900; font-size:32px; line-height:1.2; margin-top:12px; }
+  h1 span { color:#FF5A1F; }
+  .sub { color:#7A7A85; font-size:14.5px; margin-top:8px; font-weight:600; line-height:1.55; }
+
+  .receipt { margin-top:20px; background:#fff; border:1px solid #F1E9DB; border-radius:20px; padding:20px 22px; }
+  .receipt h2 { font-family:'Kanit'; font-weight:800; font-size:15px; color:#7A7A85; letter-spacing:.3px; }
+  .line { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:12px 0 0; font-size:14.5px; line-height:1.5; }
+  .line b { font-weight:700; }
+  .line .amt { font-family:'Kanit'; font-weight:800; font-size:19px; color:#FF3D00; white-space:nowrap; }
+  .line .was { font-family:'Kanit'; font-weight:700; font-size:14px; color:#9A9AA6; text-decoration:line-through; margin-left:8px; }
+  .small { font-size:13px; color:#8A8A95; line-height:1.65; margin-top:10px; }
+  .total { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:14px; border-top:1px dashed #EFE6D8; padding-top:14px; }
+  .total .lbl { font-family:'Kanit'; font-weight:700; font-size:15px; }
+  .total .val { font-family:'Kanit'; font-weight:900; font-size:30px; color:#FF3D00; }
+
+  label.em { display:block; margin-top:20px; font-size:14px; font-weight:600; color:#4A4A55; }
+  input.em, textarea.em { width:100%; margin-top:8px; padding:15px 18px; border:1px solid #E7DDCC; border-radius:14px; font-family:'Sarabun'; font-size:16px; background:#fff; }
+  textarea.em { font-size:13px; line-height:1.6; resize:vertical; }
+  input.em:focus, textarea.em:focus { outline:2px solid #FF5A1F33; border-color:#FF5A1F; }
+  button.order { width:100%; margin-top:12px; background:#FF3D00; border:none; color:#fff; font-family:'Kanit'; font-weight:800; font-size:21px; padding:19px; border-radius:999px; cursor:pointer; box-shadow:0 12px 26px rgba(255,61,0,.3); }
+  button.order small { display:block; font-family:'Sarabun'; font-weight:600; font-size:13px; opacity:.9; margin-top:4px; }
+  button.order:disabled { opacity:.55; cursor:wait; }
+  .trust { display:flex; flex-wrap:wrap; gap:8px 16px; margin-top:14px; font-size:12.5px; color:#6A6A75; font-weight:600; }
+  .trust i { font-style:normal; color:#00A36F; font-weight:800; }
+
+  .pay { display:none; margin-top:22px; background:#fff; border:1px solid #F1E9DB; border-radius:20px; padding:22px; text-align:center; }
+  .pay.show { display:block; }
+  .pay h3 { font-family:'Kanit'; font-size:18px; }
+  .pay p { font-size:13.5px; color:#7A7A85; margin-top:6px; }
+  .methods { display:none; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:14px; }
+  .methods.show { display:flex; }
+  .method { flex:1 1 200px; background:#FDFBF7; border:2px solid #EFE6D8; border-radius:14px; padding:11px 14px; font-family:'Kanit'; font-weight:600; font-size:13.5px; color:#4A4A55; cursor:pointer; line-height:1.4; }
+  .method.active { border-color:#FF5A1F; background:#FFE9DC; color:#C74A15; }
+  .method small { display:block; font-family:'Sarabun'; font-weight:600; font-size:12px; color:#9A9AA6; margin-top:3px; }
+  .qr { margin:16px auto 0; width:224px; height:224px; border:1px solid #EEE5D6; border-radius:14px; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#fff; }
+  .qr img, .qr svg { width:100%; height:100%; object-fit:contain; }
+  .payee { margin-top:12px; font-size:14px; color:#4A4A55; font-weight:600; }
+  .steps { margin:16px 0 0; padding-left:20px; text-align:left; font-size:13.5px; color:#6A6A75; line-height:1.9; }
+  .status { margin-top:14px; font-family:'Kanit'; font-weight:600; color:#C74A15; font-size:15px; }
+  .status.ok { color:#00875C; }
+  .slip { margin-top:16px; text-align:left; border-top:1px dashed #EFE6D8; padding-top:16px; }
+  .slip input[type=file] { width:100%; font-family:'Sarabun'; font-size:14px; padding:11px; border:1px dashed #E7DDCC; border-radius:12px; background:#FDFBF7; }
+  button.report { width:100%; margin-top:12px; background:#17181D; color:#FFD84D; border:none; font-family:'Kanit'; font-weight:800; font-size:17px; padding:15px; border-radius:999px; cursor:pointer; }
+  button.report:disabled { opacity:.5; cursor:wait; }
+  .hint { font-size:12.5px; color:#9A9AA6; margin-top:10px; line-height:1.7; }
+  .note { margin-top:12px; font-size:13px; color:#7A7A85; }
+  .dl { display:none; margin-top:16px; }
+  .dl.show { display:block; }
+  .dl a { display:block; background:#00B37E; color:#fff; text-decoration:none; font-family:'Kanit'; font-weight:800; font-size:19px; padding:16px; border-radius:999px; }
+
+  footer { margin-top:30px; text-align:center; font-size:13px; color:#9A9AA6; line-height:1.9; }
+  footer a { color:#C74A15; text-decoration:none; }
+  .fine { margin-top:14px; font-size:12px; color:#9A9AA6; line-height:1.7; text-align:center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <span class="brand">Kopwang Prompt</span>
+    <a class="back" href="/">← ดูรายละเอียดสินค้าเต็ม</a>
+  </div>
+
+  <span class="pill">หน้ากดสั่ง · ดาวน์โหลดทันที</span>
+  <h1>กดสั่งชุด <span>599 Prompt ก๊อปวาง</span></h1>
+  <div class="sub">ก๊อป prompt ไปวางใน AI → ได้สคริปต์ปักตะกร้า TikTok ทันที · 26 หมวดสินค้า × 23 มุม · สองภาษา TH/EN · ใช้ได้ทุกโมเดล</div>
+
+  <div class="receipt" id="summary">
+    <h2>รายการสั่งซื้อ</h2>
+    <div class="line">
+      <span><b>599 Prompt ก๊อปวาง</b><br><span class="small" style="margin:0">ไฟล์ PDF (คู่มือ + 599 prompt) + ไฟล์ CSV เปิดกับ Google Sheets · ตัวอย่างสคริปต์เต็ม 3 ชุด</span></span>
+    </div>
+    <div class="line">
+      <span>รับไฟล์ทาง <b>อีเมล</b></span>
+      <span class="small" style="margin:0;text-align:right">ส่งลิงก์ + ใบเสร็จ<br>อัตโนมัติทันทีที่ชำระสำเร็จ</span>
+    </div>
+    <div class="total">
+      <span class="lbl">ยอดที่ต้องจ่าย</span>
+      <span class="val" id="priceVal">฿99<span class="was">฿999</span></span>
+    </div>
+    <div class="small">ชำระด้วยพร้อมเพย์เข้าบัญชีร้านโดยตรง · ลิงก์โหลดอายุ 24 ชม. (โหลดได้ไม่จำกัดรอบ) · ระบบตรวจสลิปให้อัตโนมัติ ไม่ต้องรอคนตรวจ</div>
+  </div>
+
+  <label class="em" for="email">อีเมล (จำเป็น) — ใช้รับลิงก์ดาวน์โหลด + ใบเสร็จ</label>
+  <input class="em" id="email" type="email" inputmode="email" autocomplete="email" required placeholder="you@example.com">
+
+  <button class="order" id="orderBtn">กดสั่ง — จ่ายพร้อมเพย์ ฿99<small>แตะแล้วระบบจะสร้าง QR ให้ทันที</small></button>
+
+  <div class="trust">
+    <span><i>✓</i> ได้ไฟล์ทันทีหลังชำระ</span>
+    <span><i>✓</i> อัปเดตเวอร์ชันใหม่ฟรี</span>
+    <span><i>✓</i> คืนเงินได้ภายใน 7 วัน</span>
+  </div>
+
+  <div class="pay" id="payBox">
+    <h3>สแกน QR ด้วยแอปธนาคาร / พร้อมเพย์</h3>
+    <p id="payAmount">ยอดชำระ ฿99.00 · โอนเข้าบัญชีร้านโดยตรง (ไม่มีค่าธรรมเนียมเพิ่ม)</p>
+    <div class="methods" id="methods"></div>
+    <div class="qr" id="qrBox"></div>
+    <div class="payee" id="payee"></div>
+    <ol class="steps">
+      <li>เลือกช่องทางที่สะดวก (ถ้ามีหลายแบบ) → เปิดแอปธนาคาร → สแกน QR นี้</li>
+      <li>ตรวจว่ายอดขึ้น <b id="stepAmount">฿99.00</b> แล้วกดยืนยันการโอน</li>
+      <li>กลับมาที่หน้านี้ กด “ฉันโอนแล้ว” → <b>แนบสลิป</b> หรือ <b>วางข้อความ QR จากสลิป</b></li>
+      <li>ระบบตรวจสลิป/ยอดเงินอัตโนมัติ → อนุมัติ + ส่งลิงก์เข้าเมลทันที (ปกติ ~10 วินาที) และปุ่มดาวน์โหลดจะขึ้นที่หน้านี้ด้วย</li>
+    </ol>
+    <div class="status" id="status">รอการชำระเงิน…</div>
+    <div class="slip" id="slipBox">
+      <label class="em" for="slipFile" style="margin-top:0">แนบสลิปโอนเงิน (รูป) — ระบบตรวจให้อัตโนมัติ</label>
+      <input id="slipFile" type="file" accept="image/png,image/jpeg,image/webp">
+      <label class="em" for="qrText">หรือวาง “ข้อความ QR” จากสลิป (ไม่ต้องแนบรูป — เร็วที่สุด)</label>
+      <textarea class="em" id="qrText" rows="3" placeholder="0002010102122937... (คัดลอกจากสลิป/อีเมลแจ้งโอน)"></textarea>
+      <button class="report" id="reportBtn">ฉันโอนแล้ว — ตรวจอัตโนมัติเลย</button>
+      <div class="hint">แนบรูป .jpg / .png / .webp ไม่เกิน 4MB หรือวางข้อความ QR ก็ได้ · ระบบจะตรวจยอดเงิน + บัญชีผู้รับ + กันสลิปซ้ำให้เอง · สลิปใช้เพื่อตรวจสอบการชำระเงินเท่านั้น และเก็บเป็นความลับ</div>
+    </div>
+    <div class="note" id="mailNote"></div>
+    <div class="dl" id="dlBox"><a href="#" id="dlLink">⬇ ดาวน์โหลด PDF ทันที</a></div>
+  </div>
+
+  <footer>
+    <a href="/">รายละเอียดสินค้า</a> · <a href="/free">รับ 5 prompt ฟรี</a> · <a href="/retrieve">ขอลิงก์โหลดใหม่</a> · <a href="/terms">เงื่อนไข</a> · <a href="/refund">คืนเงิน</a> · <a href="/privacy">ความเป็นส่วนตัว</a>
+    <div class="fine">
+      สินค้านี้เป็นไฟล์ดิจิทัล <b>ไม่ได้การันตีรายได้</b> · ผลลัพธ์ขึ้นกับสินค้าและคอนเทนต์ของคุณ<br>
+      ติดต่อร้าน: <a href="mailto:support@kopwang.com">support@kopwang.com</a>
+    </div>
+  </footer>
+</div>
+<script>
+const $ = (id) => document.getElementById(id);
+let ORDER_LABEL = 'กดสั่ง — จ่ายพร้อมเพย์ ฿99';
+let poll = null, currentOrder = null, currentTarget = null, payOptions = [], payeeName = '';
+const STATUS = {
+  pending: 'รอการชำระเงิน…',
+  reported: 'แจ้งโอนแล้ว — ระบบยังยืนยันอัตโนมัติไม่ได้ รอร้านตรวจสอบ (ปกติไม่เกิน 1 ชั่วโมง)',
+  paid: 'ชำระเงินสำเร็จ ✅',
+  failed: 'ออเดอร์นี้ถูกปิด (สลิปไม่ผ่านการตรวจ) — ติดต่อร้านได้ที่อีเมลท้ายหน้า'
+};
+function setStatus(text, ok) {
+  const el = $('status');
+  el.textContent = text;
+  el.classList.toggle('ok', !!ok);
+}
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+function renderMethods() {
+  const box = $('methods');
+  box.innerHTML = '';
+  box.classList.toggle('show', payOptions.length > 1);
+  if (payOptions.length < 2) return;
+  payOptions.forEach((o) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'method' + (o.key === currentTarget ? ' active' : '');
+    b.innerHTML = esc(o.label);   // นโยบายร้าน: โชว์แค่ชื่อบัญชี — ไม่บอกชนิดพร้อมเพย์/ไม่โชว์เลข
+    b.addEventListener('click', () => selectMethod(o.key));
+    box.appendChild(b);
+  });
+}
+function selectMethod(key) {
+  const o = payOptions.find((x) => x.key === key) || payOptions[0];
+  if (!o) return;
+  currentTarget = o.key;
+  $('qrBox').innerHTML = o.qr_svg || '';
+  // บรรทัดนี้โชว์ “ชื่อบัญชี” เสมอ (ป้ายบนปุ่มอาจเป็นชื่อช่องทาง) — ไม่บอกชนิดพร้อมเพย์/ไม่โชว์เลข
+  $('payee').innerHTML = 'โอนเข้าบัญชี: <b>' + esc(payeeName) + '</b>';
+  renderMethods();
+}
+function renderQr(d) {
+  if (d.payee && d.payee.name) payeeName = d.payee.name;
+  if (Array.isArray(d.pay_options) && d.pay_options.length) {
+    payOptions = d.pay_options;
+    selectMethod(d.pay_target || payOptions[0].key);
+  } else {
+    payOptions = []; currentTarget = null; renderMethods();
+    if (d.qr_image_url) $('qrBox').innerHTML = '<img src="' + d.qr_image_url + '" alt="PromptPay QR">';
+    else if (d.qr_svg) $('qrBox').innerHTML = d.qr_svg;
+    else if (d.qr_content) $('qrBox').textContent = 'ไม่พบรหัส QR';
+    if (d.payee) $('payee').textContent = 'โอนเข้าบัญชี: ' + (d.payee.name || '');
+  }
+  if (d.amount_satang) document.querySelector('#payBox > p').textContent = 'ยอดชำระ ฿' + (d.amount_satang / 100).toFixed(2) + ' · โอนเข้าบัญชีร้านโดยตรง (ไม่มีค่าธรรมเนียมเพิ่ม)';
+}
+async function showPaid(orderId) {
+  const p = await (await fetch('/paid?order=' + orderId)).json();
+  if (p.download_url) { $('dlLink').href = p.download_url; $('dlBox').classList.add('show'); autoDownload(p.download_url); }
+  if (p.email) $('mailNote').textContent = 'ส่งลิงก์ไปที่ ' + p.email + ' แล้ว';
+}
+// โหลด PDF ให้ทันทีที่อนุมัติ (ครั้งแรกเท่านั้น — ไม่โหลดซ้ำทุกครั้งที่ poll/refresh)
+let autoDlAt = 0;
+function autoDownload(url) {
+  if (!url || autoDlAt) return;
+  autoDlAt = Date.now();
+  const a = document.createElement('a');
+  a.href = url; a.rel = 'noopener';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+function applyStatus(s) {
+  setStatus(STATUS[s.status] || ('สถานะ: ' + s.status), s.status === 'paid');
+  if (s.status === 'paid') {
+    if (poll) { clearInterval(poll); poll = null; }
+    $('slipBox').style.display = 'none';
+    showPaid(currentOrder);
+  } else if (s.status === 'reported') {
+    $('slipBox').style.display = 'none';
+  }
+}
+function startPolling(orderId) {
+  if (poll) clearInterval(poll);
+  poll = setInterval(async () => {
+    try { applyStatus(await (await fetch('/api/order/' + orderId)).json()); } catch (e) { /* ลองรอบถัดไป */ }
+  }, 3000);
+}
+async function showPay(orderId) {
+  currentOrder = orderId;
+  $('payBox').classList.add('show');
+  $('orderBtn').style.display = 'none';
+  $('email').style.display = 'none';
+  $('summary').style.display = 'none';
+  const lbl = document.querySelector('label.em');
+  if (lbl) lbl.style.display = 'none';
+  try {
+    const s = await (await fetch('/api/order/' + orderId)).json();
+    renderQr(s);
+    applyStatus(s);
+  } catch (e) { /* ให้ polling จัดการต่อ */ }
+  startPolling(orderId);
+  $('payBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+$('orderBtn').addEventListener('click', async () => {
+  const btn = $('orderBtn');
+  const email = $('email').value.trim();
+  if (!email) { alert('กรอกอีเมลก่อนนะครับ — ใช้รับลิงก์ดาวน์โหลด + ใบเสร็จ'); $('email').focus(); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('อีเมลไม่ถูกต้อง'); return; }
+  btn.disabled = true; btn.textContent = 'กำลังสร้างรายการชำระเงิน…';
+  try {
+    const r = await fetch('/api/checkout', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ email }) });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'checkout failed');
+    if (d.order_id) history.replaceState(null, '', '/order?order=' + encodeURIComponent(d.order_id));
+    renderQr(d);
+    await showPay(d.order_id);
+  } catch (e) {
+    alert('เกิดข้อผิดพลาด: ' + e.message);
+    btn.disabled = false; btn.textContent = ORDER_LABEL;
+  }
+});
+$('reportBtn').addEventListener('click', async () => {
+  if (!currentOrder) return;
+  const btn = $('reportBtn');
+  btn.disabled = true; btn.textContent = 'กำลังส่งข้อมูล…';
+  try {
+    const fd = new FormData();
+    const f = $('slipFile').files[0];
+    const qr = $('qrText').value.trim();
+    if (!f && !qr) { alert('แนบสลิป หรือวางข้อความ QR จากสลิป 1 อย่างก่อนนะครับ'); btn.disabled = false; btn.textContent = 'ฉันโอนแล้ว — ตรวจอัตโนมัติเลย'; return; }
+    if (f) fd.append('slip', f);
+    if (qr) fd.append('qr_payload', qr);
+    if (currentTarget) fd.append('pay_target', currentTarget);   // บอกว่าโอนเข้าช่องทางไหน
+    const r = await fetch('/api/order/' + currentOrder + '/report', { method:'POST', body: fd });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'ส่งข้อมูลไม่สำเร็จ');
+    setStatus(d.message || STATUS[d.status], d.status === 'paid');
+    if (d.status === 'paid') { $('slipBox').style.display = 'none'; showPaid(currentOrder); }
+    else {
+      $('mailNote').textContent = d.auto_reason ? 'ระบบตรวจอัตโนมัติ: ' + d.auto_reason : '';
+      btn.textContent = 'ส่งแล้ว ✓ (แก้ไข/แนบใหม่ได้อีก)'; btn.disabled = false;
+    }
+  } catch (e) {
+    alert('เกิดข้อผิดพลาด: ' + e.message);
+    btn.disabled = false; btn.textContent = 'ฉันโอนแล้ว — แจ้งร้านตรวจสอบ';
+  }
+});
+// กลับเข้าหน้านี้พร้อม ?order=… (เช่น refresh หรือกดลิงก์เดิม) → แสดง QR + สถานะต่อ ไม่ต้องสั่งซ้ำ
+const resumeId = new URLSearchParams(location.search).get('order');
+if (resumeId) showPay(resumeId);
+
+// ดึงราคาจริงจากเซิร์ฟเวอร์ (PRICE_SATANG) — หน้าเว็บแสดงราคาเดียวกับที่ QR สร้างเสมอ
+fetch('/api/health').then((r) => r.json()).then((h) => {
+  if (!h || !h.price_satang) return;
+  const b = String(h.price_satang / 100);
+  $('priceVal').innerHTML = '฿' + b + '<span class="was">฿999</span>';
+  ORDER_LABEL = 'กดสั่ง — จ่ายพร้อมเพย์ ฿' + b;
+  const btn = $('orderBtn');
+  if (btn) { const small = btn.querySelector('small'); btn.textContent = ORDER_LABEL; if (small) btn.appendChild(small); }
+  $('payAmount').textContent = 'ยอดชำระ ฿' + b + '.00 · โอนเข้าบัญชีร้านโดยตรง (ไม่มีค่าธรรมเนียมเพิ่ม)';
+  $('stepAmount').textContent = '฿' + b + '.00';
+}).catch(() => {});
+</script>
+</body>
+</html>

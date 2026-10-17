@@ -1,0 +1,13 @@
+{
+  "entrypoint": "worker.js",
+  "compatibilityDate": "2025-07-18",
+  "modules": [
+    { "name": "worker.js", "type": "esm", "path": "./worker.js" },
+    { "name": "promptpay.mjs", "type": "esm", "path": "./promptpay.mjs" },
+    { "name": "qr.mjs", "type": "esm", "path": "./qr.mjs" },
+    { "name": "free-sample.mjs", "type": "esm", "path": "./free-sample.mjs" },
+    { "name": "pack-version.mjs", "type": "esm", "path": "./pack-version.mjs" }
+  ],
+  "assetsDirectory": "./public",
+  "spa": false
+}

@@ -1,0 +1,600 @@
+﻿id,niche_th,niche_en,angle_th,angle_en,file
+001,สกินแคร์/ความงาม,Skincare & Beauty,Problem–Solution,Problem–Solution,01-beauty-skincare.md
+002,สกินแคร์/ความงาม,Skincare & Beauty,รีวิวประสบการณ์จริง,Real Experience Review,01-beauty-skincare.md
+003,สกินแคร์/ความงาม,Skincare & Beauty,Unboxing แกะกล่อง,Unboxing,01-beauty-skincare.md
+004,สกินแคร์/ความงาม,Skincare & Beauty,สาธิต/ทดสอบการใช้งาน,Demo & Test,01-beauty-skincare.md
+005,สกินแคร์/ความงาม,Skincare & Beauty,เปรียบเทียบ A vs B,A vs B Comparison,01-beauty-skincare.md
+006,สกินแคร์/ความงาม,Skincare & Beauty,POV/เรื่องเล่า,POV Story,01-beauty-skincare.md
+007,สกินแคร์/ความงาม,Skincare & Beauty,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,01-beauty-skincare.md
+008,สกินแคร์/ความงาม,Skincare & Beauty,Tips & Hacks,Tips & Hacks,01-beauty-skincare.md
+009,สกินแคร์/ความงาม,Skincare & Beauty,Routine/วันในชีวิต,Routine & Day in the Life,01-beauty-skincare.md
+010,สกินแคร์/ความงาม,Skincare & Beauty,Trend/Top Picks,Trend & Top Picks,01-beauty-skincare.md
+011,สกินแคร์/ความงาม,Skincare & Beauty,มายาคติที่คนเชื่อผิด,Myth-busting,01-beauty-skincare.md
+012,สกินแคร์/ความงาม,Skincare & Beauty,งบจำกัดก็เอาได้,Budget Pick,01-beauty-skincare.md
+013,สกินแคร์/ความงาม,Skincare & Beauty,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,01-beauty-skincare.md
+014,สกินแคร์/ความงาม,Skincare & Beauty,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,01-beauty-skincare.md
+015,สกินแคร์/ความงาม,Skincare & Beauty,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,01-beauty-skincare.md
+016,สกินแคร์/ความงาม,Skincare & Beauty,ของขวัญให้คนที่รัก,Gift Idea,01-beauty-skincare.md
+017,สกินแคร์/ความงาม,Skincare & Beauty,รวมรีวิวจากคนอื่น,Social Proof Roundup,01-beauty-skincare.md
+018,สกินแคร์/ความงาม,Skincare & Beauty,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,01-beauty-skincare.md
+019,สกินแคร์/ความงาม,Skincare & Beauty,ใช้ตอนไหนถึงคุ้ม,When to Use,01-beauty-skincare.md
+020,สกินแคร์/ความงาม,Skincare & Beauty,ตามล่าดีล/โปร,Deal Hunting,01-beauty-skincare.md
+021,สกินแคร์/ความงาม,Skincare & Beauty,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,01-beauty-skincare.md
+022,สกินแคร์/ความงาม,Skincare & Beauty,ลองใช้ 7 วัน,7-Day Trial Log,01-beauty-skincare.md
+023,สกินแคร์/ความงาม,Skincare & Beauty,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,01-beauty-skincare.md
+024,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,Problem–Solution,Problem–Solution,02-makeup.md
+025,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,รีวิวประสบการณ์จริง,Real Experience Review,02-makeup.md
+026,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,Unboxing แกะกล่อง,Unboxing,02-makeup.md
+027,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,สาธิต/ทดสอบการใช้งาน,Demo & Test,02-makeup.md
+028,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,เปรียบเทียบ A vs B,A vs B Comparison,02-makeup.md
+029,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,POV/เรื่องเล่า,POV Story,02-makeup.md
+030,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,02-makeup.md
+031,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,Tips & Hacks,Tips & Hacks,02-makeup.md
+032,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,Routine/วันในชีวิต,Routine & Day in the Life,02-makeup.md
+033,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,Trend/Top Picks,Trend & Top Picks,02-makeup.md
+034,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,มายาคติที่คนเชื่อผิด,Myth-busting,02-makeup.md
+035,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,งบจำกัดก็เอาได้,Budget Pick,02-makeup.md
+036,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,02-makeup.md
+037,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,02-makeup.md
+038,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,02-makeup.md
+039,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,ของขวัญให้คนที่รัก,Gift Idea,02-makeup.md
+040,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,รวมรีวิวจากคนอื่น,Social Proof Roundup,02-makeup.md
+041,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,02-makeup.md
+042,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,ใช้ตอนไหนถึงคุ้ม,When to Use,02-makeup.md
+043,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,ตามล่าดีล/โปร,Deal Hunting,02-makeup.md
+044,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,02-makeup.md
+045,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,ลองใช้ 7 วัน,7-Day Trial Log,02-makeup.md
+046,เมคอัพ/เครื่องสำอาง,Makeup & Cosmetics,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,02-makeup.md
+047,อาหารเสริม/สุขภาพ,Supplements & Health,Problem–Solution,Problem–Solution,03-supplements-health.md
+048,อาหารเสริม/สุขภาพ,Supplements & Health,รีวิวประสบการณ์จริง,Real Experience Review,03-supplements-health.md
+049,อาหารเสริม/สุขภาพ,Supplements & Health,Unboxing แกะกล่อง,Unboxing,03-supplements-health.md
+050,อาหารเสริม/สุขภาพ,Supplements & Health,สาธิต/ทดสอบการใช้งาน,Demo & Test,03-supplements-health.md
+051,อาหารเสริม/สุขภาพ,Supplements & Health,เปรียบเทียบ A vs B,A vs B Comparison,03-supplements-health.md
+052,อาหารเสริม/สุขภาพ,Supplements & Health,POV/เรื่องเล่า,POV Story,03-supplements-health.md
+053,อาหารเสริม/สุขภาพ,Supplements & Health,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,03-supplements-health.md
+054,อาหารเสริม/สุขภาพ,Supplements & Health,Tips & Hacks,Tips & Hacks,03-supplements-health.md
+055,อาหารเสริม/สุขภาพ,Supplements & Health,Routine/วันในชีวิต,Routine & Day in the Life,03-supplements-health.md
+056,อาหารเสริม/สุขภาพ,Supplements & Health,Trend/Top Picks,Trend & Top Picks,03-supplements-health.md
+057,อาหารเสริม/สุขภาพ,Supplements & Health,มายาคติที่คนเชื่อผิด,Myth-busting,03-supplements-health.md
+058,อาหารเสริม/สุขภาพ,Supplements & Health,งบจำกัดก็เอาได้,Budget Pick,03-supplements-health.md
+059,อาหารเสริม/สุขภาพ,Supplements & Health,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,03-supplements-health.md
+060,อาหารเสริม/สุขภาพ,Supplements & Health,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,03-supplements-health.md
+061,อาหารเสริม/สุขภาพ,Supplements & Health,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,03-supplements-health.md
+062,อาหารเสริม/สุขภาพ,Supplements & Health,ของขวัญให้คนที่รัก,Gift Idea,03-supplements-health.md
+063,อาหารเสริม/สุขภาพ,Supplements & Health,รวมรีวิวจากคนอื่น,Social Proof Roundup,03-supplements-health.md
+064,อาหารเสริม/สุขภาพ,Supplements & Health,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,03-supplements-health.md
+065,อาหารเสริม/สุขภาพ,Supplements & Health,ใช้ตอนไหนถึงคุ้ม,When to Use,03-supplements-health.md
+066,อาหารเสริม/สุขภาพ,Supplements & Health,ตามล่าดีล/โปร,Deal Hunting,03-supplements-health.md
+067,อาหารเสริม/สุขภาพ,Supplements & Health,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,03-supplements-health.md
+068,อาหารเสริม/สุขภาพ,Supplements & Health,ลองใช้ 7 วัน,7-Day Trial Log,03-supplements-health.md
+069,อาหารเสริม/สุขภาพ,Supplements & Health,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,03-supplements-health.md
+070,แฟชั่น/เสื้อผ้า,Fashion & Apparel,Problem–Solution,Problem–Solution,04-fashion.md
+071,แฟชั่น/เสื้อผ้า,Fashion & Apparel,รีวิวประสบการณ์จริง,Real Experience Review,04-fashion.md
+072,แฟชั่น/เสื้อผ้า,Fashion & Apparel,Unboxing แกะกล่อง,Unboxing,04-fashion.md
+073,แฟชั่น/เสื้อผ้า,Fashion & Apparel,สาธิต/ทดสอบการใช้งาน,Demo & Test,04-fashion.md
+074,แฟชั่น/เสื้อผ้า,Fashion & Apparel,เปรียบเทียบ A vs B,A vs B Comparison,04-fashion.md
+075,แฟชั่น/เสื้อผ้า,Fashion & Apparel,POV/เรื่องเล่า,POV Story,04-fashion.md
+076,แฟชั่น/เสื้อผ้า,Fashion & Apparel,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,04-fashion.md
+077,แฟชั่น/เสื้อผ้า,Fashion & Apparel,Tips & Hacks,Tips & Hacks,04-fashion.md
+078,แฟชั่น/เสื้อผ้า,Fashion & Apparel,Routine/วันในชีวิต,Routine & Day in the Life,04-fashion.md
+079,แฟชั่น/เสื้อผ้า,Fashion & Apparel,Trend/Top Picks,Trend & Top Picks,04-fashion.md
+080,แฟชั่น/เสื้อผ้า,Fashion & Apparel,มายาคติที่คนเชื่อผิด,Myth-busting,04-fashion.md
+081,แฟชั่น/เสื้อผ้า,Fashion & Apparel,งบจำกัดก็เอาได้,Budget Pick,04-fashion.md
+082,แฟชั่น/เสื้อผ้า,Fashion & Apparel,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,04-fashion.md
+083,แฟชั่น/เสื้อผ้า,Fashion & Apparel,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,04-fashion.md
+084,แฟชั่น/เสื้อผ้า,Fashion & Apparel,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,04-fashion.md
+085,แฟชั่น/เสื้อผ้า,Fashion & Apparel,ของขวัญให้คนที่รัก,Gift Idea,04-fashion.md
+086,แฟชั่น/เสื้อผ้า,Fashion & Apparel,รวมรีวิวจากคนอื่น,Social Proof Roundup,04-fashion.md
+087,แฟชั่น/เสื้อผ้า,Fashion & Apparel,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,04-fashion.md
+088,แฟชั่น/เสื้อผ้า,Fashion & Apparel,ใช้ตอนไหนถึงคุ้ม,When to Use,04-fashion.md
+089,แฟชั่น/เสื้อผ้า,Fashion & Apparel,ตามล่าดีล/โปร,Deal Hunting,04-fashion.md
+090,แฟชั่น/เสื้อผ้า,Fashion & Apparel,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,04-fashion.md
+091,แฟชั่น/เสื้อผ้า,Fashion & Apparel,ลองใช้ 7 วัน,7-Day Trial Log,04-fashion.md
+092,แฟชั่น/เสื้อผ้า,Fashion & Apparel,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,04-fashion.md
+093,บ้าน/จัดบ้าน,Home & Organization,Problem–Solution,Problem–Solution,05-home-organization.md
+094,บ้าน/จัดบ้าน,Home & Organization,รีวิวประสบการณ์จริง,Real Experience Review,05-home-organization.md
+095,บ้าน/จัดบ้าน,Home & Organization,Unboxing แกะกล่อง,Unboxing,05-home-organization.md
+096,บ้าน/จัดบ้าน,Home & Organization,สาธิต/ทดสอบการใช้งาน,Demo & Test,05-home-organization.md
+097,บ้าน/จัดบ้าน,Home & Organization,เปรียบเทียบ A vs B,A vs B Comparison,05-home-organization.md
+098,บ้าน/จัดบ้าน,Home & Organization,POV/เรื่องเล่า,POV Story,05-home-organization.md
+099,บ้าน/จัดบ้าน,Home & Organization,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,05-home-organization.md
+100,บ้าน/จัดบ้าน,Home & Organization,Tips & Hacks,Tips & Hacks,05-home-organization.md
+101,บ้าน/จัดบ้าน,Home & Organization,Routine/วันในชีวิต,Routine & Day in the Life,05-home-organization.md
+102,บ้าน/จัดบ้าน,Home & Organization,Trend/Top Picks,Trend & Top Picks,05-home-organization.md
+103,บ้าน/จัดบ้าน,Home & Organization,มายาคติที่คนเชื่อผิด,Myth-busting,05-home-organization.md
+104,บ้าน/จัดบ้าน,Home & Organization,งบจำกัดก็เอาได้,Budget Pick,05-home-organization.md
+105,บ้าน/จัดบ้าน,Home & Organization,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,05-home-organization.md
+106,บ้าน/จัดบ้าน,Home & Organization,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,05-home-organization.md
+107,บ้าน/จัดบ้าน,Home & Organization,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,05-home-organization.md
+108,บ้าน/จัดบ้าน,Home & Organization,ของขวัญให้คนที่รัก,Gift Idea,05-home-organization.md
+109,บ้าน/จัดบ้าน,Home & Organization,รวมรีวิวจากคนอื่น,Social Proof Roundup,05-home-organization.md
+110,บ้าน/จัดบ้าน,Home & Organization,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,05-home-organization.md
+111,บ้าน/จัดบ้าน,Home & Organization,ใช้ตอนไหนถึงคุ้ม,When to Use,05-home-organization.md
+112,บ้าน/จัดบ้าน,Home & Organization,ตามล่าดีล/โปร,Deal Hunting,05-home-organization.md
+113,บ้าน/จัดบ้าน,Home & Organization,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,05-home-organization.md
+114,บ้าน/จัดบ้าน,Home & Organization,ลองใช้ 7 วัน,7-Day Trial Log,05-home-organization.md
+115,บ้าน/จัดบ้าน,Home & Organization,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,05-home-organization.md
+116,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,Problem–Solution,Problem–Solution,06-kitchen.md
+117,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,รีวิวประสบการณ์จริง,Real Experience Review,06-kitchen.md
+118,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,Unboxing แกะกล่อง,Unboxing,06-kitchen.md
+119,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,สาธิต/ทดสอบการใช้งาน,Demo & Test,06-kitchen.md
+120,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,เปรียบเทียบ A vs B,A vs B Comparison,06-kitchen.md
+121,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,POV/เรื่องเล่า,POV Story,06-kitchen.md
+122,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,06-kitchen.md
+123,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,Tips & Hacks,Tips & Hacks,06-kitchen.md
+124,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,Routine/วันในชีวิต,Routine & Day in the Life,06-kitchen.md
+125,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,Trend/Top Picks,Trend & Top Picks,06-kitchen.md
+126,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,มายาคติที่คนเชื่อผิด,Myth-busting,06-kitchen.md
+127,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,งบจำกัดก็เอาได้,Budget Pick,06-kitchen.md
+128,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,06-kitchen.md
+129,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,06-kitchen.md
+130,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,06-kitchen.md
+131,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,ของขวัญให้คนที่รัก,Gift Idea,06-kitchen.md
+132,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,รวมรีวิวจากคนอื่น,Social Proof Roundup,06-kitchen.md
+133,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,06-kitchen.md
+134,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,ใช้ตอนไหนถึงคุ้ม,When to Use,06-kitchen.md
+135,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,ตามล่าดีล/โปร,Deal Hunting,06-kitchen.md
+136,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,06-kitchen.md
+137,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,ลองใช้ 7 วัน,7-Day Trial Log,06-kitchen.md
+138,เครื่องครัว/อุปกรณ์ทำอาหาร,Kitchen & Cookware,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,06-kitchen.md
+139,แกดเจ็ต/ไอที,Gadgets & Tech,Problem–Solution,Problem–Solution,07-gadgets-tech.md
+140,แกดเจ็ต/ไอที,Gadgets & Tech,รีวิวประสบการณ์จริง,Real Experience Review,07-gadgets-tech.md
+141,แกดเจ็ต/ไอที,Gadgets & Tech,Unboxing แกะกล่อง,Unboxing,07-gadgets-tech.md
+142,แกดเจ็ต/ไอที,Gadgets & Tech,สาธิต/ทดสอบการใช้งาน,Demo & Test,07-gadgets-tech.md
+143,แกดเจ็ต/ไอที,Gadgets & Tech,เปรียบเทียบ A vs B,A vs B Comparison,07-gadgets-tech.md
+144,แกดเจ็ต/ไอที,Gadgets & Tech,POV/เรื่องเล่า,POV Story,07-gadgets-tech.md
+145,แกดเจ็ต/ไอที,Gadgets & Tech,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,07-gadgets-tech.md
+146,แกดเจ็ต/ไอที,Gadgets & Tech,Tips & Hacks,Tips & Hacks,07-gadgets-tech.md
+147,แกดเจ็ต/ไอที,Gadgets & Tech,Routine/วันในชีวิต,Routine & Day in the Life,07-gadgets-tech.md
+148,แกดเจ็ต/ไอที,Gadgets & Tech,Trend/Top Picks,Trend & Top Picks,07-gadgets-tech.md
+149,แกดเจ็ต/ไอที,Gadgets & Tech,มายาคติที่คนเชื่อผิด,Myth-busting,07-gadgets-tech.md
+150,แกดเจ็ต/ไอที,Gadgets & Tech,งบจำกัดก็เอาได้,Budget Pick,07-gadgets-tech.md
+151,แกดเจ็ต/ไอที,Gadgets & Tech,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,07-gadgets-tech.md
+152,แกดเจ็ต/ไอที,Gadgets & Tech,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,07-gadgets-tech.md
+153,แกดเจ็ต/ไอที,Gadgets & Tech,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,07-gadgets-tech.md
+154,แกดเจ็ต/ไอที,Gadgets & Tech,ของขวัญให้คนที่รัก,Gift Idea,07-gadgets-tech.md
+155,แกดเจ็ต/ไอที,Gadgets & Tech,รวมรีวิวจากคนอื่น,Social Proof Roundup,07-gadgets-tech.md
+156,แกดเจ็ต/ไอที,Gadgets & Tech,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,07-gadgets-tech.md
+157,แกดเจ็ต/ไอที,Gadgets & Tech,ใช้ตอนไหนถึงคุ้ม,When to Use,07-gadgets-tech.md
+158,แกดเจ็ต/ไอที,Gadgets & Tech,ตามล่าดีล/โปร,Deal Hunting,07-gadgets-tech.md
+159,แกดเจ็ต/ไอที,Gadgets & Tech,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,07-gadgets-tech.md
+160,แกดเจ็ต/ไอที,Gadgets & Tech,ลองใช้ 7 วัน,7-Day Trial Log,07-gadgets-tech.md
+161,แกดเจ็ต/ไอที,Gadgets & Tech,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,07-gadgets-tech.md
+162,แม่และเด็ก,Mom & Baby,Problem–Solution,Problem–Solution,08-mom-baby.md
+163,แม่และเด็ก,Mom & Baby,รีวิวประสบการณ์จริง,Real Experience Review,08-mom-baby.md
+164,แม่และเด็ก,Mom & Baby,Unboxing แกะกล่อง,Unboxing,08-mom-baby.md
+165,แม่และเด็ก,Mom & Baby,สาธิต/ทดสอบการใช้งาน,Demo & Test,08-mom-baby.md
+166,แม่และเด็ก,Mom & Baby,เปรียบเทียบ A vs B,A vs B Comparison,08-mom-baby.md
+167,แม่และเด็ก,Mom & Baby,POV/เรื่องเล่า,POV Story,08-mom-baby.md
+168,แม่และเด็ก,Mom & Baby,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,08-mom-baby.md
+169,แม่และเด็ก,Mom & Baby,Tips & Hacks,Tips & Hacks,08-mom-baby.md
+170,แม่และเด็ก,Mom & Baby,Routine/วันในชีวิต,Routine & Day in the Life,08-mom-baby.md
+171,แม่และเด็ก,Mom & Baby,Trend/Top Picks,Trend & Top Picks,08-mom-baby.md
+172,แม่และเด็ก,Mom & Baby,มายาคติที่คนเชื่อผิด,Myth-busting,08-mom-baby.md
+173,แม่และเด็ก,Mom & Baby,งบจำกัดก็เอาได้,Budget Pick,08-mom-baby.md
+174,แม่และเด็ก,Mom & Baby,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,08-mom-baby.md
+175,แม่และเด็ก,Mom & Baby,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,08-mom-baby.md
+176,แม่และเด็ก,Mom & Baby,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,08-mom-baby.md
+177,แม่และเด็ก,Mom & Baby,ของขวัญให้คนที่รัก,Gift Idea,08-mom-baby.md
+178,แม่และเด็ก,Mom & Baby,รวมรีวิวจากคนอื่น,Social Proof Roundup,08-mom-baby.md
+179,แม่และเด็ก,Mom & Baby,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,08-mom-baby.md
+180,แม่และเด็ก,Mom & Baby,ใช้ตอนไหนถึงคุ้ม,When to Use,08-mom-baby.md
+181,แม่และเด็ก,Mom & Baby,ตามล่าดีล/โปร,Deal Hunting,08-mom-baby.md
+182,แม่และเด็ก,Mom & Baby,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,08-mom-baby.md
+183,แม่และเด็ก,Mom & Baby,ลองใช้ 7 วัน,7-Day Trial Log,08-mom-baby.md
+184,แม่และเด็ก,Mom & Baby,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,08-mom-baby.md
+185,สัตว์เลี้ยง,Pet Supplies,Problem–Solution,Problem–Solution,09-pets.md
+186,สัตว์เลี้ยง,Pet Supplies,รีวิวประสบการณ์จริง,Real Experience Review,09-pets.md
+187,สัตว์เลี้ยง,Pet Supplies,Unboxing แกะกล่อง,Unboxing,09-pets.md
+188,สัตว์เลี้ยง,Pet Supplies,สาธิต/ทดสอบการใช้งาน,Demo & Test,09-pets.md
+189,สัตว์เลี้ยง,Pet Supplies,เปรียบเทียบ A vs B,A vs B Comparison,09-pets.md
+190,สัตว์เลี้ยง,Pet Supplies,POV/เรื่องเล่า,POV Story,09-pets.md
+191,สัตว์เลี้ยง,Pet Supplies,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,09-pets.md
+192,สัตว์เลี้ยง,Pet Supplies,Tips & Hacks,Tips & Hacks,09-pets.md
+193,สัตว์เลี้ยง,Pet Supplies,Routine/วันในชีวิต,Routine & Day in the Life,09-pets.md
+194,สัตว์เลี้ยง,Pet Supplies,Trend/Top Picks,Trend & Top Picks,09-pets.md
+195,สัตว์เลี้ยง,Pet Supplies,มายาคติที่คนเชื่อผิด,Myth-busting,09-pets.md
+196,สัตว์เลี้ยง,Pet Supplies,งบจำกัดก็เอาได้,Budget Pick,09-pets.md
+197,สัตว์เลี้ยง,Pet Supplies,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,09-pets.md
+198,สัตว์เลี้ยง,Pet Supplies,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,09-pets.md
+199,สัตว์เลี้ยง,Pet Supplies,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,09-pets.md
+200,สัตว์เลี้ยง,Pet Supplies,ของขวัญให้คนที่รัก,Gift Idea,09-pets.md
+201,สัตว์เลี้ยง,Pet Supplies,รวมรีวิวจากคนอื่น,Social Proof Roundup,09-pets.md
+202,สัตว์เลี้ยง,Pet Supplies,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,09-pets.md
+203,สัตว์เลี้ยง,Pet Supplies,ใช้ตอนไหนถึงคุ้ม,When to Use,09-pets.md
+204,สัตว์เลี้ยง,Pet Supplies,ตามล่าดีล/โปร,Deal Hunting,09-pets.md
+205,สัตว์เลี้ยง,Pet Supplies,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,09-pets.md
+206,สัตว์เลี้ยง,Pet Supplies,ลองใช้ 7 วัน,7-Day Trial Log,09-pets.md
+207,สัตว์เลี้ยง,Pet Supplies,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,09-pets.md
+208,อาหาร/ขนม,Food & Snacks,Problem–Solution,Problem–Solution,10-food-snacks.md
+209,อาหาร/ขนม,Food & Snacks,รีวิวประสบการณ์จริง,Real Experience Review,10-food-snacks.md
+210,อาหาร/ขนม,Food & Snacks,Unboxing แกะกล่อง,Unboxing,10-food-snacks.md
+211,อาหาร/ขนม,Food & Snacks,สาธิต/ทดสอบการใช้งาน,Demo & Test,10-food-snacks.md
+212,อาหาร/ขนม,Food & Snacks,เปรียบเทียบ A vs B,A vs B Comparison,10-food-snacks.md
+213,อาหาร/ขนม,Food & Snacks,POV/เรื่องเล่า,POV Story,10-food-snacks.md
+214,อาหาร/ขนม,Food & Snacks,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,10-food-snacks.md
+215,อาหาร/ขนม,Food & Snacks,Tips & Hacks,Tips & Hacks,10-food-snacks.md
+216,อาหาร/ขนม,Food & Snacks,Routine/วันในชีวิต,Routine & Day in the Life,10-food-snacks.md
+217,อาหาร/ขนม,Food & Snacks,Trend/Top Picks,Trend & Top Picks,10-food-snacks.md
+218,อาหาร/ขนม,Food & Snacks,มายาคติที่คนเชื่อผิด,Myth-busting,10-food-snacks.md
+219,อาหาร/ขนม,Food & Snacks,งบจำกัดก็เอาได้,Budget Pick,10-food-snacks.md
+220,อาหาร/ขนม,Food & Snacks,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,10-food-snacks.md
+221,อาหาร/ขนม,Food & Snacks,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,10-food-snacks.md
+222,อาหาร/ขนม,Food & Snacks,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,10-food-snacks.md
+223,อาหาร/ขนม,Food & Snacks,ของขวัญให้คนที่รัก,Gift Idea,10-food-snacks.md
+224,อาหาร/ขนม,Food & Snacks,รวมรีวิวจากคนอื่น,Social Proof Roundup,10-food-snacks.md
+225,อาหาร/ขนม,Food & Snacks,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,10-food-snacks.md
+226,อาหาร/ขนม,Food & Snacks,ใช้ตอนไหนถึงคุ้ม,When to Use,10-food-snacks.md
+227,อาหาร/ขนม,Food & Snacks,ตามล่าดีล/โปร,Deal Hunting,10-food-snacks.md
+228,อาหาร/ขนม,Food & Snacks,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,10-food-snacks.md
+229,อาหาร/ขนม,Food & Snacks,ลองใช้ 7 วัน,7-Day Trial Log,10-food-snacks.md
+230,อาหาร/ขนม,Food & Snacks,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,10-food-snacks.md
+231,ฟิตเนส/สุขภาพ,Fitness & Wellness,Problem–Solution,Problem–Solution,11-fitness.md
+232,ฟิตเนส/สุขภาพ,Fitness & Wellness,รีวิวประสบการณ์จริง,Real Experience Review,11-fitness.md
+233,ฟิตเนส/สุขภาพ,Fitness & Wellness,Unboxing แกะกล่อง,Unboxing,11-fitness.md
+234,ฟิตเนส/สุขภาพ,Fitness & Wellness,สาธิต/ทดสอบการใช้งาน,Demo & Test,11-fitness.md
+235,ฟิตเนส/สุขภาพ,Fitness & Wellness,เปรียบเทียบ A vs B,A vs B Comparison,11-fitness.md
+236,ฟิตเนส/สุขภาพ,Fitness & Wellness,POV/เรื่องเล่า,POV Story,11-fitness.md
+237,ฟิตเนส/สุขภาพ,Fitness & Wellness,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,11-fitness.md
+238,ฟิตเนส/สุขภาพ,Fitness & Wellness,Tips & Hacks,Tips & Hacks,11-fitness.md
+239,ฟิตเนส/สุขภาพ,Fitness & Wellness,Routine/วันในชีวิต,Routine & Day in the Life,11-fitness.md
+240,ฟิตเนส/สุขภาพ,Fitness & Wellness,Trend/Top Picks,Trend & Top Picks,11-fitness.md
+241,ฟิตเนส/สุขภาพ,Fitness & Wellness,มายาคติที่คนเชื่อผิด,Myth-busting,11-fitness.md
+242,ฟิตเนส/สุขภาพ,Fitness & Wellness,งบจำกัดก็เอาได้,Budget Pick,11-fitness.md
+243,ฟิตเนส/สุขภาพ,Fitness & Wellness,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,11-fitness.md
+244,ฟิตเนส/สุขภาพ,Fitness & Wellness,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,11-fitness.md
+245,ฟิตเนส/สุขภาพ,Fitness & Wellness,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,11-fitness.md
+246,ฟิตเนส/สุขภาพ,Fitness & Wellness,ของขวัญให้คนที่รัก,Gift Idea,11-fitness.md
+247,ฟิตเนส/สุขภาพ,Fitness & Wellness,รวมรีวิวจากคนอื่น,Social Proof Roundup,11-fitness.md
+248,ฟิตเนส/สุขภาพ,Fitness & Wellness,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,11-fitness.md
+249,ฟิตเนส/สุขภาพ,Fitness & Wellness,ใช้ตอนไหนถึงคุ้ม,When to Use,11-fitness.md
+250,ฟิตเนส/สุขภาพ,Fitness & Wellness,ตามล่าดีล/โปร,Deal Hunting,11-fitness.md
+251,ฟิตเนส/สุขภาพ,Fitness & Wellness,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,11-fitness.md
+252,ฟิตเนส/สุขภาพ,Fitness & Wellness,ลองใช้ 7 วัน,7-Day Trial Log,11-fitness.md
+253,ฟิตเนส/สุขภาพ,Fitness & Wellness,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,11-fitness.md
+254,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,Problem–Solution,Problem–Solution,12-cleaning-laundry.md
+255,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,รีวิวประสบการณ์จริง,Real Experience Review,12-cleaning-laundry.md
+256,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,Unboxing แกะกล่อง,Unboxing,12-cleaning-laundry.md
+257,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,สาธิต/ทดสอบการใช้งาน,Demo & Test,12-cleaning-laundry.md
+258,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,เปรียบเทียบ A vs B,A vs B Comparison,12-cleaning-laundry.md
+259,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,POV/เรื่องเล่า,POV Story,12-cleaning-laundry.md
+260,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,12-cleaning-laundry.md
+261,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,Tips & Hacks,Tips & Hacks,12-cleaning-laundry.md
+262,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,Routine/วันในชีวิต,Routine & Day in the Life,12-cleaning-laundry.md
+263,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,Trend/Top Picks,Trend & Top Picks,12-cleaning-laundry.md
+264,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,มายาคติที่คนเชื่อผิด,Myth-busting,12-cleaning-laundry.md
+265,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,งบจำกัดก็เอาได้,Budget Pick,12-cleaning-laundry.md
+266,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,12-cleaning-laundry.md
+267,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,12-cleaning-laundry.md
+268,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,12-cleaning-laundry.md
+269,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,ของขวัญให้คนที่รัก,Gift Idea,12-cleaning-laundry.md
+270,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,รวมรีวิวจากคนอื่น,Social Proof Roundup,12-cleaning-laundry.md
+271,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,12-cleaning-laundry.md
+272,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,ใช้ตอนไหนถึงคุ้ม,When to Use,12-cleaning-laundry.md
+273,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,ตามล่าดีล/โปร,Deal Hunting,12-cleaning-laundry.md
+274,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,12-cleaning-laundry.md
+275,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,ลองใช้ 7 วัน,7-Day Trial Log,12-cleaning-laundry.md
+276,ทำความสะอาด/ซักผ้า,Cleaning & Laundry,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,12-cleaning-laundry.md
+277,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,Problem–Solution,Problem–Solution,13-home-appliances.md
+278,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,รีวิวประสบการณ์จริง,Real Experience Review,13-home-appliances.md
+279,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,Unboxing แกะกล่อง,Unboxing,13-home-appliances.md
+280,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,สาธิต/ทดสอบการใช้งาน,Demo & Test,13-home-appliances.md
+281,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,เปรียบเทียบ A vs B,A vs B Comparison,13-home-appliances.md
+282,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,POV/เรื่องเล่า,POV Story,13-home-appliances.md
+283,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,13-home-appliances.md
+284,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,Tips & Hacks,Tips & Hacks,13-home-appliances.md
+285,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,Routine/วันในชีวิต,Routine & Day in the Life,13-home-appliances.md
+286,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,Trend/Top Picks,Trend & Top Picks,13-home-appliances.md
+287,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,มายาคติที่คนเชื่อผิด,Myth-busting,13-home-appliances.md
+288,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,งบจำกัดก็เอาได้,Budget Pick,13-home-appliances.md
+289,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,13-home-appliances.md
+290,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,13-home-appliances.md
+291,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,13-home-appliances.md
+292,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,ของขวัญให้คนที่รัก,Gift Idea,13-home-appliances.md
+293,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,รวมรีวิวจากคนอื่น,Social Proof Roundup,13-home-appliances.md
+294,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,13-home-appliances.md
+295,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,ใช้ตอนไหนถึงคุ้ม,When to Use,13-home-appliances.md
+296,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,ตามล่าดีล/โปร,Deal Hunting,13-home-appliances.md
+297,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,13-home-appliances.md
+298,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,ลองใช้ 7 วัน,7-Day Trial Log,13-home-appliances.md
+299,เครื่องใช้ไฟฟ้าในบ้าน,Home Appliances,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,13-home-appliances.md
+300,ของแต่งบ้าน/ตกแต่ง,Home Decor,Problem–Solution,Problem–Solution,14-home-decor.md
+301,ของแต่งบ้าน/ตกแต่ง,Home Decor,รีวิวประสบการณ์จริง,Real Experience Review,14-home-decor.md
+302,ของแต่งบ้าน/ตกแต่ง,Home Decor,Unboxing แกะกล่อง,Unboxing,14-home-decor.md
+303,ของแต่งบ้าน/ตกแต่ง,Home Decor,สาธิต/ทดสอบการใช้งาน,Demo & Test,14-home-decor.md
+304,ของแต่งบ้าน/ตกแต่ง,Home Decor,เปรียบเทียบ A vs B,A vs B Comparison,14-home-decor.md
+305,ของแต่งบ้าน/ตกแต่ง,Home Decor,POV/เรื่องเล่า,POV Story,14-home-decor.md
+306,ของแต่งบ้าน/ตกแต่ง,Home Decor,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,14-home-decor.md
+307,ของแต่งบ้าน/ตกแต่ง,Home Decor,Tips & Hacks,Tips & Hacks,14-home-decor.md
+308,ของแต่งบ้าน/ตกแต่ง,Home Decor,Routine/วันในชีวิต,Routine & Day in the Life,14-home-decor.md
+309,ของแต่งบ้าน/ตกแต่ง,Home Decor,Trend/Top Picks,Trend & Top Picks,14-home-decor.md
+310,ของแต่งบ้าน/ตกแต่ง,Home Decor,มายาคติที่คนเชื่อผิด,Myth-busting,14-home-decor.md
+311,ของแต่งบ้าน/ตกแต่ง,Home Decor,งบจำกัดก็เอาได้,Budget Pick,14-home-decor.md
+312,ของแต่งบ้าน/ตกแต่ง,Home Decor,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,14-home-decor.md
+313,ของแต่งบ้าน/ตกแต่ง,Home Decor,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,14-home-decor.md
+314,ของแต่งบ้าน/ตกแต่ง,Home Decor,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,14-home-decor.md
+315,ของแต่งบ้าน/ตกแต่ง,Home Decor,ของขวัญให้คนที่รัก,Gift Idea,14-home-decor.md
+316,ของแต่งบ้าน/ตกแต่ง,Home Decor,รวมรีวิวจากคนอื่น,Social Proof Roundup,14-home-decor.md
+317,ของแต่งบ้าน/ตกแต่ง,Home Decor,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,14-home-decor.md
+318,ของแต่งบ้าน/ตกแต่ง,Home Decor,ใช้ตอนไหนถึงคุ้ม,When to Use,14-home-decor.md
+319,ของแต่งบ้าน/ตกแต่ง,Home Decor,ตามล่าดีล/โปร,Deal Hunting,14-home-decor.md
+320,ของแต่งบ้าน/ตกแต่ง,Home Decor,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,14-home-decor.md
+321,ของแต่งบ้าน/ตกแต่ง,Home Decor,ลองใช้ 7 วัน,7-Day Trial Log,14-home-decor.md
+322,ของแต่งบ้าน/ตกแต่ง,Home Decor,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,14-home-decor.md
+323,รองเท้า/กระเป๋า,Shoes & Bags,Problem–Solution,Problem–Solution,15-shoes-bags.md
+324,รองเท้า/กระเป๋า,Shoes & Bags,รีวิวประสบการณ์จริง,Real Experience Review,15-shoes-bags.md
+325,รองเท้า/กระเป๋า,Shoes & Bags,Unboxing แกะกล่อง,Unboxing,15-shoes-bags.md
+326,รองเท้า/กระเป๋า,Shoes & Bags,สาธิต/ทดสอบการใช้งาน,Demo & Test,15-shoes-bags.md
+327,รองเท้า/กระเป๋า,Shoes & Bags,เปรียบเทียบ A vs B,A vs B Comparison,15-shoes-bags.md
+328,รองเท้า/กระเป๋า,Shoes & Bags,POV/เรื่องเล่า,POV Story,15-shoes-bags.md
+329,รองเท้า/กระเป๋า,Shoes & Bags,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,15-shoes-bags.md
+330,รองเท้า/กระเป๋า,Shoes & Bags,Tips & Hacks,Tips & Hacks,15-shoes-bags.md
+331,รองเท้า/กระเป๋า,Shoes & Bags,Routine/วันในชีวิต,Routine & Day in the Life,15-shoes-bags.md
+332,รองเท้า/กระเป๋า,Shoes & Bags,Trend/Top Picks,Trend & Top Picks,15-shoes-bags.md
+333,รองเท้า/กระเป๋า,Shoes & Bags,มายาคติที่คนเชื่อผิด,Myth-busting,15-shoes-bags.md
+334,รองเท้า/กระเป๋า,Shoes & Bags,งบจำกัดก็เอาได้,Budget Pick,15-shoes-bags.md
+335,รองเท้า/กระเป๋า,Shoes & Bags,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,15-shoes-bags.md
+336,รองเท้า/กระเป๋า,Shoes & Bags,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,15-shoes-bags.md
+337,รองเท้า/กระเป๋า,Shoes & Bags,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,15-shoes-bags.md
+338,รองเท้า/กระเป๋า,Shoes & Bags,ของขวัญให้คนที่รัก,Gift Idea,15-shoes-bags.md
+339,รองเท้า/กระเป๋า,Shoes & Bags,รวมรีวิวจากคนอื่น,Social Proof Roundup,15-shoes-bags.md
+340,รองเท้า/กระเป๋า,Shoes & Bags,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,15-shoes-bags.md
+341,รองเท้า/กระเป๋า,Shoes & Bags,ใช้ตอนไหนถึงคุ้ม,When to Use,15-shoes-bags.md
+342,รองเท้า/กระเป๋า,Shoes & Bags,ตามล่าดีล/โปร,Deal Hunting,15-shoes-bags.md
+343,รองเท้า/กระเป๋า,Shoes & Bags,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,15-shoes-bags.md
+344,รองเท้า/กระเป๋า,Shoes & Bags,ลองใช้ 7 วัน,7-Day Trial Log,15-shoes-bags.md
+345,รองเท้า/กระเป๋า,Shoes & Bags,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,15-shoes-bags.md
+346,เครื่องประดับ/นาฬิกา,Jewelry & Watches,Problem–Solution,Problem–Solution,16-jewelry-watch.md
+347,เครื่องประดับ/นาฬิกา,Jewelry & Watches,รีวิวประสบการณ์จริง,Real Experience Review,16-jewelry-watch.md
+348,เครื่องประดับ/นาฬิกา,Jewelry & Watches,Unboxing แกะกล่อง,Unboxing,16-jewelry-watch.md
+349,เครื่องประดับ/นาฬิกา,Jewelry & Watches,สาธิต/ทดสอบการใช้งาน,Demo & Test,16-jewelry-watch.md
+350,เครื่องประดับ/นาฬิกา,Jewelry & Watches,เปรียบเทียบ A vs B,A vs B Comparison,16-jewelry-watch.md
+351,เครื่องประดับ/นาฬิกา,Jewelry & Watches,POV/เรื่องเล่า,POV Story,16-jewelry-watch.md
+352,เครื่องประดับ/นาฬิกา,Jewelry & Watches,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,16-jewelry-watch.md
+353,เครื่องประดับ/นาฬิกา,Jewelry & Watches,Tips & Hacks,Tips & Hacks,16-jewelry-watch.md
+354,เครื่องประดับ/นาฬิกา,Jewelry & Watches,Routine/วันในชีวิต,Routine & Day in the Life,16-jewelry-watch.md
+355,เครื่องประดับ/นาฬิกา,Jewelry & Watches,Trend/Top Picks,Trend & Top Picks,16-jewelry-watch.md
+356,เครื่องประดับ/นาฬิกา,Jewelry & Watches,มายาคติที่คนเชื่อผิด,Myth-busting,16-jewelry-watch.md
+357,เครื่องประดับ/นาฬิกา,Jewelry & Watches,งบจำกัดก็เอาได้,Budget Pick,16-jewelry-watch.md
+358,เครื่องประดับ/นาฬิกา,Jewelry & Watches,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,16-jewelry-watch.md
+359,เครื่องประดับ/นาฬิกา,Jewelry & Watches,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,16-jewelry-watch.md
+360,เครื่องประดับ/นาฬิกา,Jewelry & Watches,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,16-jewelry-watch.md
+361,เครื่องประดับ/นาฬิกา,Jewelry & Watches,ของขวัญให้คนที่รัก,Gift Idea,16-jewelry-watch.md
+362,เครื่องประดับ/นาฬิกา,Jewelry & Watches,รวมรีวิวจากคนอื่น,Social Proof Roundup,16-jewelry-watch.md
+363,เครื่องประดับ/นาฬิกา,Jewelry & Watches,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,16-jewelry-watch.md
+364,เครื่องประดับ/นาฬิกา,Jewelry & Watches,ใช้ตอนไหนถึงคุ้ม,When to Use,16-jewelry-watch.md
+365,เครื่องประดับ/นาฬิกา,Jewelry & Watches,ตามล่าดีล/โปร,Deal Hunting,16-jewelry-watch.md
+366,เครื่องประดับ/นาฬิกา,Jewelry & Watches,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,16-jewelry-watch.md
+367,เครื่องประดับ/นาฬิกา,Jewelry & Watches,ลองใช้ 7 วัน,7-Day Trial Log,16-jewelry-watch.md
+368,เครื่องประดับ/นาฬิกา,Jewelry & Watches,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,16-jewelry-watch.md
+369,ดูแลผม/สระผม,Hair Care,Problem–Solution,Problem–Solution,17-hair-care.md
+370,ดูแลผม/สระผม,Hair Care,รีวิวประสบการณ์จริง,Real Experience Review,17-hair-care.md
+371,ดูแลผม/สระผม,Hair Care,Unboxing แกะกล่อง,Unboxing,17-hair-care.md
+372,ดูแลผม/สระผม,Hair Care,สาธิต/ทดสอบการใช้งาน,Demo & Test,17-hair-care.md
+373,ดูแลผม/สระผม,Hair Care,เปรียบเทียบ A vs B,A vs B Comparison,17-hair-care.md
+374,ดูแลผม/สระผม,Hair Care,POV/เรื่องเล่า,POV Story,17-hair-care.md
+375,ดูแลผม/สระผม,Hair Care,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,17-hair-care.md
+376,ดูแลผม/สระผม,Hair Care,Tips & Hacks,Tips & Hacks,17-hair-care.md
+377,ดูแลผม/สระผม,Hair Care,Routine/วันในชีวิต,Routine & Day in the Life,17-hair-care.md
+378,ดูแลผม/สระผม,Hair Care,Trend/Top Picks,Trend & Top Picks,17-hair-care.md
+379,ดูแลผม/สระผม,Hair Care,มายาคติที่คนเชื่อผิด,Myth-busting,17-hair-care.md
+380,ดูแลผม/สระผม,Hair Care,งบจำกัดก็เอาได้,Budget Pick,17-hair-care.md
+381,ดูแลผม/สระผม,Hair Care,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,17-hair-care.md
+382,ดูแลผม/สระผม,Hair Care,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,17-hair-care.md
+383,ดูแลผม/สระผม,Hair Care,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,17-hair-care.md
+384,ดูแลผม/สระผม,Hair Care,ของขวัญให้คนที่รัก,Gift Idea,17-hair-care.md
+385,ดูแลผม/สระผม,Hair Care,รวมรีวิวจากคนอื่น,Social Proof Roundup,17-hair-care.md
+386,ดูแลผม/สระผม,Hair Care,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,17-hair-care.md
+387,ดูแลผม/สระผม,Hair Care,ใช้ตอนไหนถึงคุ้ม,When to Use,17-hair-care.md
+388,ดูแลผม/สระผม,Hair Care,ตามล่าดีล/โปร,Deal Hunting,17-hair-care.md
+389,ดูแลผม/สระผม,Hair Care,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,17-hair-care.md
+390,ดูแลผม/สระผม,Hair Care,ลองใช้ 7 วัน,7-Day Trial Log,17-hair-care.md
+391,ดูแลผม/สระผม,Hair Care,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,17-hair-care.md
+392,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,Problem–Solution,Problem–Solution,18-mens-grooming.md
+393,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,รีวิวประสบการณ์จริง,Real Experience Review,18-mens-grooming.md
+394,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,Unboxing แกะกล่อง,Unboxing,18-mens-grooming.md
+395,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,สาธิต/ทดสอบการใช้งาน,Demo & Test,18-mens-grooming.md
+396,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,เปรียบเทียบ A vs B,A vs B Comparison,18-mens-grooming.md
+397,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,POV/เรื่องเล่า,POV Story,18-mens-grooming.md
+398,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,18-mens-grooming.md
+399,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,Tips & Hacks,Tips & Hacks,18-mens-grooming.md
+400,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,Routine/วันในชีวิต,Routine & Day in the Life,18-mens-grooming.md
+401,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,Trend/Top Picks,Trend & Top Picks,18-mens-grooming.md
+402,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,มายาคติที่คนเชื่อผิด,Myth-busting,18-mens-grooming.md
+403,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,งบจำกัดก็เอาได้,Budget Pick,18-mens-grooming.md
+404,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,18-mens-grooming.md
+405,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,18-mens-grooming.md
+406,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,18-mens-grooming.md
+407,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,ของขวัญให้คนที่รัก,Gift Idea,18-mens-grooming.md
+408,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,รวมรีวิวจากคนอื่น,Social Proof Roundup,18-mens-grooming.md
+409,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,18-mens-grooming.md
+410,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,ใช้ตอนไหนถึงคุ้ม,When to Use,18-mens-grooming.md
+411,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,ตามล่าดีล/โปร,Deal Hunting,18-mens-grooming.md
+412,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,18-mens-grooming.md
+413,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,ลองใช้ 7 วัน,7-Day Trial Log,18-mens-grooming.md
+414,ดูแลตัวเองผู้ชาย/น้ำหอม,Men's Grooming & Fragrance,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,18-mens-grooming.md
+415,สุขภาพช่องปาก/ฟัน,Oral Care,Problem–Solution,Problem–Solution,19-oral-care.md
+416,สุขภาพช่องปาก/ฟัน,Oral Care,รีวิวประสบการณ์จริง,Real Experience Review,19-oral-care.md
+417,สุขภาพช่องปาก/ฟัน,Oral Care,Unboxing แกะกล่อง,Unboxing,19-oral-care.md
+418,สุขภาพช่องปาก/ฟัน,Oral Care,สาธิต/ทดสอบการใช้งาน,Demo & Test,19-oral-care.md
+419,สุขภาพช่องปาก/ฟัน,Oral Care,เปรียบเทียบ A vs B,A vs B Comparison,19-oral-care.md
+420,สุขภาพช่องปาก/ฟัน,Oral Care,POV/เรื่องเล่า,POV Story,19-oral-care.md
+421,สุขภาพช่องปาก/ฟัน,Oral Care,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,19-oral-care.md
+422,สุขภาพช่องปาก/ฟัน,Oral Care,Tips & Hacks,Tips & Hacks,19-oral-care.md
+423,สุขภาพช่องปาก/ฟัน,Oral Care,Routine/วันในชีวิต,Routine & Day in the Life,19-oral-care.md
+424,สุขภาพช่องปาก/ฟัน,Oral Care,Trend/Top Picks,Trend & Top Picks,19-oral-care.md
+425,สุขภาพช่องปาก/ฟัน,Oral Care,มายาคติที่คนเชื่อผิด,Myth-busting,19-oral-care.md
+426,สุขภาพช่องปาก/ฟัน,Oral Care,งบจำกัดก็เอาได้,Budget Pick,19-oral-care.md
+427,สุขภาพช่องปาก/ฟัน,Oral Care,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,19-oral-care.md
+428,สุขภาพช่องปาก/ฟัน,Oral Care,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,19-oral-care.md
+429,สุขภาพช่องปาก/ฟัน,Oral Care,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,19-oral-care.md
+430,สุขภาพช่องปาก/ฟัน,Oral Care,ของขวัญให้คนที่รัก,Gift Idea,19-oral-care.md
+431,สุขภาพช่องปาก/ฟัน,Oral Care,รวมรีวิวจากคนอื่น,Social Proof Roundup,19-oral-care.md
+432,สุขภาพช่องปาก/ฟัน,Oral Care,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,19-oral-care.md
+433,สุขภาพช่องปาก/ฟัน,Oral Care,ใช้ตอนไหนถึงคุ้ม,When to Use,19-oral-care.md
+434,สุขภาพช่องปาก/ฟัน,Oral Care,ตามล่าดีล/โปร,Deal Hunting,19-oral-care.md
+435,สุขภาพช่องปาก/ฟัน,Oral Care,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,19-oral-care.md
+436,สุขภาพช่องปาก/ฟัน,Oral Care,ลองใช้ 7 วัน,7-Day Trial Log,19-oral-care.md
+437,สุขภาพช่องปาก/ฟัน,Oral Care,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,19-oral-care.md
+438,อุปกรณ์สำนักงาน/การเรียน,Office & School,Problem–Solution,Problem–Solution,20-office-school.md
+439,อุปกรณ์สำนักงาน/การเรียน,Office & School,รีวิวประสบการณ์จริง,Real Experience Review,20-office-school.md
+440,อุปกรณ์สำนักงาน/การเรียน,Office & School,Unboxing แกะกล่อง,Unboxing,20-office-school.md
+441,อุปกรณ์สำนักงาน/การเรียน,Office & School,สาธิต/ทดสอบการใช้งาน,Demo & Test,20-office-school.md
+442,อุปกรณ์สำนักงาน/การเรียน,Office & School,เปรียบเทียบ A vs B,A vs B Comparison,20-office-school.md
+443,อุปกรณ์สำนักงาน/การเรียน,Office & School,POV/เรื่องเล่า,POV Story,20-office-school.md
+444,อุปกรณ์สำนักงาน/การเรียน,Office & School,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,20-office-school.md
+445,อุปกรณ์สำนักงาน/การเรียน,Office & School,Tips & Hacks,Tips & Hacks,20-office-school.md
+446,อุปกรณ์สำนักงาน/การเรียน,Office & School,Routine/วันในชีวิต,Routine & Day in the Life,20-office-school.md
+447,อุปกรณ์สำนักงาน/การเรียน,Office & School,Trend/Top Picks,Trend & Top Picks,20-office-school.md
+448,อุปกรณ์สำนักงาน/การเรียน,Office & School,มายาคติที่คนเชื่อผิด,Myth-busting,20-office-school.md
+449,อุปกรณ์สำนักงาน/การเรียน,Office & School,งบจำกัดก็เอาได้,Budget Pick,20-office-school.md
+450,อุปกรณ์สำนักงาน/การเรียน,Office & School,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,20-office-school.md
+451,อุปกรณ์สำนักงาน/การเรียน,Office & School,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,20-office-school.md
+452,อุปกรณ์สำนักงาน/การเรียน,Office & School,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,20-office-school.md
+453,อุปกรณ์สำนักงาน/การเรียน,Office & School,ของขวัญให้คนที่รัก,Gift Idea,20-office-school.md
+454,อุปกรณ์สำนักงาน/การเรียน,Office & School,รวมรีวิวจากคนอื่น,Social Proof Roundup,20-office-school.md
+455,อุปกรณ์สำนักงาน/การเรียน,Office & School,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,20-office-school.md
+456,อุปกรณ์สำนักงาน/การเรียน,Office & School,ใช้ตอนไหนถึงคุ้ม,When to Use,20-office-school.md
+457,อุปกรณ์สำนักงาน/การเรียน,Office & School,ตามล่าดีล/โปร,Deal Hunting,20-office-school.md
+458,อุปกรณ์สำนักงาน/การเรียน,Office & School,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,20-office-school.md
+459,อุปกรณ์สำนักงาน/การเรียน,Office & School,ลองใช้ 7 วัน,7-Day Trial Log,20-office-school.md
+460,อุปกรณ์สำนักงาน/การเรียน,Office & School,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,20-office-school.md
+461,ยานยนต์/ของแต่งรถ,Car & Auto,Problem–Solution,Problem–Solution,21-car-auto.md
+462,ยานยนต์/ของแต่งรถ,Car & Auto,รีวิวประสบการณ์จริง,Real Experience Review,21-car-auto.md
+463,ยานยนต์/ของแต่งรถ,Car & Auto,Unboxing แกะกล่อง,Unboxing,21-car-auto.md
+464,ยานยนต์/ของแต่งรถ,Car & Auto,สาธิต/ทดสอบการใช้งาน,Demo & Test,21-car-auto.md
+465,ยานยนต์/ของแต่งรถ,Car & Auto,เปรียบเทียบ A vs B,A vs B Comparison,21-car-auto.md
+466,ยานยนต์/ของแต่งรถ,Car & Auto,POV/เรื่องเล่า,POV Story,21-car-auto.md
+467,ยานยนต์/ของแต่งรถ,Car & Auto,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,21-car-auto.md
+468,ยานยนต์/ของแต่งรถ,Car & Auto,Tips & Hacks,Tips & Hacks,21-car-auto.md
+469,ยานยนต์/ของแต่งรถ,Car & Auto,Routine/วันในชีวิต,Routine & Day in the Life,21-car-auto.md
+470,ยานยนต์/ของแต่งรถ,Car & Auto,Trend/Top Picks,Trend & Top Picks,21-car-auto.md
+471,ยานยนต์/ของแต่งรถ,Car & Auto,มายาคติที่คนเชื่อผิด,Myth-busting,21-car-auto.md
+472,ยานยนต์/ของแต่งรถ,Car & Auto,งบจำกัดก็เอาได้,Budget Pick,21-car-auto.md
+473,ยานยนต์/ของแต่งรถ,Car & Auto,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,21-car-auto.md
+474,ยานยนต์/ของแต่งรถ,Car & Auto,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,21-car-auto.md
+475,ยานยนต์/ของแต่งรถ,Car & Auto,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,21-car-auto.md
+476,ยานยนต์/ของแต่งรถ,Car & Auto,ของขวัญให้คนที่รัก,Gift Idea,21-car-auto.md
+477,ยานยนต์/ของแต่งรถ,Car & Auto,รวมรีวิวจากคนอื่น,Social Proof Roundup,21-car-auto.md
+478,ยานยนต์/ของแต่งรถ,Car & Auto,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,21-car-auto.md
+479,ยานยนต์/ของแต่งรถ,Car & Auto,ใช้ตอนไหนถึงคุ้ม,When to Use,21-car-auto.md
+480,ยานยนต์/ของแต่งรถ,Car & Auto,ตามล่าดีล/โปร,Deal Hunting,21-car-auto.md
+481,ยานยนต์/ของแต่งรถ,Car & Auto,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,21-car-auto.md
+482,ยานยนต์/ของแต่งรถ,Car & Auto,ลองใช้ 7 วัน,7-Day Trial Log,21-car-auto.md
+483,ยานยนต์/ของแต่งรถ,Car & Auto,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,21-car-auto.md
+484,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,Problem–Solution,Problem–Solution,22-outdoor-sports.md
+485,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,รีวิวประสบการณ์จริง,Real Experience Review,22-outdoor-sports.md
+486,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,Unboxing แกะกล่อง,Unboxing,22-outdoor-sports.md
+487,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,สาธิต/ทดสอบการใช้งาน,Demo & Test,22-outdoor-sports.md
+488,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,เปรียบเทียบ A vs B,A vs B Comparison,22-outdoor-sports.md
+489,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,POV/เรื่องเล่า,POV Story,22-outdoor-sports.md
+490,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,22-outdoor-sports.md
+491,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,Tips & Hacks,Tips & Hacks,22-outdoor-sports.md
+492,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,Routine/วันในชีวิต,Routine & Day in the Life,22-outdoor-sports.md
+493,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,Trend/Top Picks,Trend & Top Picks,22-outdoor-sports.md
+494,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,มายาคติที่คนเชื่อผิด,Myth-busting,22-outdoor-sports.md
+495,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,งบจำกัดก็เอาได้,Budget Pick,22-outdoor-sports.md
+496,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,22-outdoor-sports.md
+497,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,22-outdoor-sports.md
+498,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,22-outdoor-sports.md
+499,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,ของขวัญให้คนที่รัก,Gift Idea,22-outdoor-sports.md
+500,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,รวมรีวิวจากคนอื่น,Social Proof Roundup,22-outdoor-sports.md
+501,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,22-outdoor-sports.md
+502,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,ใช้ตอนไหนถึงคุ้ม,When to Use,22-outdoor-sports.md
+503,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,ตามล่าดีล/โปร,Deal Hunting,22-outdoor-sports.md
+504,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,22-outdoor-sports.md
+505,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,ลองใช้ 7 วัน,7-Day Trial Log,22-outdoor-sports.md
+506,กีฬา/แคมป์ปิ้ง,Outdoor & Sports,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,22-outdoor-sports.md
+507,ต้นไม้/จัดสวน,Gardening & Plants,Problem–Solution,Problem–Solution,23-garden-plants.md
+508,ต้นไม้/จัดสวน,Gardening & Plants,รีวิวประสบการณ์จริง,Real Experience Review,23-garden-plants.md
+509,ต้นไม้/จัดสวน,Gardening & Plants,Unboxing แกะกล่อง,Unboxing,23-garden-plants.md
+510,ต้นไม้/จัดสวน,Gardening & Plants,สาธิต/ทดสอบการใช้งาน,Demo & Test,23-garden-plants.md
+511,ต้นไม้/จัดสวน,Gardening & Plants,เปรียบเทียบ A vs B,A vs B Comparison,23-garden-plants.md
+512,ต้นไม้/จัดสวน,Gardening & Plants,POV/เรื่องเล่า,POV Story,23-garden-plants.md
+513,ต้นไม้/จัดสวน,Gardening & Plants,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,23-garden-plants.md
+514,ต้นไม้/จัดสวน,Gardening & Plants,Tips & Hacks,Tips & Hacks,23-garden-plants.md
+515,ต้นไม้/จัดสวน,Gardening & Plants,Routine/วันในชีวิต,Routine & Day in the Life,23-garden-plants.md
+516,ต้นไม้/จัดสวน,Gardening & Plants,Trend/Top Picks,Trend & Top Picks,23-garden-plants.md
+517,ต้นไม้/จัดสวน,Gardening & Plants,มายาคติที่คนเชื่อผิด,Myth-busting,23-garden-plants.md
+518,ต้นไม้/จัดสวน,Gardening & Plants,งบจำกัดก็เอาได้,Budget Pick,23-garden-plants.md
+519,ต้นไม้/จัดสวน,Gardening & Plants,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,23-garden-plants.md
+520,ต้นไม้/จัดสวน,Gardening & Plants,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,23-garden-plants.md
+521,ต้นไม้/จัดสวน,Gardening & Plants,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,23-garden-plants.md
+522,ต้นไม้/จัดสวน,Gardening & Plants,ของขวัญให้คนที่รัก,Gift Idea,23-garden-plants.md
+523,ต้นไม้/จัดสวน,Gardening & Plants,รวมรีวิวจากคนอื่น,Social Proof Roundup,23-garden-plants.md
+524,ต้นไม้/จัดสวน,Gardening & Plants,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,23-garden-plants.md
+525,ต้นไม้/จัดสวน,Gardening & Plants,ใช้ตอนไหนถึงคุ้ม,When to Use,23-garden-plants.md
+526,ต้นไม้/จัดสวน,Gardening & Plants,ตามล่าดีล/โปร,Deal Hunting,23-garden-plants.md
+527,ต้นไม้/จัดสวน,Gardening & Plants,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,23-garden-plants.md
+528,ต้นไม้/จัดสวน,Gardening & Plants,ลองใช้ 7 วัน,7-Day Trial Log,23-garden-plants.md
+529,ต้นไม้/จัดสวน,Gardening & Plants,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,23-garden-plants.md
+530,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,Problem–Solution,Problem–Solution,24-travel-gear.md
+531,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,รีวิวประสบการณ์จริง,Real Experience Review,24-travel-gear.md
+532,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,Unboxing แกะกล่อง,Unboxing,24-travel-gear.md
+533,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,สาธิต/ทดสอบการใช้งาน,Demo & Test,24-travel-gear.md
+534,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,เปรียบเทียบ A vs B,A vs B Comparison,24-travel-gear.md
+535,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,POV/เรื่องเล่า,POV Story,24-travel-gear.md
+536,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,24-travel-gear.md
+537,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,Tips & Hacks,Tips & Hacks,24-travel-gear.md
+538,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,Routine/วันในชีวิต,Routine & Day in the Life,24-travel-gear.md
+539,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,Trend/Top Picks,Trend & Top Picks,24-travel-gear.md
+540,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,มายาคติที่คนเชื่อผิด,Myth-busting,24-travel-gear.md
+541,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,งบจำกัดก็เอาได้,Budget Pick,24-travel-gear.md
+542,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,24-travel-gear.md
+543,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,24-travel-gear.md
+544,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,24-travel-gear.md
+545,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,ของขวัญให้คนที่รัก,Gift Idea,24-travel-gear.md
+546,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,รวมรีวิวจากคนอื่น,Social Proof Roundup,24-travel-gear.md
+547,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,24-travel-gear.md
+548,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,ใช้ตอนไหนถึงคุ้ม,When to Use,24-travel-gear.md
+549,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,ตามล่าดีล/โปร,Deal Hunting,24-travel-gear.md
+550,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,24-travel-gear.md
+551,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,ลองใช้ 7 วัน,7-Day Trial Log,24-travel-gear.md
+552,ของใช้เดินทาง/ท่องเที่ยว,Travel Gear,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,24-travel-gear.md
+553,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,Problem–Solution,Problem–Solution,25-stationery-hobby.md
+554,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,รีวิวประสบการณ์จริง,Real Experience Review,25-stationery-hobby.md
+555,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,Unboxing แกะกล่อง,Unboxing,25-stationery-hobby.md
+556,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,สาธิต/ทดสอบการใช้งาน,Demo & Test,25-stationery-hobby.md
+557,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,เปรียบเทียบ A vs B,A vs B Comparison,25-stationery-hobby.md
+558,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,POV/เรื่องเล่า,POV Story,25-stationery-hobby.md
+559,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,25-stationery-hobby.md
+560,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,Tips & Hacks,Tips & Hacks,25-stationery-hobby.md
+561,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,Routine/วันในชีวิต,Routine & Day in the Life,25-stationery-hobby.md
+562,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,Trend/Top Picks,Trend & Top Picks,25-stationery-hobby.md
+563,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,มายาคติที่คนเชื่อผิด,Myth-busting,25-stationery-hobby.md
+564,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,งบจำกัดก็เอาได้,Budget Pick,25-stationery-hobby.md
+565,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,25-stationery-hobby.md
+566,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,25-stationery-hobby.md
+567,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,25-stationery-hobby.md
+568,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,ของขวัญให้คนที่รัก,Gift Idea,25-stationery-hobby.md
+569,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,รวมรีวิวจากคนอื่น,Social Proof Roundup,25-stationery-hobby.md
+570,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,25-stationery-hobby.md
+571,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,ใช้ตอนไหนถึงคุ้ม,When to Use,25-stationery-hobby.md
+572,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,ตามล่าดีล/โปร,Deal Hunting,25-stationery-hobby.md
+573,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,25-stationery-hobby.md
+574,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,ลองใช้ 7 วัน,7-Day Trial Log,25-stationery-hobby.md
+575,เครื่องเขียน/งานอดิเรก,Stationery & Hobby,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,25-stationery-hobby.md
+576,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,Problem–Solution,Problem–Solution,26-gaming-gear.md
+577,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,รีวิวประสบการณ์จริง,Real Experience Review,26-gaming-gear.md
+578,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,Unboxing แกะกล่อง,Unboxing,26-gaming-gear.md
+579,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,สาธิต/ทดสอบการใช้งาน,Demo & Test,26-gaming-gear.md
+580,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,เปรียบเทียบ A vs B,A vs B Comparison,26-gaming-gear.md
+581,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,POV/เรื่องเล่า,POV Story,26-gaming-gear.md
+582,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,ตอบคอมเมนต์/FAQ,Comment Reply & FAQ,26-gaming-gear.md
+583,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,Tips & Hacks,Tips & Hacks,26-gaming-gear.md
+584,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,Routine/วันในชีวิต,Routine & Day in the Life,26-gaming-gear.md
+585,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,Trend/Top Picks,Trend & Top Picks,26-gaming-gear.md
+586,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,มายาคติที่คนเชื่อผิด,Myth-busting,26-gaming-gear.md
+587,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,งบจำกัดก็เอาได้,Budget Pick,26-gaming-gear.md
+588,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,5 อย่างที่ต้องรู้ก่อนซื้อ,5 Things to Know,26-gaming-gear.md
+589,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,ข้อผิดพลาดที่คนมักทำ,Common Mistakes,26-gaming-gear.md
+590,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,ถ้าเริ่มใหม่จะทำแบบนี้,If I Started Over,26-gaming-gear.md
+591,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,ของขวัญให้คนที่รัก,Gift Idea,26-gaming-gear.md
+592,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,รวมรีวิวจากคนอื่น,Social Proof Roundup,26-gaming-gear.md
+593,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,ใครเหมาะ/ใครไม่เหมาะ,Who It's For,26-gaming-gear.md
+594,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,ใช้ตอนไหนถึงคุ้ม,When to Use,26-gaming-gear.md
+595,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,ตามล่าดีล/โปร,Deal Hunting,26-gaming-gear.md
+596,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,เปรียบเทียบ 3 ตัวเลือกสุดท้าย,Final 3 Picks,26-gaming-gear.md
+597,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,ลองใช้ 7 วัน,7-Day Trial Log,26-gaming-gear.md
+598,เกม/อุปกรณ์เกมมิ่ง,Gaming Gear,ก่อน–หลังแบบไม่ผิดกฎ,Honest Before–After,26-gaming-gear.md
+599,ทุกหมวด (MASTER),All niches (MASTER),วางแผนคอนเทนต์ 30 วัน,30-Day Content Plan,99-master-plan.md

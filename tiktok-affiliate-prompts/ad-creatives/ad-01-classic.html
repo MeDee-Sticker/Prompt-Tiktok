@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Ad 01 · Classic Cream-Orange — 599 Prompt ก๊อปวาง</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;800;900&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#111; display:flex; align-items:center; justify-content:center; min-height:100vh; overflow:hidden; }
+  #stage { width:1080px; height:1350px; transform-origin:center center; position:absolute; left:50%; top:50%; }
+  :root { --ink:#1B1B1F; --muted:#7A7A85; --orange:#FF5A1F; }
+  .ad { width:1080px; height:1350px; background:#FBF6EE; font-family:'Sarabun',sans-serif; color:var(--ink); position:relative; overflow:hidden; padding:76px 84px 0; }
+  .ad::before { content:""; position:absolute; inset:0; background-image:radial-gradient(#ECE4D6 2px, transparent 2px); background-size:40px 40px; opacity:.45; }
+  .k { font-family:'Kanit',sans-serif; }
+  .pill { position:relative; display:inline-block; background:#FFE9DC; border:2px solid var(--orange); color:#C74A15; font-family:'Kanit'; font-weight:600; font-size:23px; padding:7px 24px; border-radius:999px; }
+  h1 { position:relative; font-family:'Kanit'; font-weight:900; font-size:74px; line-height:1.08; letter-spacing:-1px; margin-top:22px; }
+  h1 .o { color:var(--orange); }
+  h1 small { display:block; font-size:32px; font-weight:600; color:var(--muted); margin-top:14px; letter-spacing:0; }
+  .sub { position:relative; font-size:22px; color:var(--muted); margin-top:10px; font-weight:600; }
+  .row { position:relative; display:flex; gap:48px; margin-top:34px; align-items:center; }
+  .mock { flex:1; position:relative; height:400px; }
+  .card { position:absolute; border-radius:18px; box-shadow:0 14px 30px rgba(0,0,0,.16); }
+  .c3 { width:250px; height:330px; background:#EFE7DA; transform:rotate(-9deg); left:0; top:40px; }
+  .c2 { width:250px; height:330px; background:#fff; transform:rotate(-4deg); left:46px; top:20px; border:2px solid #EADFCF; }
+  .c1 { width:262px; height:340px; background:#17181D; color:#fff; transform:rotate(3deg); left:96px; top:0; padding:30px 26px; display:flex; flex-direction:column; justify-content:space-between; }
+  .c1 .t { font-family:'Kanit'; font-weight:900; font-size:34px; line-height:1.12; }
+  .c1 .t span { color:#FF7A45; }
+  .c1 .m { font-size:18px; color:#9A9AA5; line-height:1.4; }
+  .c1 .badge { align-self:flex-start; background:var(--orange); font-family:'Kanit'; font-weight:800; font-size:19px; padding:5px 16px; border-radius:999px; }
+  .stick { position:absolute; background:#fff; border:2px solid var(--ink); border-radius:14px; padding:9px 18px; font-family:'Kanit'; font-weight:600; font-size:20px; box-shadow:4px 4px 0 var(--ink); }
+  .s1 { bottom:0; right:0; transform:rotate(-2deg); }
+  .checks { flex:1.05; background:#fff; border-radius:24px; padding:34px 38px; box-shadow:0 10px 26px rgba(0,0,0,.07); border:1px solid #F1E9DB; }
+  .checks li { list-style:none; display:flex; gap:16px; align-items:flex-start; font-size:23px; line-height:1.35; padding:12px 0; border-bottom:1px solid #F3EBDD; }
+  .checks li:last-child { border-bottom:none; }
+  .checks b { font-weight:700; }
+  .checks span small { display:block; font-size:19px; color:var(--muted); margin-top:2px; }
+  .tick { flex:none; width:32px; height:32px; margin-top:2px; border-radius:50%; background:var(--orange); color:#fff; font-size:19px; display:flex; align-items:center; justify-content:center; font-weight:700; }
+  .quote { position:relative; margin-top:30px; background:#17181D; color:#fff; font-family:'Kanit'; font-weight:400; font-size:23px; line-height:1.5; padding:18px 30px; border-radius:16px; width:fit-content; }
+  .quote b { font-weight:600; }
+  .quote::after { content:""; position:absolute; left:44px; bottom:-14px; border:14px solid transparent; border-top-color:#17181D; border-bottom:none; }
+  .price { position:relative; display:flex; align-items:center; gap:36px; margin-top:28px; }
+  .was { text-align:right; }
+  .was .lbl { font-size:20px; color:#9A9AA6; font-weight:700; }
+  .was .num { font-family:'Kanit'; font-weight:800; font-size:38px; color:#9A9AA6; text-decoration:line-through; text-decoration-thickness:3px; }
+  .now { width:184px; height:184px; border-radius:50%; background:linear-gradient(145deg,#FF7A2F,#FF3D00); color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:0 12px 26px rgba(255,61,0,.35); border:5px solid #fff; }
+  .now .lbl { font-family:'Kanit'; font-weight:600; font-size:20px; }
+  .now .num { font-family:'Kanit'; font-weight:900; font-size:70px; line-height:.95; }
+  .now .u { font-family:'Kanit'; font-weight:800; font-size:24px; }
+  .perks { display:flex; flex-direction:column; gap:10px; }
+  .perk { font-size:21px; font-weight:600; color:#5C5C68; display:flex; align-items:center; gap:10px; }
+  .perk i { font-style:normal; color:var(--orange); }
+  .cta { position:absolute; left:84px; right:84px; bottom:60px; background:#FF3D00; border-radius:999px; padding:22px; text-align:center; color:#fff; font-family:'Kanit'; font-weight:800; font-size:31px; box-shadow:0 10px 22px rgba(255,61,0,.28); }
+  .cta span { font-weight:400; font-size:22px; opacity:.85; }
+</style>
+</head>
+<body>
+<div id="stage"><div class="ad">
+  <span class="pill">TIKTOK SHOP AFFILIATE · คอนเทนต์ปักตะกร้า</span>
+  <h1>599 Prompt<br><span class="o">ก๊อปวาง</span>
+    <small>ชุดเดียวจบ · ก๊อปไปวาง ได้สคริปต์พร้อมถ่าย</small></h1>
+  <div class="sub">ไม่ต้องเป็นนักเขียน ไม่ต้องมีไอเดียใหม่ และไม่ต้องเก่งอังกฤษ</div>
+
+  <div class="row">
+    <div class="mock">
+      <div class="card c3"></div>
+      <div class="card c2"></div>
+      <div class="card c1">
+        <div class="badge">599 PROMPT</div>
+        <div class="t">ก๊อปวาง<br><span>ชุดเดียวจบ</span></div>
+        <div class="m">ใช้ซ้ำได้ทุกสินค้า · 26 หมวด × 23 มุม · TH/EN</div>
+      </div>
+      <div class="stick s1">ใช้ได้เลย ไม่ต้องแต่งเอง</div>
+    </div>
+    <ul class="checks">
+      <li><span class="tick">✓</span><span><b>Prompt 599 ชุด · ก๊อปวางได้เลย</b><small>26 หมวดขายดี × 23 มุมคอนเทนต์ · สองภาษา TH/EN</small></span></li>
+      <li><span class="tick">✓</span><span><b>output ครบทั้ง 8 ส่วน</b><small>Hook · Shot list · CTA · Caption</small></span></li>
+      <li><span class="tick">✓</span><span><b>ไฟล์ CSV ใช้กับ Google Sheets</b><small>คัดลอกวางอย่างเดียว</small></span></li>
+      <li><span class="tick">✓</span><span><b>ตัวอย่างสคริปต์เต็ม 3 ชุด</b><small>พร้อมเช็คลิสต์ก่อนโพสต์</small></span></li>
+    </ul>
+  </div>
+
+  <div class="quote">"เลือกสินค้า → ก๊อป prompt → วางใน AI → ได้สคริปต์ปักตะกร้าทันที"</div>
+
+  <div class="price">
+    <div class="was"><div class="lbl">ราคาปกติ</div><div class="num">999฿</div></div>
+    <div class="now"><div class="lbl">วันนี้เหลือ</div><div class="num">99</div><div class="u">บาท</div></div>
+    <div class="perks">
+      <span class="perk"><i>✓</i> ลดเฉพาะโพสต์นี้</span>
+      <span class="perk"><i>✓</i> ดาวน์โหลดทันทีหลังชำระ</span>
+      <span class="perk"><i>✓</i> อัปเดตเวอร์ชันใหม่ฟรี · ใช้กับ ChatGPT / Claude / Gemini</span>
+    </div>
+  </div>
+
+  <div class="cta">กดดูรายละเอียดที่ตะกร้า 👉 <span>· ดาวน์โหลดทันทีหลังชำระเงิน</span></div>
+</div></div>
+<script>
+function fit(){const s=Math.min(innerWidth/1080, innerHeight/1350);
+const st=document.getElementById('stage');
+st.style.transform='translate(-50%,-50%) scale('+s+')';st.style.transformOrigin='center center';}
+addEventListener('resize',fit);fit();
+</script>
+</body>
+</html>

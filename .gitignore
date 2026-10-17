@@ -1,0 +1,19 @@
+# ── ข้อมูล/สถานะเครื่อง_LOCAL ห้ามขึ้น GitHub ─────────────────────────────
+# (คีย์ลับของร้านอยู่ใน tiktok-affiliate-prompts/shop/.secrets — .gitignore ของ shop จัดการอยู่แล้ว)
+
+# สถานะ wrangler/miniflare (SQLite, R2 blobs, cache) ระดับรูท
+.wrangler/
+
+# โฟลเดอร์งานชั่วคราวระดับรูท (สคริปต์ตรวจ/เรนเดอร์/ไฟล์ทดสอบ)
+.scratch/
+
+# Node / Python
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp

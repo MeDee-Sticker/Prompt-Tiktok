@@ -1,0 +1,9 @@
+node_modules/
+.wrangler/
+wrangler.domain.toml
+.dev.vars
+.venv/
+__pycache__/
+.secrets/
+# โฟลเดอร์งานชั่วคราว (สคริปต์ตรวจ/เรนเดอร์/ไฟล์ทดสอบ)
+.scratch/

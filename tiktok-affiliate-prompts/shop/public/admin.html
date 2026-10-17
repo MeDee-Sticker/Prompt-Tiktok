@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>หลังบ้าน — คำสั่งซื้อ</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;800&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<style>
+  body { max-width:960px; margin:0 auto; }
+  .row { display:flex; gap:8px; }
+  .row button { margin-top:0; width:auto; padding:14px 22px; font-size:16px; white-space:nowrap; }
+  .scroll { overflow-x:auto; }
+  .badge.reported { background:#FFF3C4; color:#8A6100; }
+  td.actions { white-space:nowrap; }
+  button.mini { width:auto; margin:0 4px 0 0; padding:7px 12px; font-size:13px; border-radius:9px; border:none; font-family:'Kanit'; font-weight:700; cursor:pointer; }
+  button.mini.go { background:#00B37E; color:#fff; }
+  button.mini.no { background:#F2E9E1; color:#9B3A16; }
+  button.mini.del { background:#FDECEC; color:#B3261E; }
+  button.mini:disabled { opacity:.5; }
+</style>
+</head>
+<body>
+  <div class="top"><span class="brand">หลังบ้าน · คำสั่งซื้อ</span><a class="brand" href="/">หน้าเว็บขาย →</a></div>
+
+  <div class="card" id="loginCard">
+    <h1>เข้าสู่หลังบ้าน</h1>
+    <p class="muted">ใส่ ADMIN_TOKEN ของร้าน (เก็บไว้ในเครื่องนี้เท่านั้น)</p>
+    <div class="row">
+      <input id="token" type="password" placeholder="ADMIN_TOKEN" autocomplete="off">
+      <button id="loginBtn">เข้าดู</button>
+    </div>
+    <div class="msg" id="msg"></div>
+  </div>
+
+  <div class="card" id="dash" style="display:none">
+    <div class="top"><h1 style="font-size:22px">ภาพรวม</h1><button id="refreshBtn" style="width:auto;margin:0;padding:10px 18px;font-size:15px">↻ รีเฟรช</button></div>
+    <div class="stats" id="stats"></div>
+    <div class="scroll"><table id="table">
+      <thead><tr><th>เวลา</th><th>เลขที่</th><th>อีเมล</th><th>ยอด</th><th>รับเงินทาง</th><th>สถานะ</th><th>สลิป</th><th>ตรวจโดย</th><th>โหลด</th><th>อีเมลส่ง</th><th>จัดการ</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <p class="muted" id="empty" style="display:none;margin-top:14px">ยังไม่มีคำสั่งซื้อ</p>
+    <p class="muted" style="margin-top:14px">ออเดอร์สถานะ <b>reported</b> = ลูกค้าแจ้งว่าโอนแล้ว → เปิดสลิปเทียบกับแอปธนาคาร แล้วกด “อนุมัติ” เพื่อส่งลิงก์โหลดให้ลูกค้าอัตโนมัติ</p>
+  </div>
+
+  <div class="card" id="fileCard" style="display:none;margin-top:16px">
+    <h1 style="font-size:22px">ไฟล์สินค้า (PDF)</h1>
+    <p class="muted" id="fileStatus">กำลังตรวจสอบ…</p>
+    <div class="row">
+      <input id="pdfFile" type="file" accept="application/pdf,.pdf">
+      <button id="uploadBtn" style="width:auto;padding:14px 22px;font-size:16px;white-space:nowrap">อัปโหลด / แทนที่</button>
+    </div>
+    <div class="msg" id="fileMsg"></div>
+    <p class="muted" style="margin-top:10px">อัปโหลดแล้วลูกค้าที่ชำระเงินจะโหลดไฟล์นี้ทันที · อัปโหลดใหม่ = แทนที่ไฟล์เดิม</p>
+  </div>
+
+  <div class="card" id="packCard" style="display:none;margin-top:16px">
+    <div class="top"><h1 style="font-size:22px">แพ็ก &amp; เวอร์ชัน — อัปเดตลูกค้าคนเดิม</h1><a class="brand" id="custCsvLink" href="#" target="_blank" rel="noopener">⬇ ทะเบียนลูกค้า CSV</a></div>
+    <p class="muted" id="packStatus">กำลังตรวจสอบ…</p>
+    <div class="stats" id="packStats"></div>
+    <div style="border:1px dashed #E4D9C8;border-radius:14px;padding:16px;margin-top:6px">
+      <div style="font-family:'Kanit';font-weight:700;font-size:16px;margin-bottom:10px">ออกรุ่นใหม่ + แจ้งลูกค้าทุกคนที่ซื้อแล้ว</div>
+      <div class="row" style="flex-wrap:wrap">
+        <input id="newFile" type="file" accept="application/pdf,.pdf" style="flex:1 1 240px">
+        <input id="newVersion" placeholder="เวอร์ชัน เช่น 1.5" autocomplete="off" style="max-width:170px">
+        <input id="newPrompts" placeholder="จำนวน prompt (เว้นได้)" inputmode="numeric" style="max-width:190px">
+        <input id="newNotes" placeholder="มีอะไรใหม่ (ส่งในอีเมล)" style="flex:1 1 240px">
+      </div>
+      <label class="muted" style="display:block;margin:12px 0 0"><input type="checkbox" id="newNotify" checked style="width:auto;margin-right:8px">แจ้งลูกค้าคนเดิมทุกคนทางอีเมล (ส่งเป็นชุด · ระบบส่งต่อจนจบ)</label>
+      <div class="row" style="margin-top:12px">
+        <button id="publishBtn" style="width:auto;padding:14px 22px;font-size:16px">ออกรุ่นใหม่</button>
+        <button id="notifyBtn" style="width:auto;padding:14px 22px;font-size:16px;background:#F2E9E1;color:#9B3A16" title="ส่งอีเมลต่อให้คนที่ยังไม่ได้รับรุ่นปัจจุบัน">✉ แจ้งค้างอยู่ซ้ำ</button>
+      </div>
+      <div class="msg" id="packMsg"></div>
+      <p class="muted" style="margin-top:10px">พอออกรุ่นแล้ว <b>ลิงก์เดิมของลูกค้าทุกคนจะโหลดไฟล์รุ่นใหม่ทันที</b> (ไม่ต้องซื้อซ้ำ) · ไฟล์เดิมเก็บไว้ที่ <code>versions/…</code> · ไม่ต้อง deploy ใหม่</p>
+    </div>
+    <div class="scroll" style="margin-top:16px"><table id="packTable">
+      <thead><tr><th>เวอร์ชัน</th><th>prompt</th><th>หมวด</th><th>ขนาด</th><th>ออกเมื่อ</th><th>แจ้งแล้ว</th><th>มีอะไรใหม่</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <p class="muted" id="packEmpty" style="display:none;margin-top:14px">ยังไม่เคยออกรุ่นผ่านหลังบ้าน — ลูกค้าโหลดไฟล์ที่อัปโหลดไว้ใน “ไฟล์สินค้า” และระบบใช้เวอร์ชันจาก <code>pack-version.mjs</code></p>
+  </div>
+
+  <div class="card" id="leadsCard" style="display:none;margin-top:16px">
+    <div class="top"><h1 style="font-size:22px">อีเมลผู้สนใจ (ของแถม 5 prompt ฟรี)</h1><a class="brand" id="csvLink" href="#" target="_blank" rel="noopener">⬇ ดาวน์โหลด CSV</a></div>
+    <div class="stats" id="leadStats"></div>
+    <div class="scroll"><table id="leadTable">
+      <thead><tr><th>เวลา</th><th>อีเมล</th><th>ที่มา</th><th>ส่งของแถมล่าสุด</th><th>จัดการ</th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <p class="muted" id="leadsEmpty" style="display:none;margin-top:14px">ยังไม่มีคนกรอกอีเมล</p>
+    <p class="muted" style="margin-top:14px">เก็บจากหน้า <b>/free</b> (แจก 5 prompt แรกก่อนซื้อ) · ปุ่ม CSV แนบ token ให้อัตโนมัติ · ลบอีเมลได้เมื่อลูกค้าขอใช้สิทธิ์</p>
+  </div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const fmtTHB = (s) => '฿' + (Number(s || 0) / 100).toLocaleString('th-TH', { maximumFractionDigits: 0 });
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+let token = localStorage.getItem('pp_admin_token') || '';
+
+async function load() {
+  $('msg').textContent = '';
+  try {
+    const r = await fetch('/admin/orders', { headers: { authorization: 'Bearer ' + token } });
+    if (r.status === 401) { $('msg').textContent = 'token ไม่ถูกต้อง'; return false; }
+    const d = await r.json();
+    localStorage.setItem('pp_admin_token', token);
+    $('loginCard').style.display = 'none';
+    $('dash').style.display = 'block';
+    const s = d.stats;
+    $('stats').innerHTML =
+      `<div class="stat"><b>${fmtTHB(s.revenue_satang)}</b><span>รายได้ (${s.paid} ออเดอร์)</span></div>` +
+      `<div class="stat"><b>${s.reported || 0}</b><span>รอตรวจสอบ (สลิป)</span></div>` +
+      `<div class="stat"><b>${s.pending}</b><span>รอชำระ</span></div>` +
+      `<div class="stat"><b>${s.total}</b><span>ออเดอร์ทั้งหมด</span></div>` +
+      `<div class="stat"><b>${s.downloads}</b><span>ครั้งที่โหลด</span></div>`;
+    const tb = document.querySelector('#table tbody');
+    tb.innerHTML = '';
+    (d.orders || []).forEach((o) => {
+      const tr = document.createElement('tr');
+      const cls = o.status === 'paid' ? 'paid' : o.status === 'reported' ? 'reported' : 'pending';
+      const slip = o.slip_key
+        ? `<a href="/admin/slip/${encodeURIComponent(o.id)}?token=${encodeURIComponent(token)}" target="_blank" rel="noopener">ดูสลิป</a>`
+        : '—';
+      const canReview = o.status === 'pending' || o.status === 'reported';
+      const actions = (canReview
+        ? `<button class="mini go" data-act="approve" data-id="${o.id}">✔ อนุมัติ</button><button class="mini no" data-act="reject" data-id="${o.id}">✕ ปฏิเสธ</button>`
+        : '') + `<button class="mini del" data-act="delete" data-id="${o.id}">🗑 ลบ</button>`;
+      // “ตรวจโดย”: อัตโนมัติ (easyslip) หรือรอคน · แนบเหตุผลที่ระบบยืนยันไม่ได้ + จำนวนครั้งที่ลอง
+      const via = o.verify_source === 'easyslip'
+        ? `<span class="badge paid" title="ระบบตรวจ + อนุมัติเอง">auto</span> easyslip`
+        : (o.verify_source || '—');
+      const why = o.verify_note ? `<br><small title="${esc(o.verify_note)}">⚠ ${esc(o.verify_note)}</small>` : '';
+      const tries = Number(o.verify_attempts || 0) ? `<br><small>ลองอัตโนมัติ ${o.verify_attempts}×</small>` : '';
+      tr.innerHTML = `<td>${(o.created_at || '').replace('T', ' ').slice(0, 16)}</td><td>${o.id}</td><td>${esc(o.email) || '—'}</td>` +
+        `<td>${fmtTHB(o.amount_satang)}</td><td>${esc(o.pay_target_label) || '—'}</td><td><span class="badge ${cls}">${o.status}</span></td><td>${slip}</td>` +
+        `<td>${via}${o.trans_ref ? '<br><small>' + esc(o.trans_ref) + '</small>' : ''}${why}${tries}</td>` +
+        `<td>${o.download_count}</td><td>${o.emailed_at ? '✓' : '—'}</td><td class="actions">${actions}</td>`;
+      tb.appendChild(tr);
+    });
+    $('empty').style.display = (d.orders || []).length ? 'none' : 'block';
+    $('fileCard').style.display = 'block';
+    $('packCard').style.display = 'block';
+    $('leadsCard').style.display = 'block';
+    $('csvLink').href = '/admin/leads.csv?token=' + encodeURIComponent(token);
+    $('custCsvLink').href = '/admin/pack/customers.csv?token=' + encodeURIComponent(token);
+    loadProduct();
+    loadPack();
+    loadLeads();
+    return true;
+  } catch (e) { $('msg').textContent = 'เกิดข้อผิดพลาด: ' + e.message; return false; }
+}
+
+document.querySelector('#table tbody').addEventListener('click', async (e) => {
+  const btn = e.target.closest('button[data-act]');
+  if (!btn) return;
+  const id = btn.dataset.id;
+  const act = btn.dataset.act;
+  if (act === 'approve') {
+    if (!confirm('ยืนยันว่าได้รับเงินของออเดอร์ ' + id + ' แล้ว? ระบบจะส่งลิงก์ดาวน์โหลดให้ลูกค้าทันที')) return;
+  } else if (act === 'delete') {
+    if (!confirm('ลบออเดอร์ ' + id + ' ออกจากระบบถาวร? (ใช้กับออเดอร์ทดสอบเท่านั้น)\nลบ log อีเมลและสลิปของออเดอร์นี้ด้วย — กู้คืนไม่ได้')) return;
+  } else if (!confirm('ปฏิเสธออเดอร์ ' + id + ' ?')) return;
+  btn.disabled = true;
+  try {
+    const r = await fetch('/admin/orders/' + encodeURIComponent(id) + '/' + act, {
+      method: 'POST',
+      headers: { authorization: 'Bearer ' + token, 'content-type': 'application/json' },
+      body: act === 'reject' ? JSON.stringify({ note: 'สลิปไม่ถูกต้อง / ไม่พบยอดโอน' }) : '{}',
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'ทำรายการไม่สำเร็จ');
+    await load();
+  } catch (err) {
+    alert('เกิดข้อผิดพลาด: ' + err.message);
+    btn.disabled = false;
+  }
+});
+
+async function loadProduct() {
+  try {
+    const r = await fetch('/admin/product', { headers: { authorization: 'Bearer ' + token } });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'ตรวจสอบไม่สำเร็จ');
+    $('fileStatus').textContent = d.uploaded
+      ? `มีไฟล์อยู่แล้ว ${(Number(d.bytes || 0) / 1024 / 1024).toFixed(2)} MB — ลูกค้าโหลดได้แล้ว (อัปโหลดใหม่เพื่อแทนที่)`
+      : '⛔ ยังไม่มีไฟล์สินค้า → ลูกค้าที่จ่ายเงินแล้วจะโหลดไม่ได้จนกว่าจะอัปโหลด';
+  } catch (e) {
+    $('fileStatus').textContent = 'ตรวจสอบไฟล์ไม่สำเร็จ: ' + e.message;
+  }
+}
+
+$('uploadBtn').addEventListener('click', async () => {
+  const f = $('pdfFile').files && $('pdfFile').files[0];
+  if (!f) { $('fileMsg').textContent = 'เลือกไฟล์ PDF ก่อน'; return; }
+  const btn = $('uploadBtn');
+  btn.disabled = true;
+  $('fileMsg').textContent = 'กำลังอัปโหลด…';
+  try {
+    const fd = new FormData();
+    fd.append('file', f);
+    const r = await fetch('/admin/product', { method: 'POST', headers: { authorization: 'Bearer ' + token }, body: fd });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'อัปโหลดไม่สำเร็จ');
+    $('fileMsg').textContent = `✅ อัปโหลดแล้ว ${(Number(d.bytes || 0) / 1024).toFixed(0)} KB`;
+    $('pdfFile').value = '';
+    await loadProduct();
+  } catch (e) {
+    $('fileMsg').textContent = '❌ ' + e.message;
+  }
+  btn.disabled = false;
+});
+
+/* ---------- แพ็ก & เวอร์ชัน: ออกรุ่นใหม่ + แจ้งลูกค้าคนเดิม (แพ็กอัปเดตตัวเอง) ---------- */
+async function loadPack() {
+  try {
+    const r = await fetch('/admin/pack', { headers: { authorization: 'Bearer ' + token } });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'โหลดสถานะแพ็กไม่สำเร็จ');
+    const c = d.current || {}, s = d.subscribers || {};
+    $('packStatus').innerHTML = `รุ่นปัจจุบัน <b>v${esc(c.version)}</b> · ${esc(c.prompts)} prompt · ${esc(c.niches)} หมวด` +
+      (c.source === 'published'
+        ? ` · ออกเมื่อ ${esc(String(c.published_at || '').slice(0, 16))}${c.bytes ? ` · ไฟล์ ${(Number(c.bytes) / 1024 / 1024).toFixed(2)} MB` : ''}`
+        : ' · ยังไม่ออกรุ่นผ่านหลังบ้าน (ใช้ค่าจาก pack-version.mjs)');
+    $('packStats').innerHTML =
+      `<div class="stat"><b>${s.total || 0}</b><span>ลูกค้าที่ซื้อแล้ว</span></div>` +
+      `<div class="stat"><b>${s.notified_current || 0}</b><span>แจ้งรุ่นนี้แล้ว</span></div>` +
+      `<div class="stat"><b>${s.pending || 0}</b><span>ยังไม่แจ้ง</span></div>` +
+      `<div class="stat"><b>${s.downloaded_current || 0}</b><span>โหลดรุ่นนี้แล้ว</span></div>` +
+      `<div class="stat"><b>${s.unsubscribed || 0}</b><span>ยกเลิกรับอีเมล</span></div>`;
+    const tb = document.querySelector('#packTable tbody');
+    tb.innerHTML = '';
+    (d.history || []).forEach((v) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td><b>v${esc(v.version)}</b>${v.is_current ? ' <span class="badge paid">current</span>' : ''}</td>` +
+        `<td>${esc(v.prompts) || '—'}</td><td>${esc(v.niches) || '—'}</td>` +
+        `<td>${v.bytes ? (Number(v.bytes) / 1024 / 1024).toFixed(2) + ' MB' : '—'}</td>` +
+        `<td>${esc(String(v.published_at || '').replace('T', ' ').slice(0, 16))}</td>` +
+        `<td>${v.notified_count || 0}${v.notify_failed ? ` <small title="ส่งไม่สำเร็จ">(พลาด ${v.notify_failed})</small>` : ''}</td>` +
+        `<td>${esc(v.notes) || '—'}</td>`;
+      tb.appendChild(tr);
+    });
+    $('packEmpty').style.display = (d.history || []).length ? 'none' : 'block';
+    if (!d.notify.email_configured) {
+      $('packMsg').textContent = '⚠️ ยังไม่ได้ตั้ง RESEND_API_KEY — ออกรุ่นได้ แต่ยังแจ้งลูกค้าทางอีเมลไม่ได้';
+    }
+  } catch (e) {
+    $('packStatus').textContent = 'ตรวจสอบสถานะแพ็กไม่สำเร็จ: ' + e.message;
+  }
+}
+
+/** แจ้งลูกค้าคนเดิมทีละชุดจนจบ (กดซ้ำได้ · หยุดเองเมื่อสำเร็จครบหรือ “ตัน” จริง ๆ) */
+async function runNotifyLoop() {
+  for (let round = 1; round <= 50; round++) {
+    let d;
+    try {
+      const r = await fetch('/admin/pack/notify', {
+        method: 'POST',
+        headers: { authorization: 'Bearer ' + token, 'content-type': 'application/json' },
+        body: '{}',
+      });
+      d = await r.json();
+      if (!r.ok) { $('packMsg').textContent += ` · ⚠️ แจ้งเตือนไม่สำเร็จ: ${esc(d.error || r.status)}`; return; }
+    } catch (e) {
+      $('packMsg').textContent += ' · ⚠️ ติดต่อเซิร์ฟเวอร์ไม่ได้: ' + e.message;
+      return;
+    }
+    $('packMsg').textContent += ` · ส่งรอบ ${round}: ${d.sent} คน (เหลือ ${d.remaining})`;
+    if (d.done) { $('packMsg').textContent += ' · แจ้งครบทุกคนแล้ว ✅'; return; }
+    if (d.stalled) {
+      $('packMsg').textContent += ` · ⚠️ ส่งไม่ออกเลย (เหลือ ${d.remaining} คน) — ตรวจคีย์/โดเมนอีเมล แล้วกด “แจ้งค้างอยู่ซ้ำ”`;
+      return;
+    }
+  }
+  $('packMsg').textContent += ' · ยังไม่จบใน 50 รอบ — กด “แจ้งค้างอยู่ซ้ำ” ต่อได้';
+}
+
+$('publishBtn').addEventListener('click', async () => {
+  const f = $('newFile').files && $('newFile').files[0];
+  const version = $('newVersion').value.trim().replace(/^v/i, '');
+  if (!f) { $('packMsg').textContent = 'เลือกไฟล์ PDF ของรุ่นใหม่ก่อน'; return; }
+  if (!/^\d{1,3}(\.\d{1,3}){0,2}$/.test(version)) { $('packMsg').textContent = 'ใส่เลขเวอร์ชันให้ถูกต้อง เช่น 1.5'; return; }
+  const notify = $('newNotify').checked;
+  if (notify && !confirm(`ออกรุ่น v${version} และส่งอีเมลแจ้งลูกค้าทุกคนที่ซื้อแล้ว?\n(ส่งเป็นชุด · ระบบส่งต่อจนจบ · ลิงก์เก่าของลูกค้าจะโหลดรุ่นใหม่ทันที)`)) return;
+  const btn = $('publishBtn');
+  btn.disabled = true;
+  $('packMsg').textContent = 'กำลังอัปโหลดและตั้งรุ่นใหม่…';
+  try {
+    const fd = new FormData();
+    fd.append('file', f);
+    fd.append('version', version);
+    if ($('newPrompts').value.trim()) fd.append('prompts', $('newPrompts').value.trim());
+    if ($('newNotes').value.trim()) fd.append('notes', $('newNotes').value.trim());
+    const r = await fetch('/admin/pack/publish', { method: 'POST', headers: { authorization: 'Bearer ' + token }, body: fd });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'ออกรุ่นไม่สำเร็จ');
+    $('packMsg').textContent = `✅ ออกรุ่น v${d.version} แล้ว (${(Number(d.bytes || 0) / 1024).toFixed(0)} KB) — ลิงก์เดิมของลูกค้าทุกคนโหลดรุ่นนี้แล้ว`;
+    $('newFile').value = '';
+    $('newVersion').value = '';
+    $('newNotes').value = '';
+    if (d.notify) $('packMsg').textContent += ` · แจ้งไปแล้ว ${d.notify.sent} คน`;
+    if (notify) await runNotifyLoop();
+    await loadPack();
+    await loadProduct();
+  } catch (e) {
+    $('packMsg').textContent = '❌ ' + e.message;
+  }
+  btn.disabled = false;
+});
+
+$('notifyBtn').addEventListener('click', async () => {
+  const btn = $('notifyBtn');
+  btn.disabled = true;
+  $('packMsg').textContent = 'กำลังแจ้งลูกค้าที่ค้างอยู่…';
+  await runNotifyLoop();
+  await loadPack();
+  btn.disabled = false;
+});
+
+async function loadLeads() {
+  const tb = document.querySelector('#leadTable tbody');
+  try {
+    const r = await fetch('/admin/leads', { headers: { authorization: 'Bearer ' + token } });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'โหลดรายชื่อไม่สำเร็จ');
+    const s = d.stats || {};
+    $('leadStats').innerHTML =
+      `<div class="stat"><b>${s.total || 0}</b><span>อีเมลทั้งหมด</span></div>` +
+      `<div class="stat"><b>${s.today || 0}</b><span>ใหม่ใน 24 ชม.</span></div>` +
+      `<div class="stat"><b>${s.sent_last_day || 0}</b><span>ส่งของแถมใน 24 ชม.</span></div>`;
+    tb.innerHTML = '';
+    (d.leads || []).forEach((l) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${(l.created_at || '').replace('T', ' ').slice(0, 16)}</td><td>${esc(l.email)}</td>` +
+        `<td>${esc(l.source) || '—'}</td><td>${(l.last_sent_at || '—').toString().replace('T', ' ').slice(0, 16)}</td>` +
+        `<td class="actions"><button class="mini del" data-lead="${esc(l.email)}">🗑 ลบ</button></td>`;
+      tb.appendChild(tr);
+    });
+    $('leadsEmpty').style.display = (d.leads || []).length ? 'none' : 'block';
+  } catch (e) {
+    $('leadStats').innerHTML = `<div class="stat"><b>!</b><span>${esc(e.message)}</span></div>`;
+  }
+}
+
+document.querySelector('#leadTable tbody').addEventListener('click', async (e) => {
+  const btn = e.target.closest('button[data-lead]');
+  if (!btn) return;
+  const email = btn.dataset.lead;
+  if (!confirm('ลบอีเมล ' + email + ' ออกจากรายชื่อถาวร? (ใช้เมื่อลูกค้าขอใช้สิทธิ์ลบข้อมูล)')) return;
+  btn.disabled = true;
+  try {
+    const r = await fetch('/admin/leads/delete', {
+      method: 'POST',
+      headers: { authorization: 'Bearer ' + token, 'content-type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || 'ลบไม่สำเร็จ');
+    await loadLeads();
+  } catch (err) {
+    alert('เกิดข้อผิดพลาด: ' + err.message);
+    btn.disabled = false;
+  }
+});
+
+$('loginBtn').addEventListener('click', () => { token = $('token').value.trim(); load(); });
+$('token').addEventListener('keydown', (e) => { if (e.key === 'Enter') { token = $('token').value.trim(); load(); } });
+$('refreshBtn').addEventListener('click', load);
+if (token) { $('loginCard').style.display = 'none'; load().then((ok) => { if (!ok) { $('loginCard').style.display = 'block'; $('token').value = token; } }); }
+</script>
+</body>
+</html>
