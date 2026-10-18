@@ -201,5 +201,16 @@
     </div>
   </footer>
 </div>
+<script>
+/* รับช่วง “ที่มา” ต่อ: /30day?src=fb-post-7 → ปุ่มทุกปุ่มในหน้านี้พา src นั้นไปด้วย (วัดผลได้ในหลังบ้าน)
+   ไม่มี ?src= หรือส่งค่าที่ใช้ไม่ได้ → ใช้ค่าเดิม src=30day เหมือนก่อน · พฤติกรรมหน้าปกติไม่เปลี่ยน */
+(function () {
+  var raw = (new URLSearchParams(location.search).get('src') || '').toLowerCase().trim();
+  var src = raw.replace(/[^a-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+  if (!src || src === '30day') return;
+  document.querySelectorAll('a[href="/free?src=30day"]').forEach(function (a) { a.setAttribute('href', '/free?src=' + src); });
+  document.querySelectorAll('a[href="/?from=30day"]').forEach(function (a) { a.setAttribute('href', '/?src=' + src); });
+})();
+</script>
 </body>
 </html>

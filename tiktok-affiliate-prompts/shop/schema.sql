@@ -5,6 +5,7 @@
 CREATE TABLE IF NOT EXISTS orders (
   id             TEXT PRIMARY KEY,
   email          TEXT,
+  src            TEXT,          -- ที่มาของออเดอร์ เช่น tiktok-bio / facebook-pp99-c1 / fbgroup-xxx (จาก ?src= หรือ UTM)
   amount_satang  INTEGER NOT NULL,
   currency       TEXT NOT NULL DEFAULT 'THB',
   -- pending  = สร้างออเดอร์แล้ว ยังไม่แจ้งโอน

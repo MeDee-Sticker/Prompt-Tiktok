@@ -60,6 +60,8 @@ const safeEqual = (a, b) => {
   return d === 0;
 };
 const isEmail = (s) => typeof s === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) && s.length <= 254;
+/** ที่มาของออเดอร์ (src) — รับจากหน้าเว็บ เช่น "facebook-pp99-c1" · ทำความสะอาดให้เหลือ a-z 0-9 _ - เท่านั้น */
+const cleanSrc = (v) => String(v == null ? "" : v).toLowerCase().trim().replace(/[^a-z0-9_-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40) || null;
 const escapeHtml = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 /** คำขอข้ามโดเมน (CSRF) → ปฏิเสธ (ถ้าไม่มี Origin เช่น curl/เทสต์ ถือว่าผ่าน) */
@@ -82,7 +84,7 @@ const NEW_ORDER_STATUSES = ["pending", "reported"]; // สถานะที่�
 /* ---------- สร้าง/อัปเดตตารางอัตโนมัติ (idempotent) — กัน deploy ใหม่แล้วเจอ "no such table" ---------- */
 // หมายเหตุ: D1 `exec()` แยกคำสั่งตาม "บรรทัด" → ต้องเขียน 1 คำสั่งต่อ 1 บรรทัด ห้ามขึ้นบรรทัดในวงเล็บ
 const SCHEMA_SQL = [
-  "CREATE TABLE IF NOT EXISTS orders (id TEXT PRIMARY KEY, email TEXT, amount_satang INTEGER NOT NULL, currency TEXT NOT NULL DEFAULT 'THB', status TEXT NOT NULL DEFAULT 'pending', provider TEXT NOT NULL DEFAULT 'promptpay', charge_id TEXT, qr_content TEXT, qr_image_url TEXT, download_count INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL DEFAULT (datetime('now')), paid_at TEXT, emailed_at TEXT);",
+  "CREATE TABLE IF NOT EXISTS orders (id TEXT PRIMARY KEY, email TEXT, src TEXT, amount_satang INTEGER NOT NULL, currency TEXT NOT NULL DEFAULT 'THB', status TEXT NOT NULL DEFAULT 'pending', provider TEXT NOT NULL DEFAULT 'promptpay', charge_id TEXT, qr_content TEXT, qr_image_url TEXT, download_count INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL DEFAULT (datetime('now')), paid_at TEXT, emailed_at TEXT);",
   "CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);",
   "CREATE INDEX IF NOT EXISTS idx_orders_charge ON orders(charge_id);",
   "CREATE INDEX IF NOT EXISTS idx_orders_email ON orders(email);",
@@ -114,6 +116,7 @@ const COLUMNS = [
   ["verify_note", "ALTER TABLE orders ADD COLUMN verify_note TEXT"],
   ["verify_mode", "ALTER TABLE orders ADD COLUMN verify_mode TEXT"],
   ["last_download_version", "ALTER TABLE orders ADD COLUMN last_download_version TEXT"],
+  ["src", "ALTER TABLE orders ADD COLUMN src TEXT"],
 ];
 const UNIQUE_TRANSREF_SQL =
   "CREATE UNIQUE INDEX IF NOT EXISTS idx_orders_transref ON orders(trans_ref) WHERE trans_ref IS NOT NULL;";
@@ -262,7 +265,7 @@ async function upsertSubscriber(env, email, orderId) {
 }
 
 const ORDER_COLUMNS_SQL =
-  "id, email, amount_satang, currency, status, provider, charge_id, download_count, created_at, paid_at, reported_at, emailed_at, slip_key, slip_mime, slip_bytes, trans_ref, verify_source, review_note, pay_target, pay_target_label, verify_attempts, verify_note, verify_mode, last_download_version";
+  "id, email, src, amount_satang, currency, status, provider, charge_id, download_count, created_at, paid_at, reported_at, emailed_at, slip_key, slip_mime, slip_bytes, trans_ref, verify_source, review_note, pay_target, pay_target_label, verify_attempts, verify_note, verify_mode, last_download_version";
 
 const getOrder = async (env, id) =>
   env.DB.prepare(`SELECT ${ORDER_COLUMNS_SQL} FROM orders WHERE id = ?`).bind(id).first();
@@ -651,8 +654,9 @@ async function markPaid(env, orderId, source, transRef, origin) {
 /* ---------- handlers ---------- */
 async function handleCheckout(request, env) {
   if (!sameOrigin(request)) return json({ error: "คำขอข้ามโดเมนถูกปฏิเสธ" }, 403);
-  const { email, target } = await request.json().catch(() => ({}));
+  const { email, target, source } = await request.json().catch(() => ({}));
   const cleanEmail = isEmail(email) ? email.toLowerCase().trim() : null;
+  const src = cleanSrc(source);   // ช่องทางที่พาลูกค้ามา (จาก ?src= หรือ UTM) — ใช้ดูในหลังบ้านว่าช่องทางไหนขายได้
   if (email && !cleanEmail) return json({ error: "อีเมลไม่ถูกต้อง" }, 400);
   // เก็บอีเมลทุกออเดอร์ (ปิดได้ด้วย REQUIRE_EMAIL=0) — ลิงก์โหลด + ใบเสร็จส่งอัตโนมัติเมื่ออนุมัติ
   if (!cleanEmail && String(env.REQUIRE_EMAIL ?? "1") !== "0") {
@@ -669,9 +673,9 @@ async function handleCheckout(request, env) {
     if (!env.OMISE_SECRET_KEY) return json({ error: "ยังตั้งค่า OMISE_SECRET_KEY ไม่เสร็จ (ดู README)" }, 503);
     const charge = await createPromptPayCharge(env, orderId, origin);
     await env.DB.prepare(
-      `INSERT INTO orders (id, email, amount_satang, currency, status, provider, charge_id, qr_content, qr_image_url)
-       VALUES (?, ?, ?, ?, 'pending', 'omise', ?, ?, ?)`
-    ).bind(orderId, cleanEmail, charge.amount, charge.currency, charge.id,
+      `INSERT INTO orders (id, email, src, amount_satang, currency, status, provider, charge_id, qr_content, qr_image_url)
+       VALUES (?, ?, ?, ?, ?, 'pending', 'omise', ?, ?, ?)`
+    ).bind(orderId, cleanEmail, src, charge.amount, charge.currency, charge.id,
            charge.source?.qr_content || null,
            charge.source?.scannable_code?.image?.download_uri || null).run();
     return json({
@@ -698,9 +702,9 @@ async function handleCheckout(request, env) {
   // ลูกค้าเลือกช่องทางได้ (target) — ถ้าไม่ระบุ/ไม่พบ ใช้ช่องทางแรก
   const pp = await promptPayInfo(env, typeof target === "string" ? target : "");
   await env.DB.prepare(
-    `INSERT INTO orders (id, email, amount_satang, currency, status, provider, qr_content, pay_target, pay_target_label)
-     VALUES (?, ?, ?, ?, 'pending', 'promptpay', ?, ?, ?)`
-  ).bind(orderId, cleanEmail, amount, currency, pp.payload, pp.target, pp.targetLabel).run();
+    `INSERT INTO orders (id, email, src, amount_satang, currency, status, provider, qr_content, pay_target, pay_target_label)
+     VALUES (?, ?, ?, ?, ?, 'pending', 'promptpay', ?, ?, ?)`
+  ).bind(orderId, cleanEmail, src, amount, currency, pp.payload, pp.target, pp.targetLabel).run();
 
   return json({
     order_id: orderId,
@@ -1177,8 +1181,19 @@ async function handleAdmin(request, env) {
   ).all();
   const rows = results || [];
   const paidRows = rows.filter((o) => o.status === "paid");
+  // สรุปตามช่องทางที่มา (src) — ตอบว่า “โพสต์/แอดไหนพาคนซื้อได้” โดยไม่ต้องมี Pixel
+  const bySrc = new Map();
+  for (const o of rows) {
+    const key = o.src || "-";
+    const c = bySrc.get(key) || { src: key, orders: 0, paid: 0, revenue_satang: 0 };
+    c.orders++;
+    if (o.status === "paid") { c.paid++; c.revenue_satang += Number(o.amount_satang || 0); }
+    bySrc.set(key, c);
+  }
+  const channels = [...bySrc.values()].sort((a, b) => b.paid - a.paid || b.orders - a.orders);
   return json({
     orders: rows,
+    channels,
     stats: {
       total: rows.length,
       paid: paidRows.length,

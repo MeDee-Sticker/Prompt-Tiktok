@@ -30,6 +30,8 @@ OUTDIR = os.path.join(HERE, "out")
 SCRATCH = os.path.abspath(os.path.join(HERE, "..", "..", "..", ".scratch"))
 
 FPS = 30
+# เวลาที่ใช้สุ่มอ่าน “ข้อความบนจอ” จากหน้าจริง (ต้องครอบทุกซีน)
+DEFAULT_SAMPLE_TIMES = (0.6, 1.5, 2.4, 3.6, 5.2, 6.5, 7.5, 7.9)
 DUR = 8.0
 W, H = 1080, 1920
 TOTAL = int(round(DUR * FPS))                      # 240 เฟรม
@@ -59,7 +61,12 @@ MEASURE_JS = r"""
 }
 """
 
-REQUIRED_TEXT = ["100 Prompt", "ก๊อปวาง", "99", "599", "ก๊อป prompt", "ไม่ได้การันตีรายได้"]
+# ความกว้าง/สูงของกล่องข้อความถูกวัดในตัว MEASURE_JS อยู่แล้ว — ถ้าเครื่องไม่มีฟอนต์ สูงจะ = 0
+# และ page.inner_text() ของ Playwright จะคืนค่าว่าง ⇒ ด่านตรวจข้อความจะหยุดก่อนเรนเดอร์
+
+# ข้อความที่ต้องมีบนหน้าจริงก่อนเรนเดอร์ (ชื่อสินค้าปัจจุบัน + ราคา + บรรทัด compliance เต็ม ๆ)
+# เดิมรายการนี้ยังเป็นชื่อเก่า “100 Prompt” ทั้งที่เพจ/ปก/สินค้าเปลี่ยนเป็น 599 แล้ว → ตรวจแล้วจะ "ขาดข้อความ" แล้วหยุดโดยไม่เรนเดอร์
+REQUIRED_TEXT = ["599 Prompt", "ก๊อปวาง", "99", "599", "ก๊อป prompt", "ไม่ได้การันตีรายได้", "ผลลัพธ์ขึ้นกับสินค้าและคอนเทนต์ของคุณ"]
 
 
 # ----------------------------------------------------------------- เสียง
@@ -144,6 +151,9 @@ def main():
     ap.add_argument("--no-audio", action="store_true")
     ap.add_argument("--keep-frames", action="store_true")
     ap.add_argument("--fps", type=int, default=FPS)
+    ap.add_argument("--hook", help="ฮุกซีนแรก สูงสุด 3 บรรทัด คั่นด้วย | เช่น \"ปักตะกร้าแล้ว|แต่ยอดวิวไม่ขึ้น?\" (ไม่ใส่ = ฮุกเดิมใน HTML)")
+    ap.add_argument("--out", default="reel-basket.mp4", help="ชื่อไฟล์ผลลัพธ์ในโฟลเดอร์ out/")
+    ap.add_argument("--cover", default="", help="ชื่อไฟล์ปกในโฟลเดอร์ out/ (ค่าเริ่มต้น cover.png หรือ cover-<ชื่อไฟล์ออก>)")
     args = ap.parse_args()
 
     fps = args.fps
@@ -162,12 +172,51 @@ def main():
         page.wait_for_timeout(1200)                      # ให้ฟอนต์ในเครื่องพร้อม
         page.evaluate("document.fonts.ready")
 
-        # ตรวจข้อความที่ต้องมีในหน้าจริง
-        text = page.inner_text("#stage")
+        def on_screen_text(times=DEFAULT_SAMPLE_TIMES):
+            """ข้อความที่ “วาดเป็นตัวอักษรบนจอจริง” รวมหลายช่วงเวลา + รายชื่อเวลาที่จอว่าง
+
+            สองข้อที่ต้องระวัง:
+            1) ห้ามอ่านครั้งเดียวตอนโหลดเพจ — ตอนนั้น renderAt ยังไม่ถูกเรียก (สคริปต์ตั้ง
+               __NO_AUTOPLAY__) จึงยังไม่มีอะไรขึ้นจอ → ต้องสุ่มอ่านหลายเวลาตลอดคลิป
+            2) ใช้ page.inner_text() ของ Playwright (ไม่ใช่ page.evaluate) เพราะมันนับเฉพาะข้อความ
+               ที่เบราว์เซอร์ “จัดวางเป็นตัวอักษรจริง” — ถ้าเครื่องไม่มีฟอนต์ กล่องข้อความจะสูง 0
+               แล้วคืนค่าว่าง ⇒ ตรวจเจอตั้งแต่ก่อนเรนเดอร์ว่าคลิปจะออกมาไม่มีตัวหนังสือ
+            """
+            chunks, blank = [], []
+            for at in times:
+                page.evaluate("(t)=>window.renderAt(t)", at)
+                piece = page.inner_text("#stage").strip()
+                if not piece:
+                    blank.append(at)
+                chunks.append(piece)
+            return "\n".join(chunks), blank
+
+        # ตรวจข้อความที่ต้องมีบนจอจริง (ครอบทุกช่วงของคลิป)
+        text, blank_at = on_screen_text()
+        if len(blank_at) == len(DEFAULT_SAMPLE_TIMES):
+            problems.append("ไม่มีข้อความขึ้นจอเลยทุกช่วงเวลา — เครื่องนี้ไม่มีฟอนต์ติดตั้ง (ตัวอักษรจะกว้าง 0)")
         for want in REQUIRED_TEXT:
             if want not in text:
                 problems.append(f"ข้อความขาด: {want}")
         print(f"ข้อความบังคับ {len(REQUIRED_TEXT)} รายการ: " + ("ครบ" if not problems else "ขาด " + str(problems)))
+        if blank_at:
+            print(f"   ช่วงที่จอว่าง (ปกติได้ = ช่วงตัดซีน): {', '.join(f'{t:.1f}s' for t in blank_at)}")
+
+        # ── เปลี่ยนฮุกซีนแรกได้ (ใช้ทำคลิปมุมอื่นจากเทมเพลตเดียวกัน) ──
+        # 1 บรรทัด = 1 บรรทัดบนจอ (สูงสุด 3 = #l1/#l2/#l3) · บรรทัดที่เว้นว่างจะซ่อนไป ไม่ทิ้งช่องว่าง
+        if args.hook:
+            lines = [x.strip() for x in args.hook.split("|")][:3]
+            page.evaluate(
+                "(lines) => { ['#l1','#l2','#l3'].forEach((sel,i) => { const el = document.querySelector(sel); if (!el) return;"
+                " const v = (lines[i]||'').trim(); if (v) el.textContent = v; else el.style.display = 'none'; }); }",
+                lines,
+            )
+            shown = [x for x in lines if x]
+            text2, _blank = on_screen_text((1.0, 1.5, 2.0))   # ช่วงที่ฮุกขึ้นครบแล้ว (0.30–1.35 วิ)
+            miss = [x for x in shown if x not in text2]
+            if miss:
+                problems.append(f"ฮุกไม่ขึ้นบนหน้า: {miss}")
+            print("ฮุกซีนแรก: " + " / ".join(shown) + ("" if not miss else "  !! ขึ้นไม่ครบ"))
 
         if args.preview:
             out = os.path.join(SCRATCH, "reel-preview")
@@ -210,7 +259,7 @@ def main():
 
     os.makedirs(OUTDIR, exist_ok=True)
     wav = build_audio(os.path.join(SCRATCH, "reel-audio.wav"))
-    out = os.path.join(OUTDIR, "reel-basket.mp4")
+    out = os.path.join(OUTDIR, os.path.basename(args.out))
     ff = imageio_ffmpeg.get_ffmpeg_exe()
     cmd = [
         ff, "-y", "-hide_banner", "-loglevel", "error",
@@ -233,7 +282,10 @@ def main():
         return 1
 
     # หน้าปก = เฟรมที่ฮุกขึ้นครบแล้ว
-    cover = os.path.join(OUTDIR, "cover.png")
+    cover_name = os.path.basename(args.cover) if args.cover else (
+        "cover.png" if os.path.basename(args.out) == "reel-basket.mp4" else
+        "cover-" + os.path.basename(args.out).replace("reel-", "").replace(".mp4", "") + ".png")
+    cover = os.path.join(OUTDIR, cover_name)
     shutil.copy(os.path.join(frames, f"f_{int(1.5 * fps):04d}.png"), cover)
 
     # ตรวจไฟล์จริง: ถอดรหัสครบทุกเฟรม + ดูข้อมูลสตรีม

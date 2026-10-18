@@ -164,6 +164,77 @@ await t("checkout → สร้างออเดอร์ pending + คืน Q
   assert.equal(orders.get(checkout.order_id).qr_content, checkout.qr_content);
 });
 
+await t("checkout รับ “ที่มา” (src) → เก็บในออเดอร์ คลีนแล้ว ไม่หลุด HTML และสรุปในหลังบ้าน", async () => {
+  const a = await (await worker.fetch(postJson("/api/checkout", { email: "src1@example.com", source: "FB-Post 1!" }), env)).json();
+  assert.equal(orders.get(a.order_id).src, "fb-post-1", "ต้องพิมพ์เล็กและเหลือ a-z 0-9 _ - เท่านั้น");
+  const b = await (await worker.fetch(postJson("/api/checkout", { email: "src2@example.com", source: "<script>alert(1)</script>" }), env)).json();
+  const dirty = orders.get(b.order_id).src;
+  assert.match(dirty, /^[a-z0-9_-]+$/);
+  assert.ok(!dirty.includes("<"));
+  const c = await (await worker.fetch(postJson("/api/checkout", { email: "src3@example.com" }), env)).json();
+  assert.equal(orders.get(c.order_id).src, null, "ไม่ส่งมา → null ไม่ใช่ค่าว่าง");
+  const d = await (await worker.fetch(adminReq("/admin/orders"), env)).json();
+  assert.ok(d.orders.some((o) => o.src === "fb-post-1"), "รายการออเดอร์ต้องมี src");
+  const ch = d.channels.find((x) => x.src === "fb-post-1");
+  assert.equal(ch.orders, 1, "หลังบ้านต้องสรุปช่องทาง fb-post-1");
+  assert.equal(ch.paid, 0);
+});
+
+await t("หน้า / และ /order ตรวจจับที่มาเองจริง (?src= · UTM · referrer · จำช่องทางเดิมในแท็บ)", async () => {
+  const vm = await import("node:vm");
+  const shopDir = decodeURIComponent(new URL(".", import.meta.url).pathname);   // เทสต์นี้อยู่ต้นไฟล์ (ก่อนประกาศ HERE) จึงหาพาธเอง
+  for (const [file, btn] of [["index.html", "$('buyBtn').addEventListener"], ["order.html", "$('orderBtn').addEventListener"]]) {
+    const page = fs.readFileSync(path.join(shopDir, "public", file), "utf8");
+    const s = page.indexOf("const cleanSrc =");
+    const e = page.indexOf(btn);
+    assert.ok(s > 0 && e > s, `${file}: ต้องมีบล็อกตรวจจับที่มาก่อนปุ่มสั่งซื้อ`);
+    const run = (search, { referrer = "", stored = null } = {}) => {
+      const store = new Map(stored ? [["pp_src", stored]] : []);
+      const sandbox = {
+        location: { search, origin: "https://kopwang.com", hostname: "kopwang.com" },
+        document: { referrer, querySelectorAll: () => [] },
+        sessionStorage: { getItem: (k) => (store.has(k) ? store.get(k) : null), setItem: (k, v) => store.set(k, v) },
+        URLSearchParams, URL,
+      };
+      vm.createContext(sandbox);
+      vm.runInContext(page.slice(s, e) + "\n;globalThis.__src = orderSrc;", sandbox);
+      return sandbox.__src;
+    };
+    assert.equal(run("?src=fbgroup-sellers"), "fbgroup-sellers");
+    assert.equal(run("?utm_source=facebook&utm_campaign=pp99-c1"), "facebook-pp99-c1");
+    assert.equal(run("?src=FB Post 1!"), "fb-post-1", "ต้องคลีนเป็น a-z0-9_-");
+    assert.equal(run(""), "direct");
+    assert.equal(run("", { referrer: "https://www.google.com/search?q=x" }), "ref-google-com");
+    assert.equal(run("", { stored: "tiktok" }), "tiktok", "กลับมาใหม่ในแท็บเดิม → นับช่องทางเดิม");
+    assert.match(page, /JSON\.stringify\(\{ email, source: orderSrc \}\)/, `${file}: checkout ต้องส่ง source ไปด้วย`);
+  }
+});
+
+await t("หน้า /30day รับ ?src= แล้วส่งต่อไปปุ่มรับของฟรี + ปุ่มซื้อ (ไม่มี ?src= = ใช้ค่าเดิม src=30day)", async () => {
+  const vm = await import("node:vm");
+  const shopDir = decodeURIComponent(new URL(".", import.meta.url).pathname);
+  const page = fs.readFileSync(path.join(shopDir, "public", "30day.html"), "utf8");
+  const start = page.lastIndexOf("<script>");
+  const end = page.indexOf("</script>", start);
+  assert.ok(start > 0 && end > start, "30day.html: ต้องมีบล็อกรับ ?src= ต่อให้ปุ่มในหน้า (ไม่งั้นโพสต์ที่ชี้มาแผน 30 วันจะวัดผลไม่ได้)");
+  const run = (search) => {
+    const mk = (h) => ({ href: h, setAttribute(k, v) { this[k] = v; } });
+    const free = ["/free?src=30day", "/free?src=30day"].map(mk);
+    const buy = ["/?from=30day", "/?from=30day"].map(mk);
+    const groups = { 'a[href="/free?src=30day"]': free, 'a[href="/?from=30day"]': buy };
+    const sandbox = { location: { search }, document: { querySelectorAll: (sel) => groups[sel] || [] }, URLSearchParams };
+    vm.createContext(sandbox);
+    vm.runInContext(page.slice(start + 8, end), sandbox);
+    return { free: free.map((a) => a.href), buy: buy.map((a) => a.href) };
+  };
+  const withSrc = run("?src=fb-post-7");
+  assert.deepEqual(withSrc.free, ["/free?src=fb-post-7", "/free?src=fb-post-7"], "ปุ่มรับของฟรีต้องพา src ต่อ");
+  assert.deepEqual(withSrc.buy, ["/?src=fb-post-7", "/?src=fb-post-7"], "ปุ่มซื้อต้องพา src ต่อ");
+  assert.deepEqual(run("?src=FB%20Post%207!").buy, ["/?src=fb-post-7", "/?src=fb-post-7"], "ต้องคลีนค่าที่ส่งมาให้เหลือ a-z0-9_-");
+  assert.deepEqual(run("").free, ["/free?src=30day", "/free?src=30day"], "ไม่มี ?src= → ต้องคงค่าเริ่มต้นเดิม");
+  assert.deepEqual(run("?src=30day").buy, ["/?from=30day", "/?from=30day"], "src=30day = ค่าเดิมของหน้านี้ จึงไม่ต้องแก้ลิงก์");
+});
+
 await t("สถานะเริ่มต้น = pending และคืน QR กลับมาด้วย (กลับเข้าหน้าเดิมแล้วสแกนต่อได้)", async () => {
   const res = await worker.fetch(req(`/api/order/${checkout.order_id}`), env);
   const s = await res.json();

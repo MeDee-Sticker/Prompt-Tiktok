@@ -239,6 +239,33 @@ async function showPay(orderId) {
   startPolling(orderId);
   $('payBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
+/* ที่มา (src) — จำช่องทางที่พาคนมาหน้านี้ แล้วส่งไปกับออเดอร์ เพื่อดูในหลังบ้านว่าช่องทางไหนขายได้
+   รับได้ทั้ง ?src=… (ลิงก์จาก /links) · ?utm_source=/utm_campaign= (แอด Facebook) · ไม่มีอะไรเลย = ref-<โดเมน> หรือ direct */
+const cleanSrc = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+function detectSrc() {
+  const q = new URLSearchParams(location.search);
+  const direct = cleanSrc(q.get('src') || q.get('from'));
+  if (direct) return direct;
+  const utm = cleanSrc([q.get('utm_source'), q.get('utm_campaign')].filter(Boolean).join('-'));
+  if (utm) return utm;
+  try {
+    const host = new URL(document.referrer).hostname.replace(/^www\./, '');
+    if (host && host !== location.hostname) return cleanSrc('ref-' + host.split('.').slice(-2).join('-'));
+  } catch (e) { /* ไม่มี referrer */ }
+  return 'direct';
+}
+let orderSrc = '';
+try {
+  orderSrc = sessionStorage.getItem('pp_src') || detectSrc();
+  sessionStorage.setItem('pp_src', orderSrc);
+} catch (e) { orderSrc = detectSrc(); }
+if (orderSrc) {
+  document.querySelectorAll('a[href^="/free"], a[href^="/30day"]').forEach((a) => {
+    const u = new URL(a.getAttribute('href'), location.origin);
+    if (!u.searchParams.get('src')) { u.searchParams.set('src', orderSrc); a.setAttribute('href', u.pathname + u.search); }
+  });
+}
+
 $('orderBtn').addEventListener('click', async () => {
   const btn = $('orderBtn');
   const email = $('email').value.trim();
@@ -246,7 +273,7 @@ $('orderBtn').addEventListener('click', async () => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('อีเมลไม่ถูกต้อง'); return; }
   btn.disabled = true; btn.textContent = 'กำลังสร้างรายการชำระเงิน…';
   try {
-    const r = await fetch('/api/checkout', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ email }) });
+    const r = await fetch('/api/checkout', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({ email, source: orderSrc }) });
     const d = await r.json();
     if (!r.ok) throw new Error(d.error || 'checkout failed');
     if (d.order_id) history.replaceState(null, '', '/order?order=' + encodeURIComponent(d.order_id));

@@ -36,8 +36,9 @@
   <div class="card" id="dash" style="display:none">
     <div class="top"><h1 style="font-size:22px">ภาพรวม</h1><button id="refreshBtn" style="width:auto;margin:0;padding:10px 18px;font-size:15px">↻ รีเฟรช</button></div>
     <div class="stats" id="stats"></div>
+    <p class="muted" id="channels" style="margin-top:12px"></p>
     <div class="scroll"><table id="table">
-      <thead><tr><th>เวลา</th><th>เลขที่</th><th>อีเมล</th><th>ยอด</th><th>รับเงินทาง</th><th>สถานะ</th><th>สลิป</th><th>ตรวจโดย</th><th>โหลด</th><th>อีเมลส่ง</th><th>จัดการ</th></tr></thead>
+      <thead><tr><th>เวลา</th><th>เลขที่</th><th>อีเมล</th><th>ที่มา</th><th>ยอด</th><th>รับเงินทาง</th><th>สถานะ</th><th>สลิป</th><th>ตรวจโดย</th><th>โหลด</th><th>อีเมลส่ง</th><th>จัดการ</th></tr></thead>
       <tbody></tbody>
     </table></div>
     <p class="muted" id="empty" style="display:none;margin-top:14px">ยังไม่มีคำสั่งซื้อ</p>
@@ -115,6 +116,11 @@ async function load() {
       `<div class="stat"><b>${s.pending}</b><span>รอชำระ</span></div>` +
       `<div class="stat"><b>${s.total}</b><span>ออเดอร์ทั้งหมด</span></div>` +
       `<div class="stat"><b>${s.downloads}</b><span>ครั้งที่โหลด</span></div>`;
+    // ช่องทางที่มา: ออเดอร์ paid / ทั้งหมด ต่อ src — ตอบว่าโพสต์หรือแอดไหนพาคนซื้อได้
+    const ch = (d.channels || []).filter((c) => c.src !== '-');
+    $('channels').innerHTML = ch.length
+      ? '<b>ช่องทางที่มา:</b> ' + ch.map((c) => `${esc(c.src)} · ${c.paid}/${c.orders} ออเดอร์ · ${fmtTHB(c.revenue_satang)}`).join(' <span style="opacity:.4">|</span> ')
+      : '';
     const tb = document.querySelector('#table tbody');
     tb.innerHTML = '';
     (d.orders || []).forEach((o) => {
@@ -133,7 +139,7 @@ async function load() {
         : (o.verify_source || '—');
       const why = o.verify_note ? `<br><small title="${esc(o.verify_note)}">⚠ ${esc(o.verify_note)}</small>` : '';
       const tries = Number(o.verify_attempts || 0) ? `<br><small>ลองอัตโนมัติ ${o.verify_attempts}×</small>` : '';
-      tr.innerHTML = `<td>${(o.created_at || '').replace('T', ' ').slice(0, 16)}</td><td>${o.id}</td><td>${esc(o.email) || '—'}</td>` +
+      tr.innerHTML = `<td>${(o.created_at || '').replace('T', ' ').slice(0, 16)}</td><td>${o.id}</td><td>${esc(o.email) || '—'}</td><td>${esc(o.src) || '—'}</td>` +
         `<td>${fmtTHB(o.amount_satang)}</td><td>${esc(o.pay_target_label) || '—'}</td><td><span class="badge ${cls}">${o.status}</span></td><td>${slip}</td>` +
         `<td>${via}${o.trans_ref ? '<br><small>' + esc(o.trans_ref) + '</small>' : ''}${why}${tries}</td>` +
         `<td>${o.download_count}</td><td>${o.emailed_at ? '✓' : '—'}</td><td class="actions">${actions}</td>`;

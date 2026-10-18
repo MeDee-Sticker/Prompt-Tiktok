@@ -143,7 +143,7 @@ while :; do R=$(curl -s -X POST "$H/admin/pack/notify" -H "Authorization: Bearer
 ## API
 | Method | Path | ทำอะไร |
 |---|---|---|
-| POST | `/api/checkout` | สร้างออเดอร์ + คืน `{order_id, qr_content, qr_svg, amount_satang, payee}` |
+| POST | `/api/checkout` | สร้างออเดอร์ + คืน `{order_id, qr_content, qr_svg, amount_satang, payee}` · body `{ email, source? }` — `source` = ที่มา (เก็บเป็น `orders.src`, คลีนเหลือ `a-z0-9_-` ๑ 40 ตัว) หน้าเว็บส่งมาจาก `?src=` หรือ `utm_source`+`utm_campaign` เอง |
 | GET | `/api/order/:id` | สถานะออเดอร์ (`pending`/`reported`/`paid`/`failed`) + QR (ถ้ายังไม่จ่าย) สำหรับ polling |
 | POST | `/api/order/:id/report` | ลูกค้าแจ้งโอน (multipart แนบ `slip` ได้) → `reported` |
 | GET | `/paid?order=:id` | คืน `download_url` (หลังชำระแล้ว) |

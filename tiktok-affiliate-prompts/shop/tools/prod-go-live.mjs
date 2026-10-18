@@ -1,5 +1,6 @@
 // ซ้อม go-live บนร้านที่ deploy จริง (production หรือพรีวิว): อัปโหลดไฟล์สินค้า → สั่งซื้อ → อนุมัติ → อีเมลจริง → โหลดไฟล์จริง
 // รัน: BASE=https://<โดเมนร้าน> node tools/prod-go-live.mjs
+//      ระบุที่มาของออเดอร์ได้ด้วย SRC=facebook-pp99-c1 (ค่าเริ่มต้น go-live-rehearsal) → ตรวจว่าโชว์ในหลังบ้าน
 //
 // ⚠️ ตัวนี้ “ทำงานจริง” บนที่ร้าน: สร้างออเดอร์จริง 1 ใบ + ส่งอีเมลจริง 1 ฉบับ ไปที่ NOTIFY_EMAIL (อีเมลร้านเอง)
 //    แล้วลบออเดอร์ทดสอบออกให้เองเมื่อทุกข้อผ่าน · ต้องมี ADMIN_TOKEN ใน .secrets/ และ R2 ต้องผูกแล้ว
@@ -13,6 +14,9 @@ const SHOP = new URL("../", import.meta.url).pathname;
 const ADMIN = fs.readFileSync(path.join(SHOP, ".secrets/ADMIN_TOKEN"), "utf8").trim();
 const BUYER = fs.readFileSync(path.join(SHOP, ".secrets/NOTIFY_EMAIL"), "utf8").trim(); // อีเมลร้านเอง → เช็คในกล่องได้
 const PDF = process.env.PDF_FILE || path.join(SHOP, "build/prompt-pack.pdf");
+// SRC = ที่มาของออเดอร์ (เก็บในคอลัมน์ src) — ใช้ตรวจว่าช่องทางที่พาลูกค้ามาถูกบันทึกจริงบน production
+//      ค่าที่ส่งได้ต้องเหลือ a-z 0-9 _ - เท่านั้น (worker จะทำความสะอาดให้ตรงกัน)
+const SRC = String(process.env.SRC || "go-live-rehearsal").trim();
 const mask = (e) => String(e).replace(/^(.).*?(@.*)$/, "$1•••$2");
 
 let pass = 0; const fails = [];
@@ -26,7 +30,7 @@ const auth = { authorization: "Bearer " + ADMIN };
 
 const pdfBytes = fs.readFileSync(PDF);
 console.log(`== ซ้อม go-live: ${BASE} ==`);
-console.log(`   ไฟล์สินค้า: ${path.basename(PDF)} ${(pdfBytes.length / 1024 / 1024).toFixed(2)} MB · อีเมลทดสอบ: ${mask(BUYER)}\n`);
+console.log(`   ไฟล์สินค้า: ${path.basename(PDF)} ${(pdfBytes.length / 1024 / 1024).toFixed(2)} MB · อีเมลทดสอบ: ${mask(BUYER)} · ที่มา (src): ${SRC}\n`);
 
 await t("อัปโหลดไฟล์สินค้าขึ้น R2 ของที่ร้าน (field: file) แล้วอ่านกลับมาเทียบขนาด", async () => {
   const fd = new FormData();
@@ -42,10 +46,10 @@ await t("อัปโหลดไฟล์สินค้าขึ้น R2 ข�
 });
 
 let orderId = null, emailId = null, pdfFromLink = null;
-await t("ลูกค้าสั่งซื้อ (อีเมลร้านเอง) → ออเดอร์ pending + ยอดตามราคาที่ตั้ง", async () => {
+await t("ลูกค้าสั่งซื้อ (อีเมลร้านเอง) → ออเดอร์ pending + ยอดตามราคาที่ตั้ง · เก็บที่มา (src)", async () => {
   const { status, body } = await j("/api/checkout", {
     method: "POST", headers: { "content-type": "application/json" },
-    body: JSON.stringify({ email: BUYER, source: "go-live-rehearsal" }),
+    body: JSON.stringify({ email: BUYER, source: SRC }),
   });
   assert(status === 200, "checkout ต้องได้ 200: " + JSON.stringify(body));
   orderId = body.order_id;
@@ -53,7 +57,12 @@ await t("ลูกค้าสั่งซื้อ (อีเมลร้าน
   assert(body.amount_satang > 0, "ต้องมียอดเงิน");
   const st = await j("/api/order/" + orderId);
   assert(st.body.status === "pending", "สถานะเริ่มต้นต้อง pending ได้ " + st.body.status);
-  return `order=${orderId} · ฿${(body.amount_satang / 100).toFixed(2)}`;
+  const row = (await j("/admin/orders", { headers: auth })).body.orders?.find((o) => o.id === orderId);
+  assert(row, "ต้องเห็นออเดอร์ใหม่ในหลังบ้านทันทีที่สั่ง");
+  assert(row.src === SRC, `หลังบ้านต้องเก็บที่มาไว้ (คาด ${SRC} · ได้ ${JSON.stringify(row.src)})`);
+  const ch = (await j("/admin/orders", { headers: auth })).body.channels || [];
+  assert(ch.some((c) => c.src === SRC && c.orders >= 1), `สรุปช่องทางในหลังบ้านต้องมี ${SRC}: ` + JSON.stringify(ch));
+  return `order=${orderId} · ฿${(body.amount_satang / 100).toFixed(2)} · src=${row.src}`;
 });
 
 await t("ร้านกดอนุมัติ → paid + ส่งอีเมลลิงก์โหลดจริง (Resend คืน id)", async () => {
@@ -91,13 +100,15 @@ await t("หลังบ้านเห็นออเดอร์ว่าจ�
   assert(row.download_count >= 1, "ต้องนับรอบโหลด ได้ " + row.download_count);
   const fresh = (await j("/api/checkout", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email: BUYER }) })).body;
   assert((await j("/paid?order=" + fresh.order_id)).body.status === "pending", "ออเดอร์ใหม่ต้องยังไม่ paid");
+  const freshRow = (await j("/admin/orders", { headers: auth })).body.orders?.find((o) => o.id === fresh.order_id);
+  assert(freshRow && !freshRow.src, "ออเดอร์ที่ไม่ส่งที่มาต้องได้ src ว่าง (ไม่ใช่ค่าค้าง): " + JSON.stringify(freshRow?.src));
   assert((await fetch(BASE + "/api/download/dummy.token")).status === 403, "โทเคนปลอมต้องโดน 403");
   await j(`/admin/orders/${fresh.order_id}/delete`, { method: "POST", headers: auth });
   return `emailed_at=${row.emailed_at} · download_count=${row.download_count}`;
 });
 
 console.log(`\nสรุปซ้อม go-live: ผ่าน ${pass} ข้อ${fails.length ? ` · ล้มเหลว ${fails.length}: ${fails.join(" | ")}` : " — ไม่มีข้อล้มเหลว"}`);
-console.log(`   ออเดอร์ทดสอบ: ${orderId} · Resend id: ${emailId} · PDF ที่โหลดได้: ${pdfFromLink} ไบต์`);
+console.log(`   ออเดอร์ทดสอบ: ${orderId} (src=${SRC}) · Resend id: ${emailId} · PDF ที่โหลดได้: ${pdfFromLink} ไบต์`);
 console.log("   ⏳ ยังต้องให้คนทำเอง: สแกน QR ในแอปธนาคาร → ต้องขึ้นชื่อบัญชีร้าน · โอนจริง ฿1 → ตรวจสลิปอัตโนมัติ");
 
 if (!fails.length && orderId) {
